@@ -25,19 +25,24 @@
 - Completed Phase 8 from the immutable Phase 7 CSV: validated all pairing assumptions, calculated agreement with the recorded expert action, paired language effects, safe translation cosine similarity, latency summaries, and episode-cluster bootstrap intervals.
 - Completed Phase 9 with the five specified task-progress bins, aggregate and per-episode stage summaries, and three presentation figures in PNG and PDF formats.
 - Confirmed the Phase 8-9 analysis is deterministic and model-free; the SHA-256 of `results/vla_predictions.csv` remained `ab4984aeea52a8ca60c94a5cb19a15d69fd27707f5c5734ddd8bec680f376dc4`.
+- Completed the Phase 10 gripper/state source audit against local v2.1 metadata, installed LeRobot 0.4.4 LIBERO processing/environment code, serialized checkpoint normalization, all locally usable demonstrations, and existing predictions.
+- Inspected all 10 locally available episodes and 2,612 expert frames; the expert gripper channel is exactly binary with 1,300 `-1` commands, 1,312 `+1` commands, and 48 nonzero transitions.
+- Validated from measured finger-qpos response and 20 manually reviewed two-camera transition contact sheets that `+1` commands closing and `-1` commands opening.
+- Established the Phase 10 semantic gate: `+1→-1` is opening-command onset, but not every onset is completed task release; later extraction must use temporal holding/opening persistence plus state/scene context.
+- Confirmed state indices 0–2 are observed end-effector XYZ, indices 3–5 are axis-angle orientation (despite legacy roll/pitch/yaw labels), and indices 6–7 are two gripper finger joint positions.
 
 ## CURRENT
 
-- Phases 1-9 are complete and verified. Awaiting inspection and authorization.
+- Phases 1-10 are complete and verified. Awaiting inspection and authorization.
 
 ## NEXT
 
-- Phase 10 — Gripper Semantics, only after explicit authorization.
-- Do not start gripper semantics, release work, stochasticity, MuJoCo, or demos without explicit approval.
+- Phase 11 — Expert Release Events, only after explicit authorization.
+- Do not extract final release events, fit a release envelope, implement a guard, or start stochasticity, MuJoCo, or demos without explicit approval.
 
 ## BLOCKERS
 
-- None currently. The dataset format mismatch is handled locally with the converter bundled in LeRobot 0.4.4.
+- None currently. Phase 10 documents that only episodes 0–9 of the metadata-advertised 50 episodes are locally available; the semantic decision covers those 2,612 inspectable frames.
 
 ## PHASE 3-6 RESULTS
 
@@ -70,6 +75,16 @@
 - Stage sensitivity is condition-specific and non-monotonic. Aggregate and per-episode results are in `results/stage_sensitivity.csv` and `results/stage_sensitivity_by_episode.csv`.
 - Translation cosine similarity is undefined for 16/800 rows under the documented `1e-8` near-zero norm rule; these values remain `NaN` and are counted rather than assigned an invented direction.
 - Integrity report: `results/metrics_validation.json` (`PASS`). Concise interpretation: `results/phase8_9_findings.md`.
+
+## PHASE 10 RESULTS
+
+- Outcome: `OUTCOME A — SUFFICIENTLY INTERPRETABLE`, with temporal/contextual restrictions.
+- Expert action index 6 is an exactly binary saturated command: `-1` appears 1,300 times and `+1` appears 1,312 times.
+- State-response evidence: mean finger-qpos aperture proxy falls from `0.075059` to `0.039398` within 10 frames of `-1→+1`, and rises from `0.036676` to `0.069481` within 10 frames of `+1→-1`.
+- Interpretation: `+1` commands closing; `-1` commands opening; `+1→-1` is opening-command onset, not automatically physical release.
+- Visual review: 20 transition windows from episodes 0, 3, 6, and 9, both cameras, including normal deposits and anomalous retry/regrasp sequences.
+- Recommendation: GO for Phase 11 after authorization, provided release extraction uses temporal holding/opening confirmation and rejects failed placement/regrasp openings.
+- Audits: `results/gripper_semantics_audit.md`, `results/state_semantics_audit.md`, and `results/gripper_analysis.txt`.
 
 ## DISCOVERED ISSUES / CONSTRAINTS
 

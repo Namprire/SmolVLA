@@ -32,4 +32,15 @@ results/*
 !results/figures/
 !results/figures/*.png
 !results/figures/*.pdf
+!results/gripper_semantics_audit.md
+!results/gripper_analysis.txt
+!results/gripper_transition_candidates.csv
+!results/state_semantics_audit.md
+!results/predicted_gripper_distribution.csv
+!results/figures/gripper/
+!results/figures/gripper/*.png
+!results/figures/gripper/*.pdf
+!results/gripper_transitions/
+!results/gripper_transitions/*.png
+!results/gripper_transitions/*.csv
 !results/.gitkeep

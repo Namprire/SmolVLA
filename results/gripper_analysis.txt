@@ -1,0 +1,58 @@
+OUTCOME A — SUFFICIENTLY INTERPRETABLE
+
+Coverage
+--------
+The local metadata advertises 50 episodes/13,021 frames, but local parquet data exist only for episodes 0–9. All 10 usable episodes and all 2,612 available frames were inspected numerically. 20 transition windows from early, middle, and late local episodes—including anomalous retry sequences—were rendered from both cameras and manually reviewed.
+
+Expert gripper distribution
+---------------------------
+count=2612
+min=-1.000000
+max=1.000000
+mean=0.004594
+median=1.000000
+sample_std=1.000181
+q01=-1.000000
+q05=-1.000000
+q25=-1.000000
+q50=1.000000
+q75=1.000000
+q95=1.000000
+q99=1.000000
+unique_counts={'-1.0': 1300, '1.0': 1312}
+
+Semantics decision
+------------------
+The expert action gripper signal is an exactly binary, saturated, persistent open/close controller command. It is not a continuous finger-position, state-delta, or measured-velocity signal. Direct measured finger-state response shows that `+1` commands closing and `-1` commands opening. A `+1→-1` transition is therefore the onset of an opening command. The local representation does not document the lower-level actuator control law beneath that binary command.
+
+Opening-command onset alone is not synonymous with physical object release. Absolute `-1` also occurs before the first grasp and between object manipulations, and episodes 3, 5, and 6 contain extra close/open retries. A defensible release event must use temporal transition logic: prior sustained `+1` holding/closing context, a `+1→-1` onset, subsequent persistence at `-1`, and confirmation from measured finger opening and/or scene context. The exact detector and any thresholds are deliberately deferred to Phase 11.
+
+Visual evidence
+---------------
+status=COMPLETE
+Twenty transition windows were inspected in both agent and eye-in-hand views at t−2, t−1, t, t+1, t+2, t+5, and t+10. In routine cycles, −1→+1 begins with the fingers aligned around the cream-cheese box or butter; subsequent frames show the object moving with the gripper. Routine +1→−1 onsets occur over the basket, and by t+10 the object is visibly lower and separated from the retreating gripper. The rapid reversals at episode 3 frames 195/197 and the openings at episode 3 frame 208 and episode 6 frame 204 occur during failed placement/regrasp sequences away from a completed basket deposit. They visually confirm that +1→−1 means opening-command onset, but not necessarily a successful task release.
+
+Temporal evidence
+-----------------
+All 48 nonzero changes have magnitude exactly 2: 24 `-1→+1` and 24 `+1→-1`. Most episodes show four transitions (two grasp/carry/release cycles); episodes 3, 5, and 6 show additional transitions consistent with retries/regrasping. Mean aperture proxy after `-1→+1` decreases from 0.075059 at t to 0.039398 at t+10. After `+1→-1`, it increases from 0.036676 to 0.069481.
+
+Prediction diagnostic (not semantic evidence)
+---------------------------------------------
+- contradictory: min -1.025325, q01 -1.018287, q05 -1.009392, median -0.982169, q95 1.011637, q99 1.019580, max 1.030689.
+- correct: min -1.049774, q01 -1.022337, q05 -1.014911, median -0.984806, q95 1.012885, q99 1.019467, max 1.031383.
+- paraphrase: min -1.031035, q01 -1.027051, q05 -1.019362, median -0.987398, q95 1.020453, q99 1.026545, max 1.047947.
+- unrelated: min -1.059480, q01 -1.031670, q05 -1.023699, median -0.995752, q95 1.009822, q99 1.022721, max 1.029702.
+Predictions were not clipped or thresholded. Their continuous, sometimes out-of-support values reflect the model plus linear MEAN_STD unnormalization and do not redefine the binary expert semantics.
+
+GO / NO-GO
+----------
+GO for Phase 11 only after explicit authorization. The numeric direction is interpretable, but Phase 11 must define release temporally and validate held-object context; it must not equate every `-1` value or every `+1→-1` transition with a completed physical release.
+
+Methodological limitations
+--------------------------
+- Only 10 of the metadata-advertised 50 episodes are locally available; conclusions cover 2,612 frames, not all 13,021 advertised frames.
+- Camera evidence is observational and 20 Hz; command onset precedes full finger motion and may precede physical separation from an object.
+- Finger `qpos` is a state measurement, while action[6] is a command. Their time lag matters.
+- The low-level position/velocity/force realization of the binary gripper command is not documented in the local representation and is not needed for identifying command direction.
+- The local metadata does not state pose units/reference frame and mislabels axis-angle state components as roll/pitch/yaw.
+- No final release events, spatial envelope, threshold, guard, or new inference were created in Phase 10.

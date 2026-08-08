@@ -133,6 +133,19 @@ The integrity report is `results/metrics_validation.json`; compact numerical fin
 
 The analysis stops after Phase 9. It does not interpret gripper release semantics or perform any Phase 10 work.
 
+## Gripper semantics audit (Phase 10)
+
+Phase 10 works only from locally available expert parquet demonstrations, installed LeRobot 0.4.4 source/configuration, checkpoint processor state, and the existing Phase 7 predictions. It does not load or run SmolVLA:
+
+```bash
+MPLCONFIGDIR="$PWD/.cache/matplotlib" \
+  .venv/bin/python reliability/inspect_gripper.py
+```
+
+The audit inspects all 10 locally available episodes (2,612 frames), enumerates every binary gripper-command transition, measures the delayed finger-state response, renders representative trajectories, and creates 20 two-camera transition contact sheets including retry/regrasp cases. Results are summarized in `results/gripper_semantics_audit.md`, `results/state_semantics_audit.md`, and `results/gripper_analysis.txt`.
+
+The audit finds that expert action index 6 is an exactly binary persistent command: `+1` closes and `-1` opens. A `+1→-1` transition marks opening-command onset, not necessarily completed object release. Any later event extraction must require temporal holding/opening context and must distinguish failed placement/regrasp sequences. Phase 10 does not create release events or implement a release guard.
+
 ## Verified hard-gate result
 
 On 2026-08-08, the hard-gate command passed on `mps:0` with fallback disabled.
