@@ -1,0 +1,40 @@
+{
+  "pilot_row_count": 36,
+  "observation_count": 9,
+  "condition_counts": {
+    "correct": 9,
+    "paraphrase": 9,
+    "contradictory": 9,
+    "unrelated": 9
+  },
+  "single_frame_full_action_distance_from_correct": {
+    "correct": 0.0,
+    "paraphrase": 0.08613871783018112,
+    "contradictory": 0.19804662466049194,
+    "unrelated": 0.18312038481235504
+  },
+  "pilot_full_action_distance_summary": {
+    "paraphrase": {
+      "observation_count": 9,
+      "mean_full_7d_distance_from_correct": 0.09006595943123615,
+      "median_full_7d_distance_from_correct": 0.09009206514398269,
+      "max_full_7d_distance_from_correct": 0.14855583572953182,
+      "nonzero_count_at_1e-8": 9
+    },
+    "contradictory": {
+      "observation_count": 9,
+      "mean_full_7d_distance_from_correct": 0.12267753581370479,
+      "median_full_7d_distance_from_correct": 0.1035269099807503,
+      "max_full_7d_distance_from_correct": 0.23833500916272288,
+      "nonzero_count_at_1e-8": 9
+    },
+    "unrelated": {
+      "observation_count": 9,
+      "mean_full_7d_distance_from_correct": 0.44861949001077606,
+      "median_full_7d_distance_from_correct": 0.2630142990530034,
+      "max_full_7d_distance_from_correct": 2.0997100021965096,
+      "nonzero_count_at_1e-8": 9
+    }
+  },
+  "scope": "small controlled pilot; no scientific conclusion is claimed"
+}

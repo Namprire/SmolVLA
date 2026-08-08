@@ -1,0 +1,6 @@
+lerobot[smolvla]==0.4.4
+torch==2.10.0
+pandas==3.0.5
+numpy==2.4.6
+scipy==1.17.1
+matplotlib==3.11.1

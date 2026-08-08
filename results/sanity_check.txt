@@ -1,0 +1,34 @@
+SmolVLA hard-gate result
+Recorded: 2026-08-08 (America/New_York)
+
+Command:
+HF_HOME=$PWD/.cache/huggingface HF_HUB_DISABLE_XET=1 HF_HUB_ENABLE_HF_TRANSFER=0 .venv/bin/python experiments/sanity_check.py --device mps
+
+Model: HuggingFaceVLA/smolvla_libero
+Dataset: HuggingFaceVLA/smol-libero
+LeRobot: 0.4.4
+PyTorch: 2.10.0
+MPS available: true
+Selected/actual policy device: mps / mps:0
+PYTORCH_ENABLE_MPS_FALLBACK: 0
+
+Dataset length (episode-0 smoke subset): 258
+Raw keys: action, episode_index, frame_index, index, observation.images.image, observation.images.image2, observation.state, observation.state.joint, task, task_index, timestamp
+Camera 1: (3, 256, 256), torch.float32
+Camera 2: (3, 256, 256), torch.float32
+State: (8,) [-0.04658396542072296, 0.0010548062855377793, 0.6923741102218628, 3.154628038406372, 0.004372127819806337, -0.0727287232875824, 0.03402569890022278, -0.03406943008303642]
+Expert action: (7,) [0.3187499940395355, -0.24910713732242584, 0.18482142686843872, -0.0053571430034935474, 0.12107142806053162, -0.029999999329447746, -1.0]
+Task: put both the cream cheese box and the butter in the basket
+
+Processed camera 1: (1, 3, 256, 256), torch.float32, mps:0
+Processed camera 2: (1, 3, 256, 256), torch.float32, mps:0
+Processed state: (1, 8), torch.float32, mps:0
+Language tokens: (1, 13), torch.int64, mps:0
+Language token IDs: [1078, 1062, 260, 8549, 10421, 3985, 284, 260, 7121, 281, 260, 11831, 198]
+Checkpoint tensor dtypes verified: 746 BF16, 42 FP32
+
+Model-space output: [0.7527871131896973, 0.11925368010997772, 0.015537898987531662, -1.5122824907302856, 0.16340363025665283, -0.2600265145301819, -0.9389134049415588]
+Predicted postprocessed action: (7,) [0.315359503030777, 0.13197200000286102, -0.0834629163146019, -0.05880657583475113, 0.016002021729946136, -0.025503437966108322, -0.9873965978622437]
+Load + first inference: 19146.2 ms
+
+PASS: final postprocessed action is finite and seven-dimensional.

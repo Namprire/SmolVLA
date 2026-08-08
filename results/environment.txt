@@ -1,0 +1,19 @@
+Recorded: 2026-08-08 (America/New_York)
+Platform: macOS 15.7.1, arm64, Apple M2 Max
+Python: 3.11.15
+LeRobot: 0.4.4
+PyTorch: 2.10.0
+torchvision: 0.25.0
+transformers: 4.57.6
+huggingface-hub: 0.35.3
+NumPy: 2.4.6
+pandas: 3.0.5
+SciPy: 1.17.1
+Matplotlib: 3.11.1
+MPS built: true
+MPS available on host: true
+MPS available inside restricted command sandbox: false (execution-isolation artifact)
+Requested initial inference device: mps
+Actual inference device: mps:0
+PYTORCH_ENABLE_MPS_FALLBACK during inference: 0 (disabled)
+Hard-gate load + first inference time: 19146.2 ms

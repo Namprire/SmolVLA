@@ -1,0 +1,17 @@
+.venv/
+.cache/
+__pycache__/
+*.py[cod]
+.DS_Store
+
+# Generated experiment artifacts are ignored except for concise tracked records.
+results/*
+!results/environment.txt
+!results/sanity_check.txt
+!results/api_inspection.md
+!results/determinism_check.csv
+!results/language_conditions.json
+!results/language_pilot_summary.json
+!results/language_single_frame.csv
+!results/vla_predictions_pilot.csv
+!results/.gitkeep
