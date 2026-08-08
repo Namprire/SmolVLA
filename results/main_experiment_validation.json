@@ -1,0 +1,122 @@
+{
+  "validation_result": "PASS",
+  "episodes": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "episode_count": 10,
+  "observations": 200,
+  "predictions": 800,
+  "conditions_per_observation": 4,
+  "duplicate_key_count": 0,
+  "finite_action_and_timing_values": true,
+  "positive_inference_timings": true,
+  "task_progress_in_unit_interval": true,
+  "same_noise_within_observation": true,
+  "exact_language_strings": true,
+  "non_language_preprocessing_equality_checked_per_computed_observation": true,
+  "source_dataset_mutation_checked_per_computed_observation": true,
+  "action_dimension": 7,
+  "trajectory_coverage": {
+    "0": {
+      "frame_count": 20,
+      "min_frame": 0,
+      "max_frame": 257,
+      "min_task_progress": 0.0,
+      "max_task_progress": 1.0
+    },
+    "1": {
+      "frame_count": 20,
+      "min_frame": 0,
+      "max_frame": 251,
+      "min_task_progress": 0.0,
+      "max_task_progress": 1.0
+    },
+    "2": {
+      "frame_count": 20,
+      "min_frame": 0,
+      "max_frame": 245,
+      "min_task_progress": 0.0,
+      "max_task_progress": 1.0
+    },
+    "3": {
+      "frame_count": 20,
+      "min_frame": 0,
+      "max_frame": 287,
+      "min_task_progress": 0.0,
+      "max_task_progress": 1.0
+    },
+    "4": {
+      "frame_count": 20,
+      "min_frame": 0,
+      "max_frame": 243,
+      "min_task_progress": 0.0,
+      "max_task_progress": 1.0
+    },
+    "5": {
+      "frame_count": 20,
+      "min_frame": 0,
+      "max_frame": 278,
+      "min_task_progress": 0.0,
+      "max_task_progress": 1.0
+    },
+    "6": {
+      "frame_count": 20,
+      "min_frame": 0,
+      "max_frame": 302,
+      "min_task_progress": 0.0,
+      "max_task_progress": 1.0
+    },
+    "7": {
+      "frame_count": 20,
+      "min_frame": 0,
+      "max_frame": 246,
+      "min_task_progress": 0.0,
+      "max_task_progress": 1.0
+    },
+    "8": {
+      "frame_count": 20,
+      "min_frame": 0,
+      "max_frame": 237,
+      "min_task_progress": 0.0,
+      "max_task_progress": 1.0
+    },
+    "9": {
+      "frame_count": 20,
+      "min_frame": 0,
+      "max_frame": 256,
+      "min_task_progress": 0.0,
+      "max_task_progress": 1.0
+    }
+  },
+  "actual_compute_device": "mps:0",
+  "mean_inference_latency_ms": 541.0591126591316,
+  "median_inference_latency_ms": 539.1988545889035,
+  "summed_inference_latency_seconds": 432.8472901273053,
+  "stage": "B",
+  "predictions_computed_this_run": 640,
+  "predictions_skipped_as_complete": 160,
+  "elapsed_runtime_seconds": 372.17563116690144,
+  "started_at": "2026-08-08T14:54:44.015116-04:00",
+  "completed_at": "2026-08-08T15:00:56.189221-04:00",
+  "output_file": "/Users/nampham/Documents/Blended/SmolVLA/results/vla_predictions.csv",
+  "selection_manifest": "/Users/nampham/Documents/Blended/SmolVLA/results/main_experiment_selection.json",
+  "total_measured_phase7_runtime_seconds": 479.4278067089617,
+  "target_observations": 200,
+  "target_predictions": 800,
+  "deviation_from_target": null,
+  "resumability_validation": {
+    "result": "PASS",
+    "existing_predictions_loaded": 160,
+    "predictions_recomputed": 0,
+    "csv_sha256_unchanged": true
+  }
+}

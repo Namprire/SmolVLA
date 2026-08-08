@@ -1,0 +1,87 @@
+{
+  "validation_result": "PASS",
+  "input_file": "/Users/nampham/Documents/Blended/SmolVLA/results/vla_predictions.csv",
+  "input_sha256_before": "ab4984aeea52a8ca60c94a5cb19a15d69fd27707f5c5734ddd8bec680f376dc4",
+  "input_sha256_after": "ab4984aeea52a8ca60c94a5cb19a15d69fd27707f5c5734ddd8bec680f376dc4",
+  "input_unchanged": true,
+  "row_count": 800,
+  "observation_count": 200,
+  "episode_count": 10,
+  "episodes": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "rows_per_observation": 4,
+  "stored_condition_identifiers": [
+    "correct",
+    "paraphrase",
+    "contradictory",
+    "unrelated"
+  ],
+  "presentation_condition_labels": {
+    "correct": "Correct",
+    "paraphrase": "Paraphrase",
+    "contradictory": "Contradictory",
+    "unrelated": "Unrelated"
+  },
+  "exact_instruction_mapping": {
+    "correct": "put both the cream cheese box and the butter in the basket",
+    "paraphrase": "place the cream cheese box and the butter together inside the basket",
+    "contradictory": "put the cream cheese box in the basket but leave the butter outside the basket",
+    "unrelated": "open the top drawer of the cabinet"
+  },
+  "identical_noise_within_observation": true,
+  "identical_expert_action_within_observation": true,
+  "finite_7d_actions": true,
+  "task_progress_in_unit_interval": true,
+  "positive_finite_inference_time": true,
+  "actual_compute_device": "mps:0",
+  "expert_agreement_row_count": 800,
+  "paired_language_effect_row_count": 600,
+  "summary_row_count": 32,
+  "bootstrap_summary_row_count": 12,
+  "stage_sensitivity_row_count": 60,
+  "stage_sensitivity_by_episode_row_count": 600,
+  "cosine_norm_epsilon": 1e-08,
+  "translation_cosine_undefined_count": 16,
+  "cluster_bootstrap": {
+    "cluster_unit": "episode_id",
+    "episode_count": 10,
+    "replicates": 2000,
+    "base_seed": 20260809,
+    "confidence_interval": "95% percentile"
+  },
+  "task_stage_bins": {
+    "edges": [
+      0.0,
+      0.2,
+      0.4,
+      0.6,
+      0.8,
+      1.0
+    ],
+    "labels": [
+      "0\u201320%",
+      "20\u201340%",
+      "40\u201360%",
+      "60\u201380%",
+      "80\u2013100%"
+    ],
+    "right_open_except_final": true,
+    "progress_one_in_final_bin": true
+  },
+  "scientific_pairing_key": [
+    "episode_id",
+    "frame_index",
+    "global_index"
+  ],
+  "correct_condition_used_only_as_baseline_in_language_effects": true
+}

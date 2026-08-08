@@ -27,6 +27,7 @@ from lerobot.datasets.v30.convert_dataset_v21_to_v30 import (
 DATASET_ID = "HuggingFaceVLA/smol-libero"
 SMOKE_EPISODE = 0
 PILOT_EPISODES = (0, 1, 2)
+MAIN_EPISODES = tuple(range(10))
 
 
 def _prepare_v21_source_view(raw_root: Path, view_root: Path, episodes: tuple[int, ...]) -> Path:
@@ -213,6 +214,18 @@ def load_pilot_dataset(
         repo_id=DATASET_ID,
         root=root,
         episodes=list(episodes),
+        revision="v3.0",
+        download_videos=False,
+    )
+
+
+def load_main_dataset(raw_root: Path, converted_root: Path) -> LeRobotDataset:
+    """Return the isolated v3.0 view of episodes 0-9 for Phase 7."""
+    root = prepare_pilot_dataset(raw_root, converted_root, MAIN_EPISODES)
+    return LeRobotDataset(
+        repo_id=DATASET_ID,
+        root=root,
+        episodes=list(MAIN_EPISODES),
         revision="v3.0",
         download_videos=False,
     )

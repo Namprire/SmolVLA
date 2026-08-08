@@ -1,0 +1,47 @@
+{
+  "validation_result": "PASS",
+  "episodes": [
+    0,
+    1
+  ],
+  "episode_count": 2,
+  "observations": 40,
+  "predictions": 160,
+  "conditions_per_observation": 4,
+  "duplicate_key_count": 0,
+  "finite_action_and_timing_values": true,
+  "positive_inference_timings": true,
+  "task_progress_in_unit_interval": true,
+  "same_noise_within_observation": true,
+  "exact_language_strings": true,
+  "action_dimension": 7,
+  "trajectory_coverage": {
+    "0": {
+      "frame_count": 20,
+      "min_frame": 0,
+      "max_frame": 257,
+      "min_task_progress": 0.0,
+      "max_task_progress": 1.0
+    },
+    "1": {
+      "frame_count": 20,
+      "min_frame": 0,
+      "max_frame": 251,
+      "min_task_progress": 0.0,
+      "max_task_progress": 1.0
+    }
+  },
+  "actual_compute_device": "mps:0",
+  "mean_inference_latency_ms": 535.4657662188401,
+  "median_inference_latency_ms": 533.8005829835311,
+  "summed_inference_latency_seconds": 85.67452259501442,
+  "stage": "A",
+  "predictions_computed_this_run": 0,
+  "predictions_skipped_as_complete": 160,
+  "elapsed_runtime_seconds": 7.053865875117481,
+  "started_at": "2026-08-08T14:54:17.607449-04:00",
+  "completed_at": "2026-08-08T14:54:24.661284-04:00",
+  "output_file": "/Users/nampham/Documents/Blended/SmolVLA/results/vla_predictions.csv",
+  "selection_manifest": "/Users/nampham/Documents/Blended/SmolVLA/results/main_experiment_selection.json",
+  "estimated_full_target_runtime_seconds": 35.269329375587404
+}

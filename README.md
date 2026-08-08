@@ -98,7 +98,40 @@ HF_HOME="$PWD/.cache/huggingface" \
 
 The script gates all language substitutions on five repeated, explicit-noise deterministic predictions. It then writes the four-condition single-frame results and a 9-observation/36-row early-middle-late pilot. It validates exact strings, finite 7-D actions, normalized progress, condition coverage, noise reuse, preprocessing equality outside language fields, and duplicate absence. See `results/api_inspection.md`, `results/determinism_check.csv`, `results/language_conditions.json`, `results/language_single_frame.csv`, `results/vla_predictions_pilot.csv`, and `results/language_pilot_summary.json`.
 
-The run stops after Phase 6. These outputs prove the controlled intervention pipeline and provide a small pilot only; they are not a full experiment or a scientific conclusion.
+The Phase 3-6 driver stops after Phase 6. Those outputs prove the controlled intervention pipeline and provide a small pilot only; they are not a full experiment or a scientific conclusion.
+
+## Main controlled language experiment (Phase 7)
+
+The Phase 7 driver uses the unchanged controlled prediction API and is staged and resumable. Stage A covers episodes 0-1; Stage B resumes the same CSV and extends it through episode 9:
+
+```bash
+PYTORCH_ENABLE_MPS_FALLBACK=0 HF_HOME="$PWD/.cache/huggingface" \
+  .venv/bin/python experiments/main_language_experiment.py --stage a --device mps
+
+PYTORCH_ENABLE_MPS_FALLBACK=0 HF_HOME="$PWD/.cache/huggingface" \
+  .venv/bin/python experiments/main_language_experiment.py --stage b --device mps
+```
+
+The deterministic selection contains 20 unique, stratified observations per episode and forces the real start/end frames into every episode. `results/main_experiment_selection.json` records all local/global indices, task progress values, selection seeds, noise seeds, and noise hashes.
+
+`results/vla_predictions.csv` is append-only during inference. On resume, the driver validates its complete schema and every existing uniqueness key, instruction, progress value, seed/hash, device, action, and timing before computing only missing rows. The validated Phase 7 run contains 200 observations and 800 predictions across episodes 0-9. Integrity details are in `results/main_experiment_validation.json`.
+
+Phase 7 stops after data generation and integrity validation. It does not calculate language-effect metrics or scientific conclusions.
+
+## Paired metrics and task-stage sensitivity (Phases 8-9)
+
+The Phase 8-9 analysis is deterministic, model-free, and reads the validated Phase 7 CSV without changing it:
+
+```bash
+MPLCONFIGDIR="$PWD/.cache/matplotlib" \
+  .venv/bin/python experiments/analyze_language_results.py
+```
+
+The script fails on any violated pairing assumption before computing results. It produces per-prediction agreement with the recorded expert action, 600 paired alternative-versus-Correct effects, condition summaries, latency diagnostics, five-bin task-stage summaries, per-episode stage summaries, and 2,000-replicate episode-cluster bootstrap intervals. Near-zero translation vectors use a documented `1e-8` cosine threshold and remain undefined rather than receiving an invented direction.
+
+The integrity report is `results/metrics_validation.json`; compact numerical findings are in `results/phase8_9_findings.md`. Analysis tables are under `results/`, and the three requested figures are available as PNG and PDF under `results/figures/`.
+
+The analysis stops after Phase 9. It does not interpret gripper release semantics or perform any Phase 10 work.
 
 ## Verified hard-gate result
 
