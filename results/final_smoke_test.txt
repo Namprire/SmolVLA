@@ -1,0 +1,70 @@
+FINAL SMOKE TEST — PASS
+Date: 2026-08-08
+
+Scope
+-----
+Offline analysis regeneration, final artifact generation, and demo switching only.
+No SmolVLA checkpoint was loaded and no new VLA inference was run.
+
+1. Analysis regeneration
+------------------------
+Command:
+MPLCONFIGDIR="$PWD/.cache/matplotlib" .venv/bin/python experiments/analyze_language_results.py
+
+Status: PASS
+Observed result:
+- Input validation: PASS
+- Prediction rows: 800
+- Paired observations: 200
+- Episodes: 10
+- Expert-agreement rows: 800
+- Paired language-effect rows: 600
+- Stage-summary rows: 60
+- Expected undefined translation-cosine values: 16
+- Stored prediction SHA-256 remained ab4984aeea52a8ca60c94a5cb19a15d69fd27707f5c5734ddd8bec680f376dc4
+
+2. Final validation and figure generation
+-----------------------------------------
+Command:
+MPLCONFIGDIR="$PWD/.cache/matplotlib" .venv/bin/python experiments/finalize_results.py
+
+Status: PASS
+Observed result:
+- Final validation: PASS
+- Final figures: 4 PNG + 4 PDF
+- Curated demo examples: 5
+- Duplicate count: 0
+- Unexpected NaN/non-finite count: 0
+- Expected undefined translation-cosine count: 16
+- Model inference calls: 0
+
+Verified figure pairs:
+- results/figures/final/01_language_induced_action_difference.{png,pdf}
+- results/figures/final/02_agreement_with_recorded_expert_action.{png,pdf}
+- results/figures/final/03_language_sensitivity_across_task_progress.{png,pdf}
+- results/figures/final/04_gripper_semantics_temporal_validation.{png,pdf}
+
+3. Demo smoke test
+------------------
+Command:
+MPLBACKEND=Agg MPLCONFIGDIR="$PWD/.cache/matplotlib" .venv/bin/python demo/demo.py --smoke-test
+
+Status: PASS
+Observed result:
+- Opened curated example 1 (episode 7, frame 246)
+- Loaded both packaged camera images
+- Cycled Correct, Paraphrase, Contradictory, and Unrelated
+- Verified the camera arrays remain identical while language condition and stored prediction change
+- Model inference calls: 0
+
+4. Repository checks
+--------------------
+Status: PASS
+- git diff --check: PASS
+- No tracked model checkpoints or parquet dataset files
+- No source-tree __pycache__, .DS_Store, temporary screenshots, or *.tmp files
+- No absolute /Users paths in scripts/documentation outside ignored caches/results audit records
+- No obvious credentials, passwords, API keys, or bearer tokens found in tracked source/documentation
+- .venv/ and .cache/ remain ignored
+
+FINAL STATUS: PASS — project complete / presentation-ready

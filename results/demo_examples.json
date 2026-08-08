@@ -1,0 +1,113 @@
+{
+  "source": "results/language_effects.csv",
+  "selection_count": 5,
+  "selection_policy": "Deterministic rank-based selection covering low Paraphrase change, large Contradictory and Unrelated changes, late-stage sensitivity, and one explicit observation-level counterexample. Duplicate observations are excluded.",
+  "anti_cherry_picking_note": "The selection deliberately includes a counterexample where Paraphrase changes the action more than Contradictory; aggregate ordering is not claimed for every frame.",
+  "examples": [
+    {
+      "example_index": 1,
+      "selection_type": "paraphrase_close_to_correct",
+      "episode_id": 7,
+      "frame_index": 246,
+      "global_index": 2116,
+      "task_progress": 1.0,
+      "reason": "Smallest stored Paraphrase distance from Correct (0.0318) among all 200 observations; included as a low-perturbation example.",
+      "full_action_distance_from_correct": {
+        "Paraphrase": 0.0317787247201953,
+        "Contradictory": 0.0695394916213075,
+        "Unrelated": 0.0268553333121826
+      },
+      "gripper_difference_from_correct": {
+        "Paraphrase": 0.0063337683677672,
+        "Contradictory": 0.0009304285049437,
+        "Unrelated": 0.0144198536872862
+      },
+      "camera_1_asset": "results/demo_assets/episode_07_frame_246_camera_1.png",
+      "camera_2_asset": "results/demo_assets/episode_07_frame_246_camera_2.png"
+    },
+    {
+      "example_index": 2,
+      "selection_type": "large_contradictory_change",
+      "episode_id": 2,
+      "frame_index": 205,
+      "global_index": 715,
+      "task_progress": 0.8367346938775511,
+      "reason": "Largest stored Contradictory distance from Correct (2.1789); shows a substantial controlled language effect.",
+      "full_action_distance_from_correct": {
+        "Paraphrase": 0.118894577912465,
+        "Contradictory": 2.178875535415981,
+        "Unrelated": 2.1449181713727
+      },
+      "gripper_difference_from_correct": {
+        "Paraphrase": 0.0033900737762448,
+        "Contradictory": 2.0221279859542847,
+        "Unrelated": 2.0154709219932556
+      },
+      "camera_1_asset": "results/demo_assets/episode_02_frame_205_camera_1.png",
+      "camera_2_asset": "results/demo_assets/episode_02_frame_205_camera_2.png"
+    },
+    {
+      "example_index": 3,
+      "selection_type": "large_unrelated_change",
+      "episode_id": 5,
+      "frame_index": 230,
+      "global_index": 1518,
+      "task_progress": 0.8273381294964028,
+      "reason": "Largest unused Unrelated distance from Correct (2.3066); shows a very large action change without reusing the contradictory example.",
+      "full_action_distance_from_correct": {
+        "Paraphrase": 0.3013712403559849,
+        "Contradictory": 2.157131252889733,
+        "Unrelated": 2.3065726496350414
+      },
+      "gripper_difference_from_correct": {
+        "Paraphrase": 0.0011144876480104,
+        "Contradictory": 1.980515778064728,
+        "Unrelated": 1.9824647307395935
+      },
+      "camera_1_asset": "results/demo_assets/episode_05_frame_230_camera_1.png",
+      "camera_2_asset": "results/demo_assets/episode_05_frame_230_camera_2.png"
+    },
+    {
+      "example_index": 4,
+      "selection_type": "late_stage_strong_sensitivity",
+      "episode_id": 1,
+      "frame_index": 223,
+      "global_index": 481,
+      "task_progress": 0.8884462151394422,
+      "reason": "Late-stage observation (progress 0.888) with a large mean distance across altered conditions (1.4070); selected after excluding observations already used above.",
+      "full_action_distance_from_correct": {
+        "Paraphrase": 0.1805804280591349,
+        "Contradictory": 2.0161896648596715,
+        "Unrelated": 2.0242983265062873
+      },
+      "gripper_difference_from_correct": {
+        "Paraphrase": 0.0055799484252927,
+        "Contradictory": 2.000213921070099,
+        "Unrelated": 1.9935099482536316
+      },
+      "camera_1_asset": "results/demo_assets/episode_01_frame_223_camera_1.png",
+      "camera_2_asset": "results/demo_assets/episode_01_frame_223_camera_2.png"
+    },
+    {
+      "example_index": 5,
+      "selection_type": "ordering_counterexample_and_gripper_change",
+      "episode_id": 6,
+      "frame_index": 229,
+      "global_index": 1796,
+      "task_progress": 0.7582781456953642,
+      "reason": "Counterexample to observation-level ordering: Paraphrase exceeds Contradictory by 1.9998. It also contains a large Paraphrase gripper change, preventing an only-hypothesis-supporting selection.",
+      "full_action_distance_from_correct": {
+        "Paraphrase": 2.064586188914183,
+        "Contradictory": 0.0647794351141687,
+        "Unrelated": 2.0494692228849343
+      },
+      "gripper_difference_from_correct": {
+        "Paraphrase": 2.0393604040145874,
+        "Contradictory": 0.0024354457855222,
+        "Unrelated": 2.025821328163147
+      },
+      "camera_1_asset": "results/demo_assets/episode_06_frame_229_camera_1.png",
+      "camera_2_asset": "results/demo_assets/episode_06_frame_229_camera_2.png"
+    }
+  ]
+}

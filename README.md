@@ -1,108 +1,106 @@
-# From Language to Reliable Action
+# Controlled Language Sensitivity in SmolVLA
 
-Evaluating and Guarding SmolVLA for Packing-Style Robotic Manipulation.
+This project evaluates how changing only a natural-language instruction alters the action predicted by a pretrained Vision-Language-Action model. It combines a controlled paired experiment, trajectory-stage analysis, agreement measurements against recorded demonstrations, and an empirical audit of binary gripper-control semantics.
 
-This repository contains the verified Phase 1-2 setup/hard gate and the Phase 3-6 controlled-language pilot. It evaluates the pretrained `HuggingFaceVLA/smolvla_libero` checkpoint; it does not train or fine-tune SmolVLA.
+The project evaluates `HuggingFaceVLA/smolvla_libero` on demonstrations from `HuggingFaceVLA/smol-libero`. It does **not** train or fine-tune SmolVLA, and it does not claim closed-loop task success or safety.
 
-## Environment
+## Motivation
 
-The verified environment uses stable CPython 3.11 on Apple silicon:
+A VLA policy receives language, images, and robot state together. If its action changes under semantically equivalent, contradictory, or unrelated instructions, that behavior matters for reliability. The central question is:
+
+> How much does changing only the natural-language instruction alter SmolVLA's predicted action when vision, robot state, preprocessing, model, and flow-matching noise are fixed?
+
+## Experimental design
+
+- Pretrained model: `HuggingFaceVLA/smolvla_libero`
+- Dataset: `HuggingFaceVLA/smol-libero`
+- Hardware used for stored inference: Apple M2 Max, `mps:0`
+- 10 locally available episodes
+- 20 stratified observations per episode; 200 observations total
+- Four language conditions: Correct, Paraphrase, Contradictory, Unrelated
+- 800 stored predictions
+- Same two images, robot state, preprocessing, checkpoint, and explicit flow-noise tensor within every four-condition comparison
+
+The explicit flow noise has checkpoint-specific shape `(1, 50, 32)`, dtype `float32`, and is reused exactly across all four language conditions for an observation. `results/main_experiment_selection.json` records the deterministic sample selection, noise seeds, and noise hashes. `results/vla_predictions.csv` is the immutable source of truth for final analysis.
+
+## Main results
+
+Mean full 7-D action distance from the Correct-language prediction:
+
+| Condition | Mean distance | Episode-cluster bootstrap 95% CI |
+|---|---:|---:|
+| Paraphrase | 0.202755 | [0.172452, 0.231373] |
+| Contradictory | 0.354315 | [0.297352, 0.414462] |
+| Unrelated | 0.806369 | [0.761888, 0.855950] |
+
+Mean translation / axis-angle orientation / gripper errors against the recorded expert action:
+
+| Condition | Translation | Orientation | Gripper |
+|---|---:|---:|---:|
+| Correct | 0.340237 | 0.070786 | 0.208461 |
+| Paraphrase | 0.363251 | 0.071559 | 0.228939 |
+| Contradictory | 0.414641 | 0.072025 | 0.276336 |
+| Unrelated | 0.615211 | 0.092736 | 0.656285 |
+
+Under these controlled observations, paraphrases generally produced smaller changes than contradictory or unrelated instructions. Unrelated instructions produced the largest average changes. The ordering is an aggregate result, not a rule for every individual frame. Language sensitivity also varied non-monotonically across task progress.
+
+The expert gripper channel is an exactly binary persistent command: `+1` closes and `-1` opens. A `+1 -> -1` transition marks opening-command onset, but does not by itself prove successful physical release.
+
+See `results/final_findings.md`, `results/final_validation.json`, and `results/presentation_cheatsheet.md` for the concise final record.
+
+## Quick start: inspect completed results
+
+No model checkpoint or dataset download is needed to read the tracked tables, documents, figures, or curated demo assets.
+
+Create the verified Python 3.11 environment if needed:
 
 ```bash
 UV_CACHE_DIR=/private/tmp/smolvla-uv-cache uv venv --python 3.11 .venv
 UV_CACHE_DIR=/private/tmp/smolvla-uv-cache uv pip install --python .venv/bin/python -r requirements.txt
 ```
 
-Verified versions: Python 3.11.15, LeRobot 0.4.4, PyTorch 2.10.0,
-torchvision 0.25.0, Transformers 4.57.6, NumPy 2.4.6, pandas 3.0.5,
-SciPy 1.17.1, and Matplotlib 3.11.1. The complete record is in
-`results/environment.txt`.
-
-## Required hard-gate downloads
-
-Keep Hugging Face caches inside the repository's ignored `.cache/` directory:
+Launch the offline viewer:
 
 ```bash
-export HF_HOME="$PWD/.cache/huggingface"
-export HF_HUB_DISABLE_XET=1
-export HF_HUB_ENABLE_HF_TRANSFER=0
-
-.venv/bin/hf download HuggingFaceVLA/smolvla_libero \
-  --include 'config.json' 'model.safetensors' \
-  'policy_preprocessor.json' 'policy_postprocessor.json' \
-  'policy_preprocessor_step_5_normalizer_processor.safetensors' \
-  'policy_postprocessor_step_1_unnormalizer_processor.safetensors' \
-  --local-dir .cache/huggingface/models/HuggingFaceVLA/smolvla_libero
-
-.venv/bin/hf download HuggingFaceVLA/smol-libero \
-  --repo-type dataset --revision v2.1 \
-  --include 'meta/*' 'data/chunk-000/episode_000000.parquet' \
-  --local-dir .cache/huggingface/lerobot_v21/HuggingFaceVLA/smol-libero
+.venv/bin/python demo/demo.py
 ```
 
-The dataset repository currently exposes only a `v2.1` tag. Installed LeRobot 0.4.4 uses the v3.0 dataset schema, so the smoke test creates an ignored, local v3.0 view of episode 0 using converter functions bundled with that installed release. It never modifies or uploads the source dataset.
-
-## One real postprocessed action
-
-Run on the host so PyTorch can see Metal Performance Shaders:
+Use the buttons or keys `1`–`4` to switch language conditions for the same observation. Use the example buttons or arrow keys to move through curated observations. List them without opening a window with:
 
 ```bash
-export HF_HOME="$PWD/.cache/huggingface"
-.venv/bin/python experiments/sanity_check.py --device mps
+.venv/bin/python demo/demo.py --list-examples
 ```
 
-The script prints environment/device information, raw sample keys and values, exact dataset task text, checkpoint configuration, official preprocessor tokens/shapes, the recorded expert action, and the real postprocessed model action. It asserts that the final action is finite and seven-dimensional.
+## Cheap and safe to rerun
 
-The checkpoint is self-contained. To avoid a redundant 2.03 GB base-VLM
-initialization download, the smoke test constructs the architecture from the
-checkpoint-specified VLM config, loads `model.safetensors` with `strict=True`,
-then restores and verifies every stored tensor dtype (746 BF16 and 42 FP32 in
-the inspected checkpoint) before inference. A missing/unexpected state key or
-dtype mismatch is a hard failure.
+These commands use stored predictions and perform **zero new SmolVLA inference**.
 
-If a specific MPS operation fails, preserve the traceback before testing PyTorch's targeted fallback:
+Regenerate Phase 8–9 metrics from `results/vla_predictions.csv`:
 
 ```bash
-PYTORCH_ENABLE_MPS_FALLBACK=1 .venv/bin/python experiments/sanity_check.py --device mps
+MPLCONFIGDIR="$PWD/.cache/matplotlib" \
+  .venv/bin/python experiments/analyze_language_results.py
 ```
 
-Use `--device cpu` only if the documented MPS attempts fail. Do not describe a fallback run as pure MPS execution.
-
-## Controlled language intervention (Phases 3-6)
-
-`src/prediction.py` exposes the clean controlled API:
-
-```python
-predict_action(frame, instruction, noise=None, seed=None)
-```
-
-It copies only the checkpoint input features from the real dataset frame, supplies the requested string as `task`, runs the official serialized checkpoint preprocessor and postprocessor, and returns a finite postprocessed 7-D action with model-only inference latency. Explicit reusable flow noise is preferred. The installed LeRobot 0.4.4 path is `SmolVLAPolicy.predict_action_chunk(batch, noise=...)`; for a single observation this checkpoint requires a `(1, 50, 32)` `torch.float32` tensor on the inference device.
-
-The small pilot uses episodes 0-2 only. Download the two additional parquet files:
+Validate the final sources, regenerate the four final figures, refresh curated examples and camera assets, and rewrite the final findings/cheat sheet:
 
 ```bash
-.venv/bin/hf download HuggingFaceVLA/smol-libero \
-  --repo-type dataset --revision v2.1 \
-  --include 'data/chunk-000/episode_000001.parquet' \
-  'data/chunk-000/episode_000002.parquet' \
-  --local-dir .cache/huggingface/lerobot_v21/HuggingFaceVLA/smol-libero
+MPLCONFIGDIR="$PWD/.cache/matplotlib" \
+  .venv/bin/python experiments/finalize_results.py
 ```
 
-Then run with MPS fallback disabled:
+The finalizer needs the already-local episode parquet files only when refreshing camera assets and the representative gripper figure. It never loads the checkpoint. Existing tracked outputs remain directly inspectable without those local caches.
+
+Run the headless demo smoke test:
 
 ```bash
-PYTORCH_ENABLE_MPS_FALLBACK=0 \
-HF_HOME="$PWD/.cache/huggingface" \
-.venv/bin/python experiments/language_control.py --device mps
+MPLBACKEND=Agg MPLCONFIGDIR="$PWD/.cache/matplotlib" \
+  .venv/bin/python demo/demo.py --smoke-test
 ```
 
-The script gates all language substitutions on five repeated, explicit-noise deterministic predictions. It then writes the four-condition single-frame results and a 9-observation/36-row early-middle-late pilot. It validates exact strings, finite 7-D actions, normalized progress, condition coverage, noise reuse, preprocessing equality outside language fields, and duplicate absence. See `results/api_inspection.md`, `results/determinism_check.csv`, `results/language_conditions.json`, `results/language_single_frame.csv`, `results/vla_predictions_pilot.csv`, and `results/language_pilot_summary.json`.
+## Expensive inference: already completed
 
-The Phase 3-6 driver stops after Phase 6. Those outputs prove the controlled intervention pipeline and provide a small pilot only; they are not a full experiment or a scientific conclusion.
-
-## Main controlled language experiment (Phase 7)
-
-The Phase 7 driver uses the unchanged controlled prediction API and is staged and resumable. Stage A covers episodes 0-1; Stage B resumes the same CSV and extends it through episode 9:
+The two-stage command below produced the 800 predictions. **Do not run it merely to inspect, analyze, plot, or demonstrate the completed project.** The driver is resumable and validates every existing row, but running it requires the local checkpoint/dataset and MPS access.
 
 ```bash
 PYTORCH_ENABLE_MPS_FALLBACK=0 HF_HOME="$PWD/.cache/huggingface" \
@@ -112,60 +110,50 @@ PYTORCH_ENABLE_MPS_FALLBACK=0 HF_HOME="$PWD/.cache/huggingface" \
   .venv/bin/python experiments/main_language_experiment.py --stage b --device mps
 ```
 
-The deterministic selection contains 20 unique, stratified observations per episode and forces the real start/end frames into every episode. `results/main_experiment_selection.json` records all local/global indices, task progress values, selection seeds, noise seeds, and noise hashes.
+The validated inference source hash is recorded in `results/final_validation.json`. The finalization workflow checks that derived language effects, expert-agreement metrics, and summaries remain consistent with the stored predictions.
 
-`results/vla_predictions.csv` is append-only during inference. On resume, the driver validates its complete schema and every existing uniqueness key, instruction, progress value, seed/hash, device, action, and timing before computing only missing rows. The validated Phase 7 run contains 200 observations and 800 predictions across episodes 0-9. Integrity details are in `results/main_experiment_validation.json`.
-
-Phase 7 stops after data generation and integrity validation. It does not calculate language-effect metrics or scientific conclusions.
-
-## Paired metrics and task-stage sensitivity (Phases 8-9)
-
-The Phase 8-9 analysis is deterministic, model-free, and reads the validated Phase 7 CSV without changing it:
-
-```bash
-MPLCONFIGDIR="$PWD/.cache/matplotlib" \
-  .venv/bin/python experiments/analyze_language_results.py
-```
-
-The script fails on any violated pairing assumption before computing results. It produces per-prediction agreement with the recorded expert action, 600 paired alternative-versus-Correct effects, condition summaries, latency diagnostics, five-bin task-stage summaries, per-episode stage summaries, and 2,000-replicate episode-cluster bootstrap intervals. Near-zero translation vectors use a documented `1e-8` cosine threshold and remain undefined rather than receiving an invented direction.
-
-The integrity report is `results/metrics_validation.json`; compact numerical findings are in `results/phase8_9_findings.md`. Analysis tables are under `results/`, and the three requested figures are available as PNG and PDF under `results/figures/`.
-
-The analysis stops after Phase 9. It does not interpret gripper release semantics or perform any Phase 10 work.
-
-## Gripper semantics audit (Phase 10)
-
-Phase 10 works only from locally available expert parquet demonstrations, installed LeRobot 0.4.4 source/configuration, checkpoint processor state, and the existing Phase 7 predictions. It does not load or run SmolVLA:
-
-```bash
-MPLCONFIGDIR="$PWD/.cache/matplotlib" \
-  .venv/bin/python reliability/inspect_gripper.py
-```
-
-The audit inspects all 10 locally available episodes (2,612 frames), enumerates every binary gripper-command transition, measures the delayed finger-state response, renders representative trajectories, and creates 20 two-camera transition contact sheets including retry/regrasp cases. Results are summarized in `results/gripper_semantics_audit.md`, `results/state_semantics_audit.md`, and `results/gripper_analysis.txt`.
-
-The audit finds that expert action index 6 is an exactly binary persistent command: `+1` closes and `-1` opens. A `+1→-1` transition marks opening-command onset, not necessarily completed object release. Any later event extraction must require temporal holding/opening context and must distinguish failed placement/regrasp sequences. Phase 10 does not create release events or implement a release guard.
-
-## Verified hard-gate result
-
-On 2026-08-08, the hard-gate command passed on `mps:0` with fallback disabled.
-For episode 0, frame 0, the exact dataset task was:
+## Repository structure
 
 ```text
-put both the cream cheese box and the butter in the basket
+demo/
+  demo.py                              offline stored-prediction viewer
+experiments/
+  sanity_check.py                      one-action model hard gate
+  language_control.py                  controlled-language pilot
+  main_language_experiment.py          completed 800-prediction driver
+  analyze_language_results.py          model-free Phase 8–9 metrics
+  finalize_results.py                  final validation, figures, examples, docs
+reliability/
+  inspect_gripper.py                   model-free Phase 10 semantics audit
+src/
+  dataset.py                           local dataset preparation/loading
+  prediction.py                        controlled prediction API
+  metrics.py                           validation and paired metrics
+results/
+  vla_predictions.csv                  validated inference source of truth
+  language_effects.csv                 600 paired comparisons against Correct
+  expert_agreement.csv                 800 agreement records
+  bootstrap_summary.csv                episode-cluster uncertainty
+  stage_sensitivity*.csv               aggregate and per-episode stage results
+  figures/final/                       four final PNG/PDF figures
+  demo_assets/                         camera frames used by the offline demo
+  demo_examples.json                   deterministic curated selection
+  final_validation.json                final integrity report
+  final_findings.md                    concise scientific summary
+  presentation_cheatsheet.md           one-page defense notes
+  final_smoke_test.txt                  final command/status record
 ```
 
-The recorded expert action was:
+## Scope and limitations
 
-```text
-[0.31874999, -0.24910714, 0.18482143, -0.00535714, 0.12107143, -0.03, -1.0]
-```
+- Only 10 locally available episodes and one manipulation task/domain were evaluated.
+- Observations within episodes are temporally related; uncertainty resamples episodes as clusters.
+- The recorded expert action is a demonstration reference, not a ground-truth optimal action.
+- Translation, axis-angle orientation, and gripper dimensions have different physical meanings and scales.
+- The full 7-D norm is useful for paired comparison but is not a calibrated physical cost.
+- This is offline frame-level analysis, not closed-loop task-success evaluation.
+- Only one pretrained checkpoint was studied.
+- Language conditions were manually designed.
+- Physical release cannot be inferred from gripper command sign alone.
 
-The checkpoint's official postprocessor produced:
-
-```text
-[0.31535950, 0.13197200, -0.08346292, -0.05880658, 0.01600202, -0.02550344, -0.98739660]
-```
-
-This is a genuine finite 7-D SmolVLA prediction, not a claim of objective action
-correctness. See `results/sanity_check.txt` for the compact terminal record.
+Phases 11–14, release-event extraction, a release envelope or guard, stochasticity experiments, MuJoCo, ROS, and simulator integration are intentionally outside the final project scope.

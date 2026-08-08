@@ -43,4 +43,14 @@ results/*
 !results/gripper_transitions/
 !results/gripper_transitions/*.png
 !results/gripper_transitions/*.csv
+!results/final_validation.json
+!results/final_findings.md
+!results/presentation_cheatsheet.md
+!results/final_smoke_test.txt
+!results/demo_examples.json
+!results/demo_assets/
+!results/demo_assets/*.png
+!results/figures/final/
+!results/figures/final/*.png
+!results/figures/final/*.pdf
 !results/.gitkeep
