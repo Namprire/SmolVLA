@@ -23,6 +23,18 @@ A VLA policy receives language, images, and robot state together. If its action 
 
 The explicit flow noise has checkpoint-specific shape `(1, 50, 32)`, dtype `float32`, and is reused exactly across all four language conditions for an observation. `results/main_experiment_selection.json` records the deterministic sample selection, noise seeds, and noise hashes. `results/vla_predictions.csv` is the immutable source of truth for final analysis.
 
+## Visual demo
+
+The GIF below shows the complete stored episode 0 trajectory from the agent and eye-in-hand cameras. It uses existing dataset frames only; no new model inference or simulation was run.
+
+![Episode 0 arm demonstration](results/demo_assets/episode_00_arm_demo.gif)
+
+| Language-induced action difference | Agreement with recorded expert action |
+|:---:|:---:|
+| ![Language-induced action difference](results/figures/final/01_language_induced_action_difference.png) | ![Agreement with recorded expert action](results/figures/final/02_agreement_with_recorded_expert_action.png) |
+| Language sensitivity across task progress | Gripper-command semantics |
+| ![Language sensitivity across task progress](results/figures/final/03_language_sensitivity_across_task_progress.png) | ![Gripper-command semantics](results/figures/final/04_gripper_semantics_temporal_validation.png) |
+
 ## Main results
 
 Mean full 7-D action distance from the Correct-language prediction:
