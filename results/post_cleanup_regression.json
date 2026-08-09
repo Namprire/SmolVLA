@@ -1,0 +1,107 @@
+{
+  "validation_result": "PASS",
+  "scope": "Stored-data analysis and offline viewer only; no SmolVLA inference, training, download, or new experiment.",
+  "checks": {
+    "independent_result_validation": {
+      "command": ".venv/bin/python experiments/final_independent_validation.py",
+      "status": "PASS",
+      "prediction_rows": 800,
+      "observations": 200,
+      "conditions_per_observation": 4
+    },
+    "existing_metrics_analysis": {
+      "command": ".venv/bin/python experiments/analyze_language_results.py",
+      "status": "PASS",
+      "expert_agreement_rows": 800,
+      "paired_language_effect_rows": 600,
+      "stage_summary_rows": 60,
+      "expected_undefined_translation_cosines": 16
+    },
+    "final_figure_regeneration": {
+      "command": ".venv/bin/python experiments/finalize_results.py",
+      "status": "PASS",
+      "png_count": 4,
+      "pdf_count": 4,
+      "model_inference_calls": 0
+    },
+    "viewer_forensic_audit": {
+      "command": ".venv/bin/python experiments/final_viewer_audit.py",
+      "status": "PASS",
+      "examples": 5,
+      "condition_renders": 20,
+      "source_camera_pixels_exact": true,
+      "source_expert_actions_match": true
+    },
+    "offline_demo_smoke_test": {
+      "command": ".venv/bin/python demo/demo.py --smoke-test",
+      "status": "PASS",
+      "all_five_examples_loaded": true,
+      "all_four_conditions_switched": true,
+      "cameras_unchanged_across_condition_switch": true,
+      "model_inference_calls": 0
+    },
+    "curated_example_validation": {
+      "status": "PASS",
+      "all_five_selection_claims_true": true,
+      "documented_exclusion_rules_reproduced": true,
+      "example_5_paraphrase_minus_contradictory": 1.999806753800014
+    },
+    "gripper_semantics_regeneration": {
+      "command": ".venv/bin/python reliability/inspect_gripper.py",
+      "status": "PASS",
+      "local_episodes": 10,
+      "local_frames": 2612,
+      "command_transitions": 48,
+      "two_camera_contact_sheets": 20,
+      "model_inference_calls": 0
+    },
+    "static_cleanup_checks": {
+      "status": "PASS",
+      "unused_imports": 0,
+      "dead_cli_options": 0,
+      "byte_identical_tracked_duplicates": 0,
+      "machine_specific_paths_in_active_source_or_reader_facing_docs": 0,
+      "git_diff_check": "PASS"
+    }
+  },
+  "raw_hashes": {
+    "results/determinism_check.csv": {
+      "before": "52800d7a561cf6bd46f52d141d572528d5751979186cf595a81207e30f4068f0",
+      "after": "52800d7a561cf6bd46f52d141d572528d5751979186cf595a81207e30f4068f0",
+      "unchanged": true
+    },
+    "results/language_conditions.json": {
+      "before": "f9456e4ca8510ac8bf5295234dcbd5eae281014277ef1e98788a677605e6642f",
+      "after": "f9456e4ca8510ac8bf5295234dcbd5eae281014277ef1e98788a677605e6642f",
+      "unchanged": true
+    },
+    "results/main_experiment_selection.json": {
+      "before": "040cf92bc0d0816814aac38504a016cf7920cfcd5707678e2233b3ad86b26982",
+      "after": "040cf92bc0d0816814aac38504a016cf7920cfcd5707678e2233b3ad86b26982",
+      "unchanged": true
+    },
+    "results/main_experiment_validation.json": {
+      "before": "84734ac8a8e84f92ea643094648dcf1c5304d50ecde098b53d315437efdb62b6",
+      "after": "84734ac8a8e84f92ea643094648dcf1c5304d50ecde098b53d315437efdb62b6",
+      "unchanged": true
+    },
+    "results/vla_predictions.csv": {
+      "before": "ab4984aeea52a8ca60c94a5cb19a15d69fd27707f5c5734ddd8bec680f376dc4",
+      "after": "ab4984aeea52a8ca60c94a5cb19a15d69fd27707f5c5734ddd8bec680f376dc4",
+      "unchanged": true
+    },
+    "results/vla_predictions_pilot.csv": {
+      "before": "7d54313751a1a269256d29cc2484dcef334f7055b506a2d1082fe2a4f50d66b8",
+      "after": "7d54313751a1a269256d29cc2484dcef334f7055b506a2d1082fe2a4f50d66b8",
+      "unchanged": true
+    }
+  },
+  "all_raw_hashes_unchanged": true,
+  "numerical_results_unchanged": true,
+  "arm_only_6d_means": {
+    "Paraphrase": 0.149570241993341,
+    "Contradictory": 0.21030856507848644,
+    "Unrelated": 0.4670427649399778
+  },
+  "arm_only_aggregate_order_survives": true
+}

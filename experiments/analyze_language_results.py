@@ -196,7 +196,7 @@ def plot_language_action_distance(effects: pd.DataFrame) -> None:
 def plot_expert_agreement(expert: pd.DataFrame) -> None:
     metrics = (
         ("translation_error_l2", "Translation L2 error"),
-        ("rotation_error_l2", "Rotation L2 error"),
+        ("rotation_error_l2", "Axis-angle-component L2 error"),
         ("gripper_absolute_error", "Gripper absolute error"),
     )
     episode_means = expert.groupby(["episode_id", "language_condition"], as_index=False)[
@@ -431,7 +431,7 @@ def write_findings(
         f"{effect_medians['Unrelated']['gripper_language_difference']:.4f}. Sparse large gripper changes make "
         f"the mean gripper difference for Unrelated ({effect_means['Unrelated']['gripper_language_difference']:.4f}) "
         f"slightly exceed its mean translation distance ({effect_means['Unrelated']['translation_language_distance']:.4f}). "
-        "Rotation differences were smallest numerically. Because these components have different semantics/scales, "
+        "Axis-angle differences were smallest numerically. Because these components have different semantics/scales, "
         "this is not a calibrated cross-component sensitivity ranking.",
         "",
         "## Task stage and episode structure",
@@ -473,7 +473,7 @@ def write_findings(
             "",
             "## Agreement with the recorded expert action",
             "",
-            "6. Mean translation / rotation / gripper errors by condition were:",
+            "6. Mean translation / axis-angle / gripper errors by condition were:",
             "",
         ]
     )

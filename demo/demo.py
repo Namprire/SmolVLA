@@ -181,7 +181,7 @@ class OfflineDemo:
             strict=True,
         ):
             axis.clear()
-            axis.imshow(image)
+            axis.imshow(np.rot90(image, 2))
             axis.set_title(title, fontsize=11, fontweight="bold")
             axis.axis("off")
         self.refresh()
@@ -223,7 +223,7 @@ class OfflineDemo:
             f"Action order: [{label_line}]\n"
             f"Recorded expert 7-D action:\n{format_action(expert)}\n"
             f"Stored SmolVLA predicted 7-D action:\n{format_action(predicted)}\n\n"
-            f"AGREEMENT WITH RECORDED EXPERT ACTION\n"
+            f"SELECTED PREDICTION VS RECORDED EXPERT\n"
             f"Translation difference:  {translation:.4f}\n"
             f"Axis-angle difference:   {rotation:.4f}\n"
             f"Gripper difference:      {gripper:.4f}\n"
@@ -283,6 +283,7 @@ class OfflineDemo:
         self.table_ax.text(
             0.0,
             0.47,
+            "LANGUAGE-INDUCED DIFFERENCE VS CORRECT PREDICTION\n"
             "Why this example was selected:\n" + reason,
             transform=self.table_ax.transAxes,
             va="top",
@@ -328,30 +329,41 @@ class OfflineDemo:
             self.set_condition(int(event.key) - 1)
 
     def smoke_test(self) -> None:
-        original_camera_arrays = [
-            np.asarray(self.camera_1_ax.images[0].get_array()).copy(),
-            np.asarray(self.camera_2_ax.images[0].get_array()).copy(),
-        ]
-        seen: list[str] = []
-        for index, condition in enumerate(CONDITION_ORDER):
-            self.set_condition(index)
-            self.fig.canvas.draw()
-            if self.selected_row().language_condition != condition:
-                raise RuntimeError(f"Condition switch failed for {condition}")
-            seen.append(condition)
-            for axis, original in zip(
-                (self.camera_1_ax, self.camera_2_ax),
-                original_camera_arrays,
-                strict=True,
-            ):
-                if not np.array_equal(np.asarray(axis.images[0].get_array()), original):
-                    raise RuntimeError("Camera image changed during language-condition switch")
-        if seen != list(CONDITION_ORDER):
-            raise RuntimeError(f"Condition cycle incomplete: {seen}")
+        original_example_index = self.example_index
+        seen_examples: list[int] = []
+        for example_index in range(len(self.examples)):
+            self.example_index = example_index
+            self.load_example()
+            seen_examples.append(int(self.example["example_index"]))
+            original_camera_arrays = [
+                np.asarray(self.camera_1_ax.images[0].get_array()).copy(),
+                np.asarray(self.camera_2_ax.images[0].get_array()).copy(),
+            ]
+            seen_conditions: list[str] = []
+            for condition_index, condition in enumerate(CONDITION_ORDER):
+                self.set_condition(condition_index)
+                self.fig.canvas.draw()
+                if self.selected_row().language_condition != condition:
+                    raise RuntimeError(f"Condition switch failed for {condition}")
+                seen_conditions.append(condition)
+                for axis, original in zip(
+                    (self.camera_1_ax, self.camera_2_ax),
+                    original_camera_arrays,
+                    strict=True,
+                ):
+                    if not np.array_equal(np.asarray(axis.images[0].get_array()), original):
+                        raise RuntimeError("Camera image changed during language-condition switch")
+            if seen_conditions != list(CONDITION_ORDER):
+                raise RuntimeError(f"Condition cycle incomplete: {seen_conditions}")
+        self.example_index = original_example_index
+        self.load_example()
+        expected_examples = [int(example["example_index"]) for example in self.examples]
+        if seen_examples != expected_examples:
+            raise RuntimeError(f"Example cycle incomplete: {seen_examples}")
         print(
             "DEMO SMOKE PASS: "
-            f"example={self.example_index + 1}, episode={self.example['episode_id']}, "
-            f"frame={self.example['frame_index']}, conditions={','.join(seen)}, "
+            f"examples={','.join(str(value) for value in seen_examples)}, "
+            f"conditions={','.join(CONDITION_ORDER)}, "
             "same_cameras_across_conditions=true, model_inference=0",
             flush=True,
         )

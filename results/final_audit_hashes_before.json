@@ -1,0 +1,11 @@
+{
+  "algorithm": "sha256",
+  "files": {
+    "results/determinism_check.csv": "52800d7a561cf6bd46f52d141d572528d5751979186cf595a81207e30f4068f0",
+    "results/language_conditions.json": "f9456e4ca8510ac8bf5295234dcbd5eae281014277ef1e98788a677605e6642f",
+    "results/main_experiment_selection.json": "040cf92bc0d0816814aac38504a016cf7920cfcd5707678e2233b3ad86b26982",
+    "results/main_experiment_validation.json": "84734ac8a8e84f92ea643094648dcf1c5304d50ecde098b53d315437efdb62b6",
+    "results/vla_predictions.csv": "ab4984aeea52a8ca60c94a5cb19a15d69fd27707f5c5734ddd8bec680f376dc4",
+    "results/vla_predictions_pilot.csv": "7d54313751a1a269256d29cc2484dcef334f7055b506a2d1082fe2a4f50d66b8"
+  }
+}

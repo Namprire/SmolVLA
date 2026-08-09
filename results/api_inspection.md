@@ -1,9 +1,9 @@
 # Installed LeRobot SmolVLA API inspection
 
 - LeRobot version: `0.4.4`
-- Policy source inspected: `/Users/nampham/Documents/Blended/SmolVLA/.venv/lib/python3.11/site-packages/lerobot/policies/smolvla/modeling_smolvla.py`
-- SmolVLA processor source inspected: `/Users/nampham/Documents/Blended/SmolVLA/.venv/lib/python3.11/site-packages/lerobot/policies/smolvla/processor_smolvla.py`
-- Tokenizer processor source inspected: `/Users/nampham/Documents/Blended/SmolVLA/.venv/lib/python3.11/site-packages/lerobot/processor/tokenizer_processor.py`
+- Policy source inspected: `site-packages/lerobot/policies/smolvla/modeling_smolvla.py`
+- SmolVLA processor source inspected: `site-packages/lerobot/policies/smolvla/processor_smolvla.py`
+- Tokenizer processor source inspected: `site-packages/lerobot/processor/tokenizer_processor.py`
 - `SmolVLAPolicy.predict_action_chunk` signature: `(self, batch: dict[str, torch.Tensor], noise: torch.Tensor | None = None, **kwargs: typing_extensions.Unpack[lerobot.policies.smolvla.modeling_smolvla.ActionSelectKwargs]) -> torch.Tensor`
 - `SmolVLAPolicy.select_action` signature: `(self, batch: dict[str, torch.Tensor], noise: torch.Tensor | None = None, **kwargs: typing_extensions.Unpack[lerobot.policies.smolvla.modeling_smolvla.ActionSelectKwargs]) -> torch.Tensor`
 - `VLAFlowMatching.sample_actions` signature: `(self, images, img_masks, lang_tokens, lang_masks, state, noise=None, **kwargs: typing_extensions.Unpack[lerobot.policies.smolvla.modeling_smolvla.ActionSelectKwargs]) -> torch.Tensor`

@@ -34,9 +34,7 @@ from src.metrics import (  # noqa: E402
     COMPARISON_ORDER,
     CONDITION_LABELS,
     CONDITION_ORDER,
-    EXPERT_COLUMNS,
     OBSERVATION_KEY,
-    PRED_COLUMNS,
     STAGE_LABELS,
     build_summary,
     compute_expert_agreement,
@@ -78,17 +76,6 @@ COLORS = {
     "contradictory": "#D17A22",
     "unrelated": "#C84B4B",
 }
-
-ACTION_DISPLAY_NAMES = (
-    "x",
-    "y",
-    "z",
-    "axis-angle-x",
-    "axis-angle-y",
-    "axis-angle-z",
-    "gripper",
-)
-
 
 def sha256(path: Path) -> str:
     digest = hashlib.sha256()
@@ -497,7 +484,7 @@ def figure_language_difference(effects: pd.DataFrame, bootstrap: pd.DataFrame) -
 def figure_expert_agreement(expert: pd.DataFrame) -> None:
     metrics = (
         ("translation_error_l2", "A. Translation", "Translation L2 error"),
-        ("rotation_error_l2", "B. Axis-angle orientation", "Orientation-vector L2 error"),
+        ("rotation_error_l2", "B. Axis-angle orientation", "Axis-angle-component L2 error"),
         ("gripper_absolute_error", "C. Gripper", "Gripper absolute error"),
     )
     episode_means = expert.groupby(

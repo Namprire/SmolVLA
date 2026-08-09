@@ -1,0 +1,832 @@
+{
+  "validation_result": "PASS",
+  "independence": "No project metric or viewer helper was imported.",
+  "action_semantics": "Stored dimensions 3-5 are treated as axis-angle components despite legacy CSV header names.",
+  "structure": {
+    "row_count": 800,
+    "observation_count": 200,
+    "conditions_per_observation": 4,
+    "episodes": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "duplicate_observation_condition_keys": 0,
+    "finite_prediction_dimension": 7,
+    "finite_expert_action_dimension": 7,
+    "same_expert_action_across_conditions": true,
+    "same_frame_and_selection_identifiers_across_conditions": true,
+    "same_noise_seed_and_hash_across_conditions": true,
+    "task_progress_consistent_within_observation_and_frame_ratio": true,
+    "exact_instruction_mapping": {
+      "correct": "put both the cream cheese box and the butter in the basket",
+      "paraphrase": "place the cream cheese box and the butter together inside the basket",
+      "contradictory": "put the cream cheese box in the basket but leave the butter outside the basket",
+      "unrelated": "open the top drawer of the cabinet"
+    },
+    "csv_state_vector_limitation": "The CSV does not contain a robot-state vector or image hashes, so per-condition state/image identity cannot be established from this CSV alone; it is corroborated separately from the source pipeline and local frame assets."
+  },
+  "published_checks": {
+    "tolerance_for_four_decimal_claims": 5.1e-05,
+    "paraphrase_full_mean": {
+      "actual": 0.20275524235380105,
+      "published_approximate": 0.2028,
+      "matches_rounding": true
+    },
+    "contradictory_full_mean": {
+      "actual": 0.3543154315438337,
+      "published_approximate": 0.3543,
+      "matches_rounding": true
+    },
+    "unrelated_full_mean": {
+      "actual": 0.8063686154782291,
+      "published_approximate": 0.8064,
+      "matches_rounding": true
+    },
+    "correct_expert_agreement": {
+      "actual_translation_axis_angle_gripper": [
+        0.34023734076156587,
+        0.07078632207668076,
+        0.20846111983060836
+      ],
+      "published_approximate": [
+        0.3402,
+        0.0708,
+        0.2085
+      ],
+      "matches_rounding": true
+    },
+    "paraphrase_expert_agreement": {
+      "actual_translation_axis_angle_gripper": [
+        0.36325101607808435,
+        0.07155914336808765,
+        0.2289387282729149
+      ],
+      "published_approximate": [
+        0.3633,
+        0.0716,
+        0.2289
+      ],
+      "matches_rounding": true
+    },
+    "contradictory_expert_agreement": {
+      "actual_translation_axis_angle_gripper": [
+        0.41464084784879984,
+        0.07202515419902086,
+        0.2763364088535309
+      ],
+      "published_approximate": [
+        0.4146,
+        0.072,
+        0.2763
+      ],
+      "matches_rounding": true
+    },
+    "unrelated_expert_agreement": {
+      "actual_translation_axis_angle_gripper": [
+        0.6152105339858747,
+        0.09273557232048106,
+        0.6562852427363396
+      ],
+      "published_approximate": [
+        0.6152,
+        0.0927,
+        0.6563
+      ],
+      "matches_rounding": true
+    },
+    "paraphrase_closer_than_contradictory": true,
+    "paraphrase_closer_than_unrelated": true
+  },
+  "language_effects_from_correct_prediction": {
+    "Paraphrase": {
+      "translation_distance": {
+        "count": 200,
+        "mean": 0.148509154562012,
+        "q25": 0.0898289400760327,
+        "median": 0.11938057089551361,
+        "q75": 0.192528679806047,
+        "trimmed_mean_10_percent_each_tail": 0.1355583610816705,
+        "maximum": 0.615870130029571
+      },
+      "axis_angle_distance": {
+        "count": 200,
+        "mean": 0.014574060940665578,
+        "q25": 0.007894064246099588,
+        "median": 0.013289977144169098,
+        "q75": 0.02001076695407773,
+        "trimmed_mean_10_percent_each_tail": 0.013691186868567485,
+        "maximum": 0.0454189557041655
+      },
+      "gripper_difference": {
+        "count": 200,
+        "mean": 0.06627592742443085,
+        "q25": 0.002728208899498097,
+        "median": 0.00450295209884638,
+        "q75": 0.006906539201736367,
+        "trimmed_mean_10_percent_each_tail": 0.004809437319636337,
+        "maximum": 2.0661072731018066
+      },
+      "arm_only_6d_distance": {
+        "count": 200,
+        "mean": 0.149570241993341,
+        "q25": 0.09179172834178678,
+        "median": 0.12058482773623591,
+        "q75": 0.19442696307309193,
+        "trimmed_mean_10_percent_each_tail": 0.13666998817989398,
+        "maximum": 0.6160280070183544
+      },
+      "full_7d_distance": {
+        "count": 200,
+        "mean": 0.20275524235380105,
+        "q25": 0.09188953155203208,
+        "median": 0.12218043610844813,
+        "q75": 0.1992750636563164,
+        "trimmed_mean_10_percent_each_tail": 0.13884547897158028,
+        "maximum": 2.0854066367299096
+      },
+      "gripper_squared_share_of_full_norm": {
+        "count": 200,
+        "mean": 0.034868480919839726,
+        "q25": 0.0002849353220445412,
+        "median": 0.001343929659336436,
+        "q75": 0.005042673889401496,
+        "trimmed_mean_10_percent_each_tail": 0.00251020405865043,
+        "maximum": 0.9952383716341998
+      },
+      "gripper_dominance": {
+        "gripper_difference_over_1_native_unit_count": 6,
+        "gripper_over_half_of_squared_full_norm_count": 6,
+        "gripper_over_90_percent_of_squared_full_norm_count": 6,
+        "mean_full_minus_mean_arm_only_6d": 0.05318500036046003,
+        "mean_arm_only_divided_by_mean_full": 0.7376886548380633
+      }
+    },
+    "Contradictory": {
+      "translation_distance": {
+        "count": 200,
+        "mean": 0.20865968059770143,
+        "q25": 0.09961549734042946,
+        "median": 0.16346487984373606,
+        "q75": 0.26686649536814216,
+        "trimmed_mean_10_percent_each_tail": 0.18348947690930434,
+        "maximum": 0.8546108066855104
+      },
+      "axis_angle_distance": {
+        "count": 200,
+        "mean": 0.01957434696202631,
+        "q25": 0.010964197016792927,
+        "median": 0.016345277645416642,
+        "q75": 0.025961434018395013,
+        "trimmed_mean_10_percent_each_tail": 0.018142082796254067,
+        "maximum": 0.0686337607832903
+      },
+      "gripper_difference": {
+        "count": 200,
+        "mean": 0.1748916032910347,
+        "q25": 0.0022726356983184814,
+        "median": 0.0047626793384552,
+        "q75": 0.009313300251960727,
+        "trimmed_mean_10_percent_each_tail": 0.005780787393450727,
+        "maximum": 2.0277071595191956
+      },
+      "arm_only_6d_distance": {
+        "count": 200,
+        "mean": 0.21030856507848644,
+        "q25": 0.1007446777821911,
+        "median": 0.1640183618085586,
+        "q75": 0.26800741215719953,
+        "trimmed_mean_10_percent_each_tail": 0.18517256521138034,
+        "maximum": 0.8548523235216084
+      },
+      "full_7d_distance": {
+        "count": 200,
+        "mean": 0.3543154315438337,
+        "q25": 0.1009975396248206,
+        "median": 0.16417016950341695,
+        "q75": 0.30100371441947993,
+        "trimmed_mean_10_percent_each_tail": 0.20695275197507942,
+        "maximum": 2.1788755354159806
+      },
+      "gripper_squared_share_of_full_norm": {
+        "count": 200,
+        "mean": 0.085376529637836,
+        "q25": 0.00019525332751724536,
+        "median": 0.000865161553026751,
+        "q75": 0.003778068863943683,
+        "trimmed_mean_10_percent_each_tail": 0.0029738859400756136,
+        "maximum": 0.9922863521658543
+      },
+      "gripper_dominance": {
+        "gripper_difference_over_1_native_unit_count": 17,
+        "gripper_over_half_of_squared_full_norm_count": 17,
+        "gripper_over_90_percent_of_squared_full_norm_count": 15,
+        "mean_full_minus_mean_arm_only_6d": 0.14400686646534727,
+        "mean_arm_only_divided_by_mean_full": 0.5935630976108597
+      }
+    },
+    "Unrelated": {
+      "translation_distance": {
+        "count": 200,
+        "mean": 0.4634893282795731,
+        "q25": 0.20274028079998435,
+        "median": 0.4328779049877284,
+        "q75": 0.6935400599649997,
+        "trimmed_mean_10_percent_each_tail": 0.44572643271876344,
+        "maximum": 1.177724026452715
+      },
+      "axis_angle_distance": {
+        "count": 200,
+        "mean": 0.04233018911694433,
+        "q25": 0.018886813534709796,
+        "median": 0.033534983088860076,
+        "q75": 0.05596106522581451,
+        "trimmed_mean_10_percent_each_tail": 0.037949567099562306,
+        "maximum": 0.16537124119551966
+      },
+      "gripper_difference": {
+        "count": 200,
+        "mean": 0.4793772894144058,
+        "q25": 0.005644127726554898,
+        "median": 0.011957436800002996,
+        "q75": 0.04155433177947998,
+        "trimmed_mean_10_percent_each_tail": 0.34656553752720354,
+        "maximum": 2.061038374900818
+      },
+      "arm_only_6d_distance": {
+        "count": 200,
+        "mean": 0.4670427649399778,
+        "q25": 0.2126843664291881,
+        "median": 0.4335571613722957,
+        "q75": 0.695849494049972,
+        "trimmed_mean_10_percent_each_tail": 0.44957585256287375,
+        "maximum": 1.1790296770726365
+      },
+      "full_7d_distance": {
+        "count": 200,
+        "mean": 0.8063686154782291,
+        "q25": 0.21806140646731087,
+        "median": 0.47922723436126924,
+        "q75": 1.0821726608087125,
+        "trimmed_mean_10_percent_each_tail": 0.7230614540495205,
+        "maximum": 2.3065726496350414
+      },
+      "gripper_squared_share_of_full_norm": {
+        "count": 200,
+        "mean": 0.21427788528148184,
+        "q25": 0.0002819842081169076,
+        "median": 0.0017721010189580481,
+        "q75": 0.08032843260416384,
+        "trimmed_mean_10_percent_each_tail": 0.1502349676901819,
+        "maximum": 0.9923392801055603
+      },
+      "gripper_dominance": {
+        "gripper_difference_over_1_native_unit_count": 47,
+        "gripper_over_half_of_squared_full_norm_count": 47,
+        "gripper_over_90_percent_of_squared_full_norm_count": 18,
+        "mean_full_minus_mean_arm_only_6d": 0.3393258505382513,
+        "mean_arm_only_divided_by_mean_full": 0.5791926371824269
+      }
+    }
+  },
+  "agreement_with_recorded_expert_action": {
+    "Correct": {
+      "translation_l2": {
+        "count": 200,
+        "mean": 0.34023734076156587,
+        "q25": 0.1990476532220642,
+        "median": 0.3060385865352591,
+        "q75": 0.42915754558071756,
+        "trimmed_mean_10_percent_each_tail": 0.321188211888152,
+        "maximum": 0.9221257612906633
+      },
+      "axis_angle_l2": {
+        "count": 200,
+        "mean": 0.07078632207668076,
+        "q25": 0.03821220478162152,
+        "median": 0.06071036452465005,
+        "q75": 0.09530664039836337,
+        "trimmed_mean_10_percent_each_tail": 0.06624442542382328,
+        "maximum": 0.23133792799686706
+      },
+      "gripper_absolute_difference": {
+        "count": 200,
+        "mean": 0.20846111983060836,
+        "q25": 0.004350528120994568,
+        "median": 0.009391516447067205,
+        "q75": 0.01574091613292694,
+        "trimmed_mean_10_percent_each_tail": 0.011114504933357245,
+        "maximum": 2.0243226289749146
+      },
+      "full_7d_distance": {
+        "count": 200,
+        "mean": 0.5119518857573351,
+        "q25": 0.215138905415178,
+        "median": 0.3321240678605359,
+        "q75": 0.4937372872101308,
+        "trimmed_mean_10_percent_each_tail": 0.36808323355737593,
+        "maximum": 2.165893429937238
+      },
+      "full_7d_mae": {
+        "count": 200,
+        "mean": 0.1166225940622514,
+        "q25": 0.05604325187492315,
+        "median": 0.08251268057418719,
+        "q75": 0.11854147536879672,
+        "trimmed_mean_10_percent_each_tail": 0.09196720081779078,
+        "maximum": 0.47824469498092576
+      }
+    },
+    "Paraphrase": {
+      "translation_l2": {
+        "count": 200,
+        "mean": 0.36325101607808435,
+        "q25": 0.2097870440043249,
+        "median": 0.33270926771594045,
+        "q75": 0.4796449324885915,
+        "trimmed_mean_10_percent_each_tail": 0.34308279940333675,
+        "maximum": 1.1415328753586838
+      },
+      "axis_angle_l2": {
+        "count": 200,
+        "mean": 0.07155914336808765,
+        "q25": 0.03977163005949369,
+        "median": 0.06316295121762487,
+        "q75": 0.09617957369375435,
+        "trimmed_mean_10_percent_each_tail": 0.06717426536094127,
+        "maximum": 0.23142630107628567
+      },
+      "gripper_absolute_difference": {
+        "count": 200,
+        "mean": 0.2289387282729149,
+        "q25": 0.005119651556015015,
+        "median": 0.009439229965209905,
+        "q75": 0.017785653471946883,
+        "trimmed_mean_10_percent_each_tail": 0.035802113637328145,
+        "maximum": 2.027011752128601
+      },
+      "full_7d_distance": {
+        "count": 200,
+        "mean": 0.5486144545039366,
+        "q25": 0.2365575533141714,
+        "median": 0.34530468358770405,
+        "q75": 0.5453959934346013,
+        "trimmed_mean_10_percent_each_tail": 0.41197379545532,
+        "maximum": 2.183715626172666
+      },
+      "full_7d_mae": {
+        "count": 200,
+        "mean": 0.12477195511865176,
+        "q25": 0.060909521400130194,
+        "median": 0.0867733494004434,
+        "q75": 0.1321220007313448,
+        "trimmed_mean_10_percent_each_tail": 0.10024276496109708,
+        "maximum": 0.47485029521132155
+      }
+    },
+    "Contradictory": {
+      "translation_l2": {
+        "count": 200,
+        "mean": 0.41464084784879984,
+        "q25": 0.24537858013092703,
+        "median": 0.3575358073265066,
+        "q75": 0.54597297277952,
+        "trimmed_mean_10_percent_each_tail": 0.392268405331808,
+        "maximum": 1.2658527599464267
+      },
+      "axis_angle_l2": {
+        "count": 200,
+        "mean": 0.07202515419902086,
+        "q25": 0.04041671742854433,
+        "median": 0.06408203775174882,
+        "q75": 0.0997044836639487,
+        "trimmed_mean_10_percent_each_tail": 0.06838116604957876,
+        "maximum": 0.23172104980645492
+      },
+      "gripper_absolute_difference": {
+        "count": 200,
+        "mean": 0.2763364088535309,
+        "q25": 0.004285335540771484,
+        "median": 0.008650690317153875,
+        "q75": 0.015403598546981812,
+        "trimmed_mean_10_percent_each_tail": 0.09581176303327084,
+        "maximum": 2.0126372575759888
+      },
+      "full_7d_distance": {
+        "count": 200,
+        "mean": 0.6354214617417566,
+        "q25": 0.266086811745847,
+        "median": 0.4009254709803707,
+        "q75": 0.6826795043319464,
+        "trimmed_mean_10_percent_each_tail": 0.5164485321934081,
+        "maximum": 2.204122317449066
+      },
+      "full_7d_mae": {
+        "count": 200,
+        "mean": 0.14282289465571268,
+        "q25": 0.06592942114262504,
+        "median": 0.09888464441922093,
+        "q75": 0.16411829394097108,
+        "trimmed_mean_10_percent_each_tail": 0.12039207692666554,
+        "maximum": 0.5063296237162181
+      }
+    },
+    "Unrelated": {
+      "translation_l2": {
+        "count": 200,
+        "mean": 0.6152105339858747,
+        "q25": 0.35471624256109324,
+        "median": 0.6272390388388811,
+        "q75": 0.8451917891375966,
+        "trimmed_mean_10_percent_each_tail": 0.602013893332881,
+        "maximum": 1.5080454232437182
+      },
+      "axis_angle_l2": {
+        "count": 200,
+        "mean": 0.09273557232048106,
+        "q25": 0.05053695335558952,
+        "median": 0.08212704833642814,
+        "q75": 0.11847160675624835,
+        "trimmed_mean_10_percent_each_tail": 0.08727871148658399,
+        "maximum": 0.33536772257730296
+      },
+      "gripper_absolute_difference": {
+        "count": 200,
+        "mean": 0.6562852427363396,
+        "q25": 0.005365118384361239,
+        "median": 0.013750076293945312,
+        "q75": 1.988704428076744,
+        "trimmed_mean_10_percent_each_tail": 0.568470312654972,
+        "maximum": 2.059479832649231
+      },
+      "full_7d_distance": {
+        "count": 200,
+        "mean": 1.084083933300491,
+        "q25": 0.43435367290783533,
+        "median": 0.772265986694094,
+        "q75": 2.0734709485564013,
+        "trimmed_mean_10_percent_each_tail": 1.0512570567576272,
+        "maximum": 2.505815873680995
+      },
+      "full_7d_mae": {
+        "count": 200,
+        "mean": 0.24302700447228354,
+        "q25": 0.10103272052947432,
+        "median": 0.19474131039377035,
+        "q75": 0.4174471723547737,
+        "trimmed_mean_10_percent_each_tail": 0.23234399247228016,
+        "maximum": 0.6449336752245601
+      }
+    }
+  },
+  "ordering": {
+    "expected_strict_order_count_full_7d": 125,
+    "expected_strict_order_failure_count_full_7d": 75,
+    "paraphrase_closer_than_contradictory_count": 150,
+    "paraphrase_closer_than_unrelated_count": 182,
+    "contradictory_closer_than_unrelated_count": 171,
+    "expected_strict_order_count_arm_only_6d": 125,
+    "expected_strict_order_failure_count_arm_only_6d": 75
+  },
+  "bootstrap": {
+    "Paraphrase": {
+      "point_estimate": 0.20275524235380105,
+      "bootstrap_mean": 0.2022513554723439,
+      "ci95_low": 0.1724519972918358,
+      "ci95_high": 0.23137302229281126,
+      "replicates": 2000,
+      "seed": 20260812,
+      "cluster_unit": "episode_id",
+      "duplicate_episode_replicates": 2000,
+      "duplicate_sampled_episodes_preserved_with_multiplicity": true,
+      "published_ci_approximate": [
+        0.1725,
+        0.2314
+      ],
+      "published_ci_matches_rounding": true
+    },
+    "Contradictory": {
+      "point_estimate": 0.3543154315438337,
+      "bootstrap_mean": 0.3537792512394567,
+      "ci95_low": 0.2973522753735042,
+      "ci95_high": 0.41446161742315507,
+      "replicates": 2000,
+      "seed": 20260912,
+      "cluster_unit": "episode_id",
+      "duplicate_episode_replicates": 1997,
+      "duplicate_sampled_episodes_preserved_with_multiplicity": true,
+      "published_ci_approximate": [
+        0.2974,
+        0.4145
+      ],
+      "published_ci_matches_rounding": true
+    },
+    "Unrelated": {
+      "point_estimate": 0.8063686154782291,
+      "bootstrap_mean": 0.806589846295319,
+      "ci95_low": 0.7618884015388444,
+      "ci95_high": 0.8559504512077042,
+      "replicates": 2000,
+      "seed": 20261012,
+      "cluster_unit": "episode_id",
+      "duplicate_episode_replicates": 1999,
+      "duplicate_sampled_episodes_preserved_with_multiplicity": true,
+      "published_ci_approximate": [
+        0.7619,
+        0.856
+      ],
+      "published_ci_matches_rounding": true
+    }
+  },
+  "stage_analysis": {
+    "bin_edges": [
+      0.0,
+      0.2,
+      0.4,
+      0.6,
+      0.8,
+      1.0
+    ],
+    "bin_semantics": "left-closed/right-open except that progress=1.0 is forced into 80\u2013100%",
+    "progress_one_rows_in_final_bin": 30,
+    "basis": "paired altered-language SmolVLA prediction vs Correct-language SmolVLA prediction",
+    "means_and_episode_influence": {
+      "Paraphrase": {
+        "0\u201320%": {
+          "observation_count": 41,
+          "mean_paired_full_7d_distance": 0.18559364059311267,
+          "median_paired_full_7d_distance": 0.14569563720652803,
+          "minimum_episode_mean": 0.11900960857094564,
+          "maximum_episode_mean": 0.21629152512355246,
+          "maximum_episode_mean_episode": 9,
+          "leave_one_episode_out_mean_min": 0.1822749503736057,
+          "leave_one_episode_out_mean_max": 0.19279191432523887
+        },
+        "20\u201340%": {
+          "observation_count": 39,
+          "mean_paired_full_7d_distance": 0.12469060915676564,
+          "median_paired_full_7d_distance": 0.10511780858484024,
+          "minimum_episode_mean": 0.08298524601914804,
+          "maximum_episode_mean": 0.28268530363199984,
+          "maximum_episode_mean_episode": 6,
+          "leave_one_episode_out_mean_min": 0.10663407264531029,
+          "leave_one_episode_out_mean_max": 0.12945693637249336
+        },
+        "40\u201360%": {
+          "observation_count": 41,
+          "mean_paired_full_7d_distance": 0.1172893093097676,
+          "median_paired_full_7d_distance": 0.09795327029605454,
+          "minimum_episode_mean": 0.0840343608316688,
+          "maximum_episode_mean": 0.17843202335922081,
+          "maximum_episode_mean_episode": 2,
+          "leave_one_episode_out_mean_min": 0.11067928616928616,
+          "leave_one_episode_out_mean_max": 0.12088443887496746
+        },
+        "60\u201380%": {
+          "observation_count": 39,
+          "mean_paired_full_7d_distance": 0.31396009236998124,
+          "median_paired_full_7d_distance": 0.14024075547167805,
+          "minimum_episode_mean": 0.13849819647880685,
+          "maximum_episode_mean": 0.8014900447108917,
+          "maximum_episode_mean_episode": 6,
+          "leave_one_episode_out_mean_min": 0.27333259634157203,
+          "leave_one_episode_out_mean_max": 0.33401288047182975
+        },
+        "80\u2013100%": {
+          "observation_count": 40,
+          "mean_paired_full_7d_distance": 0.2756367541299746,
+          "median_paired_full_7d_distance": 0.11698065238488839,
+          "minimum_episode_mean": 0.09716172227363931,
+          "maximum_episode_mean": 0.629787412300367,
+          "maximum_episode_mean_episode": 5,
+          "leave_one_episode_out_mean_min": 0.236286680999931,
+          "leave_one_episode_out_mean_max": 0.295467313225123
+        }
+      },
+      "Contradictory": {
+        "0\u201320%": {
+          "observation_count": 41,
+          "mean_paired_full_7d_distance": 0.434305185090304,
+          "median_paired_full_7d_distance": 0.237053928403606,
+          "minimum_episode_mean": 0.16491055704669189,
+          "maximum_episode_mean": 0.7750186329368082,
+          "maximum_episode_mean_episode": 8,
+          "leave_one_episode_out_mean_min": 0.39747129883662785,
+          "leave_one_episode_out_mean_max": 0.4634289286625863
+        },
+        "20\u201340%": {
+          "observation_count": 39,
+          "mean_paired_full_7d_distance": 0.3056009412113256,
+          "median_paired_full_7d_distance": 0.12450055876746836,
+          "minimum_episode_mean": 0.08112608384245576,
+          "maximum_episode_mean": 0.6089846431462037,
+          "maximum_episode_mean_episode": 8,
+          "leave_one_episode_out_mean_min": 0.2709285181330538,
+          "leave_one_episode_out_mean_max": 0.33125521062491076
+        },
+        "40\u201360%": {
+          "observation_count": 41,
+          "mean_paired_full_7d_distance": 0.30625464757679594,
+          "median_paired_full_7d_distance": 0.13004783338255727,
+          "minimum_episode_mean": 0.09709055248866409,
+          "maximum_episode_mean": 0.68913331696642,
+          "maximum_episode_mean_episode": 9,
+          "leave_one_episode_out_mean_min": 0.2648623589941338,
+          "leave_one_episode_out_mean_max": 0.32886698218091825
+        },
+        "60\u201380%": {
+          "observation_count": 39,
+          "mean_paired_full_7d_distance": 0.3264412065832093,
+          "median_paired_full_7d_distance": 0.20403484078966333,
+          "minimum_episode_mean": 0.11993646059721251,
+          "maximum_episode_mean": 0.744863971031799,
+          "maximum_episode_mean_episode": 7,
+          "leave_one_episode_out_mean_min": 0.278621462074799,
+          "leave_one_episode_out_mean_max": 0.348130514115485
+        },
+        "80\u2013100%": {
+          "observation_count": 40,
+          "mean_paired_full_7d_distance": 0.39626223513571956,
+          "median_paired_full_7d_distance": 0.12281510756367706,
+          "minimum_episode_mean": 0.10532243489207938,
+          "maximum_episode_mean": 0.7032588656086752,
+          "maximum_episode_mean_episode": 5,
+          "leave_one_episode_out_mean_min": 0.36215149841650235,
+          "leave_one_episode_out_mean_max": 0.4285888796072352
+        }
+      },
+      "Unrelated": {
+        "0\u201320%": {
+          "observation_count": 41,
+          "mean_paired_full_7d_distance": 0.38201023277995083,
+          "median_paired_full_7d_distance": 0.37012505000418183,
+          "minimum_episode_mean": 0.26989454014097747,
+          "maximum_episode_mean": 0.46016077491332796,
+          "maximum_episode_mean_episode": 6,
+          "leave_one_episode_out_mean_min": 0.3735615255222884,
+          "leave_one_episode_out_mean_max": 0.39413084820038036
+        },
+        "20\u201340%": {
+          "observation_count": 39,
+          "mean_paired_full_7d_distance": 1.3118069176538627,
+          "median_paired_full_7d_distance": 1.0653816004532375,
+          "minimum_episode_mean": 0.7544938657742145,
+          "maximum_episode_mean": 2.1494576269230112,
+          "maximum_episode_mean_episode": 7,
+          "leave_one_episode_out_mean_min": 1.2420026918814338,
+          "leave_one_episode_out_mean_max": 1.3754998378686796
+        },
+        "40\u201360%": {
+          "observation_count": 41,
+          "mean_paired_full_7d_distance": 0.6772538504329655,
+          "median_paired_full_7d_distance": 0.3416455519324393,
+          "minimum_episode_mean": 0.17498768437968143,
+          "maximum_episode_mean": 1.214744595403799,
+          "maximum_episode_mean_episode": 4,
+          "leave_one_episode_out_mean_min": 0.619146742868551,
+          "leave_one_episode_out_mean_max": 0.7470130401625883
+        },
+        "60\u201380%": {
+          "observation_count": 39,
+          "mean_paired_full_7d_distance": 0.7053749639707664,
+          "median_paired_full_7d_distance": 0.49038273485539285,
+          "minimum_episode_mean": 0.2240992460049274,
+          "maximum_episode_mean": 1.2802913450318432,
+          "maximum_episode_mean_episode": 2,
+          "leave_one_episode_out_mean_min": 0.6396702347066433,
+          "leave_one_episode_out_mean_max": 0.760377903166862
+        },
+        "80\u2013100%": {
+          "observation_count": 40,
+          "mean_paired_full_7d_distance": 0.979345057513893,
+          "median_paired_full_7d_distance": 0.34501197121424154,
+          "minimum_episode_mean": 0.6333111817422634,
+          "maximum_episode_mean": 1.5456245189086377,
+          "maximum_episode_mean_episode": 3,
+          "leave_one_episode_out_mean_min": 0.9164251173589215,
+          "leave_one_episode_out_mean_max": 1.017793265932963
+        }
+      }
+    },
+    "interpretation": "Stage patterns are non-monotonic and heterogeneous across episodes."
+  },
+  "curated_examples": {
+    "selection_count": 5,
+    "all_examples_mathematically_valid": true,
+    "duplicate_observations_excluded": true,
+    "example_5_is_counterexample": true,
+    "example_5_paraphrase_minus_contradictory": 1.999806753800014,
+    "selection_policy": "Deterministic rank-based selection covering low Paraphrase change, large Contradictory and Unrelated changes, late-stage sensitivity, and one explicit observation-level counterexample. Duplicate observations are excluded.",
+    "rows": [
+      {
+        "example_index": 1,
+        "selection_type": "paraphrase_close_to_correct",
+        "episode_id": 7,
+        "frame_index": 246,
+        "global_index": 2116,
+        "task_progress": 1.0,
+        "criterion": "Paraphrase full 7-D distance from Correct (ascending)",
+        "calculated_criterion": 0.031778724720195314,
+        "rank_over_all_applicable_observations": 1,
+        "rank_after_documented_exclusions": 1,
+        "exclusion_rule": "none",
+        "full_distances_match_json": true,
+        "gripper_differences_match_json": true,
+        "reason_value_matches": true,
+        "mathematically_valid": true
+      },
+      {
+        "example_index": 2,
+        "selection_type": "large_contradictory_change",
+        "episode_id": 2,
+        "frame_index": 205,
+        "global_index": 715,
+        "task_progress": 0.8367346938775511,
+        "criterion": "Contradictory full 7-D distance from Correct (descending)",
+        "calculated_criterion": 2.1788755354159806,
+        "rank_over_all_applicable_observations": 1,
+        "rank_after_documented_exclusions": 1,
+        "exclusion_rule": "none",
+        "full_distances_match_json": true,
+        "gripper_differences_match_json": true,
+        "reason_value_matches": true,
+        "mathematically_valid": true
+      },
+      {
+        "example_index": 3,
+        "selection_type": "large_unrelated_change",
+        "episode_id": 5,
+        "frame_index": 230,
+        "global_index": 1518,
+        "task_progress": 0.8273381294964028,
+        "criterion": "Unrelated full 7-D distance from Correct (descending)",
+        "calculated_criterion": 2.3065726496350414,
+        "rank_over_all_applicable_observations": 1,
+        "rank_after_documented_exclusions": 1,
+        "exclusion_rule": "exclude observations selected for examples 1-2",
+        "full_distances_match_json": true,
+        "gripper_differences_match_json": true,
+        "reason_value_matches": true,
+        "mathematically_valid": true
+      },
+      {
+        "example_index": 4,
+        "selection_type": "late_stage_strong_sensitivity",
+        "episode_id": 1,
+        "frame_index": 223,
+        "global_index": 481,
+        "task_progress": 0.8884462151394422,
+        "criterion": "mean of three altered-condition full 7-D distances, progress >= 0.8 (descending)",
+        "calculated_criterion": 1.4070228064750312,
+        "rank_over_all_applicable_observations": 3,
+        "rank_after_documented_exclusions": 1,
+        "exclusion_rule": "exclude observations selected for examples 1-3",
+        "full_distances_match_json": true,
+        "gripper_differences_match_json": true,
+        "reason_value_matches": true,
+        "mathematically_valid": true
+      },
+      {
+        "example_index": 5,
+        "selection_type": "ordering_counterexample_and_gripper_change",
+        "episode_id": 6,
+        "frame_index": 229,
+        "global_index": 1796,
+        "task_progress": 0.7582781456953642,
+        "criterion": "Paraphrase minus Contradictory full 7-D distance (positive, descending)",
+        "calculated_criterion": 1.999806753800014,
+        "rank_over_all_applicable_observations": 1,
+        "rank_after_documented_exclusions": 1,
+        "exclusion_rule": "exclude observations selected for examples 1-4",
+        "full_distances_match_json": true,
+        "gripper_differences_match_json": true,
+        "reason_value_matches": true,
+        "mathematically_valid": true
+      }
+    ]
+  },
+  "scientific_sense": {
+    "mean_full_7d_order_is_paraphrase_contradictory_unrelated": true,
+    "mean_arm_only_6d_order_is_paraphrase_contradictory_unrelated": true,
+    "arm_only_6d_means": {
+      "Paraphrase": 0.149570241993341,
+      "Contradictory": 0.21030856507848644,
+      "Unrelated": 0.4670427649399778
+    },
+    "correct_has_greatest_mean_expert_agreement_all_reported_metrics": true,
+    "mean_within_episode_lag1_full_7d_distance": {
+      "Paraphrase": -0.03472679403531402,
+      "Contradictory": -0.006055133321012204,
+      "Unrelated": 0.257942328650857
+    },
+    "dependence_note": "The 20 observations per episode are ordered samples from ten trajectories and are temporally related; n=200 must not be presented as 200 independent robot trials.",
+    "units_note": "Translation, axis-angle, and gripper magnitudes have different units/scales; component means are reported separately and are not treated as calibrated cross-component effect sizes."
+  }
+}

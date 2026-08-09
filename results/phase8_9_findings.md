@@ -8,7 +8,7 @@ These results describe this checkpoint and the 200 controlled observations only.
 
 2. Paraphrase was closer to Correct than Unrelated in 182/200 observations (91.0%) and in 10/10 episode means. The Unrelated mean full 7-D distance was 0.8064.
 
-3. Translation was the largest typical language-effect component: median translation distances were 0.1194, 0.1635, and 0.4329, while median gripper differences were 0.0045, 0.0048, and 0.0120. Sparse large gripper changes make the mean gripper difference for Unrelated (0.4794) slightly exceed its mean translation distance (0.4635). Rotation differences were smallest numerically. Because these components have different semantics/scales, this is not a calibrated cross-component sensitivity ranking.
+3. Translation was the largest typical language-effect component: median translation distances were 0.1194, 0.1635, and 0.4329, while median gripper differences were 0.0045, 0.0048, and 0.0120. Sparse large gripper changes make the mean gripper difference for Unrelated (0.4794) slightly exceed its mean translation distance (0.4635). Axis-angle differences were smallest numerically. Because these components have different semantics/scales, this is not a calibrated cross-component sensitivity ranking.
 
 ## Task stage and episode structure
 
@@ -29,7 +29,7 @@ Per-episode peak stages were distributed as follows: Paraphrase {'80–100%': 4,
 
 ## Agreement with the recorded expert action
 
-6. Mean translation / rotation / gripper errors by condition were:
+6. Mean translation / axis-angle / gripper errors by condition were:
 
 - Correct: 0.3402 / 0.0708 / 0.2085; mean translation cosine similarity 0.7096.
 - Paraphrase: 0.3633 / 0.0716 / 0.2289; mean translation cosine similarity 0.6943.

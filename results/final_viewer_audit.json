@@ -1,0 +1,321 @@
+{
+  "validation_result": "PASS",
+  "viewer_source": "demo/demo.py",
+  "example_count": 5,
+  "all_five_examples_and_all_four_conditions_rendered": true,
+  "left_metric_semantics": "selected SmolVLA prediction vs recorded expert action",
+  "right_metric_semantics": "altered-language SmolVLA prediction vs Correct-language SmolVLA prediction",
+  "source_pipeline_corroboration": "main_language_experiment.py reuses one dataset frame and one explicit noise tensor across the four condition calls, copies every mutable input during preprocessing, and checks the source frame is unchanged after the condition loop.",
+  "rows": [
+    {
+      "example_index": 1,
+      "episode_id": 7,
+      "frame_index": 246,
+      "global_index": 2116,
+      "task_progress": 1.0,
+      "state_sha256": "3342349b00254e61ffcdf8a3c64982df5af93a7f420295c79616bb51a2d6fd00",
+      "source_identifiers_match_example": true,
+      "both_camera_assets_and_displayed_pixels_match_exact_source_frame": true,
+      "all_four_rows_exactly_match_csv": true,
+      "same_frame_progress_noise_and_expert_invariants": true,
+      "recorded_expert_action_matches_source_parquet": true,
+      "recorded_expert_source_max_abs_difference": 8.326672684688674e-17,
+      "selection_explanation_mathematically_true": true,
+      "conditions": {
+        "Correct": {
+          "selected_row_is_requested_condition": true,
+          "instruction_exact": true,
+          "exact_instruction_displayed": true,
+          "recorded_expert_vector_displayed": true,
+          "prediction_vector_displayed": true,
+          "expert_agreement_metrics_displayed_correctly": true,
+          "all_four_table_values_match_csv_at_display_precision": true,
+          "metric_families_explicitly_distinguished": true,
+          "camera_pixels_unchanged_when_condition_selected": true
+        },
+        "Paraphrase": {
+          "selected_row_is_requested_condition": true,
+          "instruction_exact": true,
+          "exact_instruction_displayed": true,
+          "recorded_expert_vector_displayed": true,
+          "prediction_vector_displayed": true,
+          "expert_agreement_metrics_displayed_correctly": true,
+          "all_four_table_values_match_csv_at_display_precision": true,
+          "metric_families_explicitly_distinguished": true,
+          "camera_pixels_unchanged_when_condition_selected": true
+        },
+        "Contradictory": {
+          "selected_row_is_requested_condition": true,
+          "instruction_exact": true,
+          "exact_instruction_displayed": true,
+          "recorded_expert_vector_displayed": true,
+          "prediction_vector_displayed": true,
+          "expert_agreement_metrics_displayed_correctly": true,
+          "all_four_table_values_match_csv_at_display_precision": true,
+          "metric_families_explicitly_distinguished": true,
+          "camera_pixels_unchanged_when_condition_selected": true
+        },
+        "Unrelated": {
+          "selected_row_is_requested_condition": true,
+          "instruction_exact": true,
+          "exact_instruction_displayed": true,
+          "recorded_expert_vector_displayed": true,
+          "prediction_vector_displayed": true,
+          "expert_agreement_metrics_displayed_correctly": true,
+          "all_four_table_values_match_csv_at_display_precision": true,
+          "metric_families_explicitly_distinguished": true,
+          "camera_pixels_unchanged_when_condition_selected": true
+        }
+      },
+      "pass": true
+    },
+    {
+      "example_index": 2,
+      "episode_id": 2,
+      "frame_index": 205,
+      "global_index": 715,
+      "task_progress": 0.8367346938775511,
+      "state_sha256": "e64b44cb9e1f54c302745d5989e791c323a6ddd5e123a86c51fb7e6ff4ff12c8",
+      "source_identifiers_match_example": true,
+      "both_camera_assets_and_displayed_pixels_match_exact_source_frame": true,
+      "all_four_rows_exactly_match_csv": true,
+      "same_frame_progress_noise_and_expert_invariants": true,
+      "recorded_expert_action_matches_source_parquet": true,
+      "recorded_expert_source_max_abs_difference": 8.673617379884035e-17,
+      "selection_explanation_mathematically_true": true,
+      "conditions": {
+        "Correct": {
+          "selected_row_is_requested_condition": true,
+          "instruction_exact": true,
+          "exact_instruction_displayed": true,
+          "recorded_expert_vector_displayed": true,
+          "prediction_vector_displayed": true,
+          "expert_agreement_metrics_displayed_correctly": true,
+          "all_four_table_values_match_csv_at_display_precision": true,
+          "metric_families_explicitly_distinguished": true,
+          "camera_pixels_unchanged_when_condition_selected": true
+        },
+        "Paraphrase": {
+          "selected_row_is_requested_condition": true,
+          "instruction_exact": true,
+          "exact_instruction_displayed": true,
+          "recorded_expert_vector_displayed": true,
+          "prediction_vector_displayed": true,
+          "expert_agreement_metrics_displayed_correctly": true,
+          "all_four_table_values_match_csv_at_display_precision": true,
+          "metric_families_explicitly_distinguished": true,
+          "camera_pixels_unchanged_when_condition_selected": true
+        },
+        "Contradictory": {
+          "selected_row_is_requested_condition": true,
+          "instruction_exact": true,
+          "exact_instruction_displayed": true,
+          "recorded_expert_vector_displayed": true,
+          "prediction_vector_displayed": true,
+          "expert_agreement_metrics_displayed_correctly": true,
+          "all_four_table_values_match_csv_at_display_precision": true,
+          "metric_families_explicitly_distinguished": true,
+          "camera_pixels_unchanged_when_condition_selected": true
+        },
+        "Unrelated": {
+          "selected_row_is_requested_condition": true,
+          "instruction_exact": true,
+          "exact_instruction_displayed": true,
+          "recorded_expert_vector_displayed": true,
+          "prediction_vector_displayed": true,
+          "expert_agreement_metrics_displayed_correctly": true,
+          "all_four_table_values_match_csv_at_display_precision": true,
+          "metric_families_explicitly_distinguished": true,
+          "camera_pixels_unchanged_when_condition_selected": true
+        }
+      },
+      "pass": true
+    },
+    {
+      "example_index": 3,
+      "episode_id": 5,
+      "frame_index": 230,
+      "global_index": 1518,
+      "task_progress": 0.8273381294964028,
+      "state_sha256": "1bee8b6c274779b294b33f607ab3ab3eea8afb57cca257c5304731a0da510055",
+      "source_identifiers_match_example": true,
+      "both_camera_assets_and_displayed_pixels_match_exact_source_frame": true,
+      "all_four_rows_exactly_match_csv": true,
+      "same_frame_progress_noise_and_expert_invariants": true,
+      "recorded_expert_action_matches_source_parquet": true,
+      "recorded_expert_source_max_abs_difference": 6.938893903907228e-17,
+      "selection_explanation_mathematically_true": true,
+      "conditions": {
+        "Correct": {
+          "selected_row_is_requested_condition": true,
+          "instruction_exact": true,
+          "exact_instruction_displayed": true,
+          "recorded_expert_vector_displayed": true,
+          "prediction_vector_displayed": true,
+          "expert_agreement_metrics_displayed_correctly": true,
+          "all_four_table_values_match_csv_at_display_precision": true,
+          "metric_families_explicitly_distinguished": true,
+          "camera_pixels_unchanged_when_condition_selected": true
+        },
+        "Paraphrase": {
+          "selected_row_is_requested_condition": true,
+          "instruction_exact": true,
+          "exact_instruction_displayed": true,
+          "recorded_expert_vector_displayed": true,
+          "prediction_vector_displayed": true,
+          "expert_agreement_metrics_displayed_correctly": true,
+          "all_four_table_values_match_csv_at_display_precision": true,
+          "metric_families_explicitly_distinguished": true,
+          "camera_pixels_unchanged_when_condition_selected": true
+        },
+        "Contradictory": {
+          "selected_row_is_requested_condition": true,
+          "instruction_exact": true,
+          "exact_instruction_displayed": true,
+          "recorded_expert_vector_displayed": true,
+          "prediction_vector_displayed": true,
+          "expert_agreement_metrics_displayed_correctly": true,
+          "all_four_table_values_match_csv_at_display_precision": true,
+          "metric_families_explicitly_distinguished": true,
+          "camera_pixels_unchanged_when_condition_selected": true
+        },
+        "Unrelated": {
+          "selected_row_is_requested_condition": true,
+          "instruction_exact": true,
+          "exact_instruction_displayed": true,
+          "recorded_expert_vector_displayed": true,
+          "prediction_vector_displayed": true,
+          "expert_agreement_metrics_displayed_correctly": true,
+          "all_four_table_values_match_csv_at_display_precision": true,
+          "metric_families_explicitly_distinguished": true,
+          "camera_pixels_unchanged_when_condition_selected": true
+        }
+      },
+      "pass": true
+    },
+    {
+      "example_index": 4,
+      "episode_id": 1,
+      "frame_index": 223,
+      "global_index": 481,
+      "task_progress": 0.8884462151394422,
+      "state_sha256": "36896891931c6c9dd5f3003210eb30ad2920c88dc16506174828659fd31fc980",
+      "source_identifiers_match_example": true,
+      "both_camera_assets_and_displayed_pixels_match_exact_source_frame": true,
+      "all_four_rows_exactly_match_csv": true,
+      "same_frame_progress_noise_and_expert_invariants": true,
+      "recorded_expert_action_matches_source_parquet": true,
+      "recorded_expert_source_max_abs_difference": 4.163336342344337e-17,
+      "selection_explanation_mathematically_true": true,
+      "conditions": {
+        "Correct": {
+          "selected_row_is_requested_condition": true,
+          "instruction_exact": true,
+          "exact_instruction_displayed": true,
+          "recorded_expert_vector_displayed": true,
+          "prediction_vector_displayed": true,
+          "expert_agreement_metrics_displayed_correctly": true,
+          "all_four_table_values_match_csv_at_display_precision": true,
+          "metric_families_explicitly_distinguished": true,
+          "camera_pixels_unchanged_when_condition_selected": true
+        },
+        "Paraphrase": {
+          "selected_row_is_requested_condition": true,
+          "instruction_exact": true,
+          "exact_instruction_displayed": true,
+          "recorded_expert_vector_displayed": true,
+          "prediction_vector_displayed": true,
+          "expert_agreement_metrics_displayed_correctly": true,
+          "all_four_table_values_match_csv_at_display_precision": true,
+          "metric_families_explicitly_distinguished": true,
+          "camera_pixels_unchanged_when_condition_selected": true
+        },
+        "Contradictory": {
+          "selected_row_is_requested_condition": true,
+          "instruction_exact": true,
+          "exact_instruction_displayed": true,
+          "recorded_expert_vector_displayed": true,
+          "prediction_vector_displayed": true,
+          "expert_agreement_metrics_displayed_correctly": true,
+          "all_four_table_values_match_csv_at_display_precision": true,
+          "metric_families_explicitly_distinguished": true,
+          "camera_pixels_unchanged_when_condition_selected": true
+        },
+        "Unrelated": {
+          "selected_row_is_requested_condition": true,
+          "instruction_exact": true,
+          "exact_instruction_displayed": true,
+          "recorded_expert_vector_displayed": true,
+          "prediction_vector_displayed": true,
+          "expert_agreement_metrics_displayed_correctly": true,
+          "all_four_table_values_match_csv_at_display_precision": true,
+          "metric_families_explicitly_distinguished": true,
+          "camera_pixels_unchanged_when_condition_selected": true
+        }
+      },
+      "pass": true
+    },
+    {
+      "example_index": 5,
+      "episode_id": 6,
+      "frame_index": 229,
+      "global_index": 1796,
+      "task_progress": 0.7582781456953642,
+      "state_sha256": "d908d9f57424476b2e0b4d42bfe9a10d8ddce4ea96ae45ada411672ae2ec0bcc",
+      "source_identifiers_match_example": true,
+      "both_camera_assets_and_displayed_pixels_match_exact_source_frame": true,
+      "all_four_rows_exactly_match_csv": true,
+      "same_frame_progress_noise_and_expert_invariants": true,
+      "recorded_expert_action_matches_source_parquet": true,
+      "recorded_expert_source_max_abs_difference": 6.938893903907228e-17,
+      "selection_explanation_mathematically_true": true,
+      "conditions": {
+        "Correct": {
+          "selected_row_is_requested_condition": true,
+          "instruction_exact": true,
+          "exact_instruction_displayed": true,
+          "recorded_expert_vector_displayed": true,
+          "prediction_vector_displayed": true,
+          "expert_agreement_metrics_displayed_correctly": true,
+          "all_four_table_values_match_csv_at_display_precision": true,
+          "metric_families_explicitly_distinguished": true,
+          "camera_pixels_unchanged_when_condition_selected": true
+        },
+        "Paraphrase": {
+          "selected_row_is_requested_condition": true,
+          "instruction_exact": true,
+          "exact_instruction_displayed": true,
+          "recorded_expert_vector_displayed": true,
+          "prediction_vector_displayed": true,
+          "expert_agreement_metrics_displayed_correctly": true,
+          "all_four_table_values_match_csv_at_display_precision": true,
+          "metric_families_explicitly_distinguished": true,
+          "camera_pixels_unchanged_when_condition_selected": true
+        },
+        "Contradictory": {
+          "selected_row_is_requested_condition": true,
+          "instruction_exact": true,
+          "exact_instruction_displayed": true,
+          "recorded_expert_vector_displayed": true,
+          "prediction_vector_displayed": true,
+          "expert_agreement_metrics_displayed_correctly": true,
+          "all_four_table_values_match_csv_at_display_precision": true,
+          "metric_families_explicitly_distinguished": true,
+          "camera_pixels_unchanged_when_condition_selected": true
+        },
+        "Unrelated": {
+          "selected_row_is_requested_condition": true,
+          "instruction_exact": true,
+          "exact_instruction_displayed": true,
+          "recorded_expert_vector_displayed": true,
+          "prediction_vector_displayed": true,
+          "expert_agreement_metrics_displayed_correctly": true,
+          "all_four_table_values_match_csv_at_display_precision": true,
+          "metric_families_explicitly_distinguished": true,
+          "camera_pixels_unchanged_when_condition_selected": true
+        }
+      },
+      "pass": true
+    }
+  ]
+}

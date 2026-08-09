@@ -21,6 +21,9 @@ EXPECTED_INSTRUCTIONS = {
     "contradictory": "put the cream cheese box in the basket but leave the butter outside the basket",
     "unrelated": "open the top drawer of the cabinet",
 }
+
+# Preserve immutable CSV/derived-table compatibility. The legacy roll/pitch/yaw
+# field names represent three stored axis-angle components, not Euler angles.
 ACTION_NAMES = ("x", "y", "z", "roll", "pitch", "yaw", "gripper")
 EXPERT_COLUMNS = [f"expert_action_{name}" for name in ACTION_NAMES]
 PRED_COLUMNS = [f"pred_action_{name}" for name in ACTION_NAMES]

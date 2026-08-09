@@ -35,6 +35,7 @@ CHECKPOINT_DIR = (
 )
 PREDICTIONS_PATH = RESULTS_DIR / "vla_predictions.csv"
 
+# These are the legacy v2.1 metadata/CSV labels; dimensions 3-5 are axis-angle.
 ACTION_NAMES = ("x", "y", "z", "roll", "pitch", "yaw", "gripper")
 STATE_NAMES_FROM_METADATA = (
     "x",

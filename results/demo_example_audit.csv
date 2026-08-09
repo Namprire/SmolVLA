@@ -1,0 +1,6 @@
+example_index,selection_type,episode_id,frame_index,global_index,task_progress,criterion,calculated_criterion,rank_over_all_applicable_observations,rank_after_documented_exclusions,exclusion_rule,full_distances_match_json,gripper_differences_match_json,reason_value_matches,mathematically_valid
+1,paraphrase_close_to_correct,7,246,2116,1.0,Paraphrase full 7-D distance from Correct (ascending),0.031778724720195314,1,1,none,True,True,True,True
+2,large_contradictory_change,2,205,715,0.8367346938775511,Contradictory full 7-D distance from Correct (descending),2.1788755354159806,1,1,none,True,True,True,True
+3,large_unrelated_change,5,230,1518,0.8273381294964028,Unrelated full 7-D distance from Correct (descending),2.3065726496350414,1,1,exclude observations selected for examples 1-2,True,True,True,True
+4,late_stage_strong_sensitivity,1,223,481,0.8884462151394422,"mean of three altered-condition full 7-D distances, progress >= 0.8 (descending)",1.4070228064750312,3,1,exclude observations selected for examples 1-3,True,True,True,True
+5,ordering_counterexample_and_gripper_change,6,229,1796,0.7582781456953642,"Paraphrase minus Contradictory full 7-D distance (positive, descending)",1.999806753800014,1,1,exclude observations selected for examples 1-4,True,True,True,True

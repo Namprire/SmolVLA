@@ -51,6 +51,8 @@ SELECTION_SEED = 2026080807
 NOISE_SEED_BASE = 7_100_000
 NOISE_SHAPE = (1, 50, 32)
 
+# Preserve the established CSV schema. Its legacy roll/pitch/yaw headers contain
+# three axis-angle action components; reader-facing text must use axis-angle.
 ACTION_NAMES = ("x", "y", "z", "roll", "pitch", "yaw", "gripper")
 EXPERT_COLUMNS = [f"expert_action_{name}" for name in ACTION_NAMES]
 PRED_COLUMNS = [f"pred_action_{name}" for name in ACTION_NAMES]

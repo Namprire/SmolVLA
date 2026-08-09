@@ -44,6 +44,8 @@ Mean translation / axis-angle orientation / gripper errors against the recorded 
 
 Under these controlled observations, paraphrases generally produced smaller changes than contradictory or unrelated instructions. Unrelated instructions produced the largest average changes. The ordering is an aggregate result, not a rule for every individual frame. Language sensitivity also varied non-monotonically across task progress.
 
+The final forensic robustness check excludes the gripper channel and recomputes a 6-D arm-only norm over translation plus the three axis-angle components. Its means remain ordered: Paraphrase 0.149570, Contradictory 0.210309, Unrelated 0.467043. The strict full 7-D ordering holds in 125/200 observations and fails in 75/200, so the conclusion is descriptive and aggregate rather than universal.
+
 The expert gripper channel is an exactly binary persistent command: `+1` closes and `-1` opens. A `+1 -> -1` transition marks opening-command onset, but does not by itself prove successful physical release.
 
 See `results/final_findings.md`, `results/final_validation.json`, and `results/presentation_cheatsheet.md` for the concise final record.
@@ -98,6 +100,15 @@ MPLBACKEND=Agg MPLCONFIGDIR="$PWD/.cache/matplotlib" \
   .venv/bin/python demo/demo.py --smoke-test
 ```
 
+Run the independent model-free forensic checks:
+
+```bash
+.venv/bin/python experiments/final_independent_validation.py
+
+MPLBACKEND=Agg MPLCONFIGDIR="$PWD/.cache/matplotlib" \
+  .venv/bin/python experiments/final_viewer_audit.py
+```
+
 ## Expensive inference: already completed
 
 The two-stage command below produced the 800 predictions. **Do not run it merely to inspect, analyze, plot, or demonstrate the completed project.** The driver is resumable and validates every existing row, but running it requires the local checkpoint/dataset and MPS access.
@@ -123,6 +134,8 @@ experiments/
   main_language_experiment.py          completed 800-prediction driver
   analyze_language_results.py          model-free Phase 8–9 metrics
   finalize_results.py                  final validation, figures, examples, docs
+  final_independent_validation.py      independent pandas/numpy forensic audit
+  final_viewer_audit.py                exact source-frame and rendered-viewer audit
 reliability/
   inspect_gripper.py                   model-free Phase 10 semantics audit
 src/
@@ -142,6 +155,9 @@ results/
   final_findings.md                    concise scientific summary
   presentation_cheatsheet.md           one-page defense notes
   final_smoke_test.txt                  final command/status record
+  final_independent_validation.*        independent recomputation record
+  final_viewer_audit.json               five-example viewer/source-frame record
+  FINAL_AUDIT.md                        final forensic verdict and limitations
 ```
 
 ## Scope and limitations

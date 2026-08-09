@@ -45,7 +45,6 @@ CONDITIONS = {
 
 DETERMINISM_SEED = 314159
 PILOT_SEED_BASE = 62000
-ACTION_COLUMNS = [f"action_{i}" for i in range(7)]
 
 
 def json_ready(value: Any) -> Any:
@@ -125,13 +124,23 @@ def write_api_inspection(predictor: SmolVLAPredictor, token_audit: dict[str, Any
             "lerobot.policies.smolvla.processor_smolvla", fromlist=["SmolVLANewLineProcessor"]
         ).SmolVLANewLineProcessor
     )
+
+    def portable_source(source: str | None) -> str:
+        if source is None:
+            return "unavailable"
+        path = Path(source)
+        if "site-packages" in path.parts:
+            index = path.parts.index("site-packages")
+            return str(Path(*path.parts[index:]))
+        return path.name
+
     lines = [
         "# Installed LeRobot SmolVLA API inspection",
         "",
         f"- LeRobot version: `{importlib.metadata.version('lerobot')}`",
-        f"- Policy source inspected: `{policy_source}`",
-        f"- SmolVLA processor source inspected: `{processor_source}`",
-        f"- Tokenizer processor source inspected: `{tokenizer_source}`",
+        f"- Policy source inspected: `{portable_source(policy_source)}`",
+        f"- SmolVLA processor source inspected: `{portable_source(processor_source)}`",
+        f"- Tokenizer processor source inspected: `{portable_source(tokenizer_source)}`",
         f"- `SmolVLAPolicy.predict_action_chunk` signature: `{inspect.signature(SmolVLAPolicy.predict_action_chunk)}`",
         f"- `SmolVLAPolicy.select_action` signature: `{inspect.signature(SmolVLAPolicy.select_action)}`",
         f"- `VLAFlowMatching.sample_actions` signature: `{inspect.signature(VLAFlowMatching.sample_actions)}`",

@@ -53,4 +53,11 @@ results/*
 !results/figures/final/
 !results/figures/final/*.png
 !results/figures/final/*.pdf
-!results/.gitkeep
+!results/final_audit_hashes_before.json
+!results/final_independent_validation.json
+!results/final_independent_validation.md
+!results/demo_example_audit.csv
+!results/final_viewer_audit.json
+!results/code_rot_audit.md
+!results/post_cleanup_regression.json
+!results/FINAL_AUDIT.md
