@@ -1,0 +1,8 @@
+episode_id,frame_index,normalized_progress,why_selected,correct_vs_paraphrase_distance,correct_vs_contradictory_distance,correct_vs_unrelated_distance,gripper_flip_present
+0,13,0.0505836575875486,Early ordinary comparison.,0.113683513928835,0.07980921272659809,0.3991546894396112,False
+0,53,0.2062256809338521,Near first close-command onset; real Contradictory gripper flip.,0.18822555607951658,2.0506533760490497,0.1907589563023491,True
+0,81,0.3151750972762646,Hero comparison: Paraphrase near Correct; Unrelated large and opening-regime flip.,0.05634947949189747,0.06602045063233855,2.2840237033218687,True
+0,128,0.4980544747081712,Near basket and first opening-command onset.,0.08565579230392484,0.10063895242695266,0.10937503187912906,False
+0,191,0.7431906614785992,Near second close-command onset.,0.23189839777604623,0.39175090332883894,0.49038273485539285,False
+0,221,0.8599221789883269,Late nominal holding interval; strong Unrelated gripper flip.,0.07702384081041506,0.41080750992511894,2.124248829269526,True
+0,241,0.9377431906614786,Late opening regime; retained real Paraphrase exception.,2.0854066367299096,0.21233668091657218,0.1448957664511499,True

@@ -41,6 +41,29 @@
   - Machine checks confirm 7/7 arm joints move by >0.10 rad, finger q spans approximately 0.000097–0.040001, and MuJoCo produced zero warnings
   - Saved exact names, ranges, hashes, source/runtime framebuffer sizes, media metadata, and passing checks under `results/mujoco_panda_hard_gate/`
   - Stopped before custom tabletop composition, coordinate mapping, inverse kinematics, or scene cosmetics as required by the Panda hard gate
+- Panda prompt hero demo — polished presentation deliverable
+  - Kept all event/release-guard phases paused and performed zero new SmolVLA inference
+  - Selected representative episode 0 and seven deterministic checkpoints spanning ordinary motion, command-transition neighborhoods, strong stored language effects, and a real Paraphrase exception
+  - Built a separate LIBERO-like scene around the unmodified official Menagerie Panda with a wood table, basket, cream-cheese/butter proxies, restrained context props, cinematic hero camera, and close branch camera
+  - Derived one fixed full-episode dataset-to-MuJoCo XYZ transform and reused it for all 258 trajectory frames and all prompt conditions
+  - Implemented position-only damped least-squares MuJoCo body-Jacobian IK with home-posture nullspace regularization; mean residual is 0.162 mm and maximum residual is 1.489 mm over 258 targets
+  - Passed five incremental visual hard gates: static scene, nominal trajectory preview, four-action checkpoint overlay, synchronized local branches, and final hero render
+  - Used real stored frame-81 predictions for the hero comparison: Paraphrase 0.056, Contradictory 0.066, and Unrelated 2.284 full 7-D distance from Correct; only Unrelated switches from CLOSE to OPEN at this curated checkpoint
+  - Rendered a 25.0-second, 600-frame, 1280x720 H.264 MP4; 300-frame GIF; 2880x1080 storyboard; and 1280x720 hero still
+  - Added animated GIF counterparts for every Panda visual gate (scene, nominal motion, four-action arrows, and local branches)
+  - Added a higher-quality primary variant using a closer full-arm camera: 1280x720 at 15 fps with a 256-color Sierra-2-4A-dithered GIF, plus matching MP4, storyboard, hero still, and validation report
+  - Added a 10-second prompt-first teaser cut inspired by the visual pacing of the local `teaser.mp4` and `hang-towel.mp4` references: fixed HQ camera, typed canonical instruction, uninterrupted accelerated nominal Panda movement, and the stored frame-81 four-action overlay
+  - Consolidated ten presentation GIFs in one index with a machine-readable audit; retained the smaller 960x540 primary render as a lightweight fallback
+  - Rendered the controlled-comparison message and required non-closed-loop disclaimer prominently; predictions are local reset comparisons and are not chained into a rollout
+  - Saved scene/config/source hashes, selected checkpoints, nominal IK trajectory, all hard-gate reports, final validation, and notes under `results/mujoco_panda_prompt_demo/`
+- Bottom-up professor-feedback extension — complete
+  - Reused the immutable 800-row canonical experiment and completed 620-row Phase-B prompt bank; performed no new SmolVLA inference
+  - Deterministically selected episode 3/frame 38 for translation: all 31 prompts share the OPENING regime, while mean translation distance is 0.203 Paraphrase, 0.245 Contradictory, and 0.461 Unrelated
+  - Deterministically selected episode 5/frame 230 for gripper variation: 0/10 Paraphrases, 3/10 Contradictory prompts, and 7/10 Unrelated prompts request OPENING; Correct remains CLOSING
+  - Built a one-object Panda micro-task from four exact stored rows (`CORRECT`, `P07`, `C01`, `U09`) with one fixed transform and one-second local branches
+  - Rendered a 16-second 1280x720 bottom-up MP4/GIF, translation and gripper primitive figures, a four-level pipeline graphic, and a one-object storyboard
+  - Reported basket-distance and held/not-held outputs only as illustrative short-horizon task proxies; did not claim closed-loop control or task success
+  - Saved source hashes, traceable prompt IDs, IK residuals, media metadata, checks, findings, and presentation wording under `results/bottom_up_demo/`
 - Phases 1–10
   - Real pretrained `HuggingFaceVLA/smolvla_libero` inference on Apple M2 Max MPS
   - Deterministic explicit flow-noise control
@@ -73,13 +96,12 @@ Reason: The controlled VLA language-sensitivity experiment already provides a co
 ## CURRENT
 
 - Extension Phases A and B complete and validated
-- Native MuJoCo hard gate, stored-action prompt animation, and official Panda asset/actuator gate complete and validated
-- Empirical release guard and its A/B/C scenarios intentionally not started
+- Native MuJoCo hard gates, simplified stored-action animation, official Panda gate, and polished Panda prompt hero demo complete and validated
+- Event/release-guard phases remain intentionally paused in favor of the presentation demo
 
 ## NEXT
 
-- User review of the official Panda hard-gate render
-- After approval: custom LIBERO-like Panda scene, fixed dataset-to-MuJoCo coordinate transform, and EEF-target IK
+- User review and presentation integration of the final Panda prompt hero demo
 
 ## BLOCKERS
 

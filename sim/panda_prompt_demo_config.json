@@ -1,0 +1,34 @@
+{
+  "episode_id": 0,
+  "source_xyz": {
+    "artifact": ".cache/huggingface/lerobot_v21/HuggingFaceVLA/smol-libero/data/chunk-000/episode_000000.parquet",
+    "field": "observation.state[0:3]",
+    "minimum": [-0.04658397287130356, -0.21306383609771729, 0.44789791107177734],
+    "maximum": [0.15824541449546814, 0.27036646008491516, 0.7323495149612427]
+  },
+  "dataset_to_mujoco_xyz": {
+    "matrix": [
+      [0.0, 0.5, 0.0],
+      [0.9, 0.0, 0.0],
+      [0.0, 0.0, 0.75]
+    ],
+    "translation": [0.5, -0.10024764910340309, 0.14407656669616698],
+    "formula": "xyz_mujoco = matrix @ xyz_dataset + translation",
+    "axis_note": "dataset y maps to Panda-forward x; dataset x maps to Panda-lateral y; dataset z maps to world z",
+    "selection_note": "One transform derived from the complete episode-0 XYZ range and Panda workspace; it is reused for every frame and prompt."
+  },
+  "mapped_xyz": {
+    "minimum": [0.39346808195114136, -0.1421732246875763, 0.48],
+    "maximum": [0.6351832300424576, 0.0421732246875763, 0.6933387699127197]
+  },
+  "scene": {
+    "table_top_z": 0.34,
+    "basket_center": [0.632, -0.102, 0.352],
+    "nominal_hand_contact_z": 0.48
+  },
+  "action_visualization": {
+    "translation_arrow_scale": 0.35,
+    "local_branch_scale": 0.14,
+    "note": "Illustrative global scales applied consistently to stored action translations; not physical trajectory integration."
+  }
+}

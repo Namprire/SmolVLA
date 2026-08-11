@@ -1,0 +1,110 @@
+{
+  "status": "PASS",
+  "gif_count": 10,
+  "all_files_nonempty": true,
+  "all_gifs_animated": true,
+  "primary_gif": "/Users/nampham/Documents/Blended/SmolVLA/results/mujoco_panda_prompt_demo/videos/panda_prompt_demo_main_hq.gif",
+  "gifs": {
+    "stored_libero_reference": {
+      "path": "/Users/nampham/Documents/Blended/SmolVLA/results/demo_assets/episode_00_arm_demo.gif",
+      "frame_count": 129,
+      "resolution": [
+        512,
+        280
+      ],
+      "size_bytes": 10785382,
+      "sha256": "6cddfbff0c92c8cdf453996e2ee0524518dc58ca48705d49e88827051febbec9"
+    },
+    "simplified_prompt_comparison": {
+      "path": "/Users/nampham/Documents/Blended/SmolVLA/results/mujoco_prompt_animation/videos/prompt_comparison_main.gif",
+      "frame_count": 185,
+      "resolution": [
+        960,
+        540
+      ],
+      "size_bytes": 3721371,
+      "sha256": "473cede24fdcfe311f1a2cf21da675ff1dfd750104396815f67114e076cd2590"
+    },
+    "official_panda_hard_gate": {
+      "path": "/Users/nampham/Documents/Blended/SmolVLA/results/mujoco_panda_hard_gate/panda_joint_gripper_hard_gate.gif",
+      "frame_count": 45,
+      "resolution": [
+        720,
+        540
+      ],
+      "size_bytes": 1787014,
+      "sha256": "779216bc426bc13633b3fb17c82ce8dd4799195988f0dc55d679c072ca6527d6"
+    },
+    "panda_static_scene": {
+      "path": "/Users/nampham/Documents/Blended/SmolVLA/results/mujoco_panda_prompt_demo/videos/hard_gate_1_static_scene.gif",
+      "frame_count": 21,
+      "resolution": [
+        960,
+        540
+      ],
+      "size_bytes": 1886375,
+      "sha256": "d5d78ec2a9b990f5be61b7851e9c3790f1211446196a1e18de9139eb223049ea"
+    },
+    "panda_nominal_motion": {
+      "path": "/Users/nampham/Documents/Blended/SmolVLA/results/mujoco_panda_prompt_demo/videos/hard_gate_2_nominal_preview.gif",
+      "frame_count": 48,
+      "resolution": [
+        960,
+        540
+      ],
+      "size_bytes": 1251183,
+      "sha256": "591e8c5dd61de2feaffacb764b8eaaba915b71e29ccd1646c7f035a5416c437e"
+    },
+    "panda_action_arrows": {
+      "path": "/Users/nampham/Documents/Blended/SmolVLA/results/mujoco_panda_prompt_demo/videos/hard_gate_3_four_action_overlay.gif",
+      "frame_count": 30,
+      "resolution": [
+        960,
+        540
+      ],
+      "size_bytes": 230358,
+      "sha256": "2ba0b2b8d4d9f3491c9a0bc49fbb66562f66c31505d524bd456633b44b4d458f"
+    },
+    "panda_local_branches": {
+      "path": "/Users/nampham/Documents/Blended/SmolVLA/results/mujoco_panda_prompt_demo/videos/hard_gate_4_branch_preview.gif",
+      "frame_count": 36,
+      "resolution": [
+        960,
+        540
+      ],
+      "size_bytes": 875909,
+      "sha256": "c30b40a2dc17807e44802070e06f9d5c6acd8e6f2e4f72dc8983d6634b0afdd9"
+    },
+    "panda_complete_hero": {
+      "path": "/Users/nampham/Documents/Blended/SmolVLA/results/mujoco_panda_prompt_demo/videos/panda_prompt_demo_main.gif",
+      "frame_count": 300,
+      "resolution": [
+        960,
+        540
+      ],
+      "size_bytes": 10985391,
+      "sha256": "d0c66460510b2a8e1b3a8f829d07292afd529b2fde526a2da7d9b017c41a7ca2"
+    },
+    "panda_complete_hero_hq": {
+      "path": "/Users/nampham/Documents/Blended/SmolVLA/results/mujoco_panda_prompt_demo/videos/panda_prompt_demo_main_hq.gif",
+      "frame_count": 375,
+      "resolution": [
+        1280,
+        720
+      ],
+      "size_bytes": 47861092,
+      "sha256": "8cf638dfd43c37b3e5e1d04cbcac3b3d617925c62b09023a120315c840964af7"
+    },
+    "panda_prompt_teaser": {
+      "path": "/Users/nampham/Documents/Blended/SmolVLA/results/mujoco_panda_prompt_demo/videos/panda_prompt_demo_teaser.gif",
+      "frame_count": 150,
+      "resolution": [
+        1280,
+        720
+      ],
+      "size_bytes": 6030719,
+      "sha256": "33a9c7c518800e883f3035b2d6aa6dfc709e819c30c0bdcac35ed15b5e9a26a2"
+    }
+  },
+  "disclaimer": "Illustrative rendering of stored action differences; not closed-loop SmolVLA\u2013LIBERO execution."
+}

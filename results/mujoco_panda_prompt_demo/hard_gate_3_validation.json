@@ -1,0 +1,59 @@
+{
+  "status": "PASS",
+  "hard_gate": 3,
+  "episode_id": 0,
+  "frame_index": 81,
+  "normalized_progress": 0.3151750972762646,
+  "exact_four_condition_coverage": true,
+  "distances_from_correct": {
+    "correct": 0.0,
+    "paraphrase": 0.05634947949189747,
+    "contradictory": 0.06602045063233855,
+    "unrelated": 2.2840237033218687
+  },
+  "gripper_regimes": {
+    "correct": "CLOSE",
+    "paraphrase": "CLOSE",
+    "contradictory": "CLOSE",
+    "unrelated": "OPEN"
+  },
+  "continuous_gripper_values": {
+    "correct": 1.0167014598846436,
+    "paraphrase": 1.0212349891662598,
+    "contradictory": 1.01021409034729,
+    "unrelated": -0.9807476997375488
+  },
+  "arrow_endpoints_mujoco": {
+    "correct": [
+      0.5505017370544432,
+      -0.017486574021143342,
+      0.5890639903712542
+    ],
+    "paraphrase": [
+      0.5557988271676061,
+      -0.015321148228806859,
+      0.5768530022110314
+    ],
+    "contradictory": [
+      0.5476219773851392,
+      -0.0026337839336818564,
+      0.5996885633784802
+    ],
+    "unrelated": [
+      0.37589397734031654,
+      0.020680438498991094,
+      0.4673750038016112
+    ]
+  },
+  "ik_residual_m": 6.651177818678785e-05,
+  "full_trajectory_ik_max_residual_m": 0.0014887683953772714,
+  "selected_checkpoint_count": 7,
+  "selected_checkpoints": "/Users/nampham/Documents/Blended/SmolVLA/results/mujoco_panda_prompt_demo/selected_checkpoints.csv",
+  "canonical_predictions_sha256": "ab4984aeea52a8ca60c94a5cb19a15d69fd27707f5c5734ddd8bec680f376dc4",
+  "output": "/Users/nampham/Documents/Blended/SmolVLA/results/mujoco_panda_prompt_demo/figures/hard_gate_3_four_action_overlay.png",
+  "animated_mp4": "/Users/nampham/Documents/Blended/SmolVLA/results/mujoco_panda_prompt_demo/videos/hard_gate_3_four_action_overlay.mp4",
+  "gif": "/Users/nampham/Documents/Blended/SmolVLA/results/mujoco_panda_prompt_demo/videos/hard_gate_3_four_action_overlay.gif",
+  "disclaimer": "Illustrative rendering of stored action differences; not closed-loop SmolVLA\u2013LIBERO execution.",
+  "smol_vla_model_loaded": false,
+  "closed_loop_rollout": false
+}

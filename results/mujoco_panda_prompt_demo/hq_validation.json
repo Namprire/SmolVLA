@@ -1,0 +1,200 @@
+{
+  "status": "PASS",
+  "render_variant": "high_quality",
+  "camera": "hero_hq",
+  "episode_id": 0,
+  "representative_episode_reason": "complete two-camera reference, two manipulation cycles, exact four-condition coverage, and real high-contrast checkpoints including frame 81",
+  "selected_checkpoint_count": 7,
+  "hero_frame": 81,
+  "hero_progress": 0.3151750972762646,
+  "hero_distances_from_correct": {
+    "correct": 0.0,
+    "paraphrase": 0.05634947949189747,
+    "contradictory": 0.06602045063233855,
+    "unrelated": 2.2840237033218687
+  },
+  "hero_gripper_regimes": {
+    "correct": "CLOSE",
+    "paraphrase": "CLOSE",
+    "contradictory": "CLOSE",
+    "unrelated": "OPEN"
+  },
+  "hero_continuous_gripper_values": {
+    "correct": 1.0167014598846436,
+    "paraphrase": 1.0212349891662598,
+    "contradictory": 1.01021409034729,
+    "unrelated": -0.9807476997375488
+  },
+  "fixed_transform": {
+    "matrix": [
+      [
+        0.0,
+        0.5,
+        0.0
+      ],
+      [
+        0.9,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.75
+      ]
+    ],
+    "translation": [
+      0.5,
+      -0.10024764910340309,
+      0.14407656669616697
+    ],
+    "formula": "xyz_mujoco = matrix @ xyz_dataset + translation",
+    "axis_note": "dataset y maps to Panda-forward x; dataset x maps to Panda-lateral y; dataset z maps to world z",
+    "selection_note": "One transform derived from the complete episode-0 XYZ range and Panda workspace; it is reused for every frame and prompt."
+  },
+  "mapped_xyz": {
+    "minimum": [
+      0.39346808195114136,
+      -0.1421732246875763,
+      0.48
+    ],
+    "maximum": [
+      0.6351832300424576,
+      0.0421732246875763,
+      0.6933387699127197
+    ]
+  },
+  "ik_method": "position-only damped least-squares MuJoCo body Jacobian with nullspace home-posture regularization",
+  "ik_trajectory_rows": 258,
+  "ik_residual_mean_m": 0.00016156637870494255,
+  "ik_residual_median_m": 0.00011094337071436589,
+  "ik_residual_p95_m": 0.0006814911721341808,
+  "ik_residual_max_m": 0.0014887683953772714,
+  "ik_iteration_max": 4,
+  "branch_ik_residuals_m": {
+    "correct": 0.0006032218456274512,
+    "paraphrase": 0.0005638893091106151,
+    "contradictory": 0.0006486694855838587,
+    "unrelated": 0.0014297854075321146
+  },
+  "branch_targets_mujoco": {
+    "correct": [
+      0.4864812371134758,
+      -0.0008845087140798499,
+      0.6711300851404667
+    ],
+    "paraphrase": [
+      0.488600073158741,
+      -1.8338397145255605e-05,
+      0.6662456898763776
+    ],
+    "contradictory": [
+      0.4853293332457542,
+      0.005056607320904745,
+      0.6753799143433571
+    ],
+    "unrelated": [
+      0.41663813322782517,
+      0.014382296293973928,
+      0.6224544905126095
+    ]
+  },
+  "gripper_visual_mapping": "prediction < 0 => OPEN target 0.040 m; prediction >= 0 => CLOSE target 0.004 m",
+  "translation_arrow_scale": 0.35,
+  "local_branch_scale": 0.14,
+  "video_structure_seconds": {
+    "recorded_reference": [
+      0,
+      3
+    ],
+    "reconstruction_transition": [
+      3,
+      6
+    ],
+    "nominal_motion": [
+      6,
+      11
+    ],
+    "hero_four_action_overlay": [
+      11,
+      16
+    ],
+    "four_local_branches": [
+      16,
+      21
+    ],
+    "return_to_nominal": [
+      21,
+      23
+    ],
+    "takeaway_end_card": [
+      23,
+      25
+    ]
+  },
+  "mp4": {
+    "path": "/Users/nampham/Documents/Blended/SmolVLA/results/mujoco_panda_prompt_demo/videos/panda_prompt_demo_main_hq.mp4",
+    "frame_count": 600,
+    "duration_seconds": 25.0,
+    "fps": 24,
+    "resolution": [
+      1280,
+      720
+    ],
+    "codec": "h264"
+  },
+  "gif": {
+    "path": "/Users/nampham/Documents/Blended/SmolVLA/results/mujoco_panda_prompt_demo/videos/panda_prompt_demo_main_hq.gif",
+    "frame_count": 375,
+    "resolution": [
+      1280,
+      720
+    ],
+    "encoding": "15 fps, 1280x720, 256 colors, Sierra-2-4A dithering"
+  },
+  "storyboard": {
+    "path": "/Users/nampham/Documents/Blended/SmolVLA/results/mujoco_panda_prompt_demo/figures/panda_prompt_demo_storyboard_hq.png",
+    "resolution": [
+      2880,
+      1080
+    ]
+  },
+  "hero_still": {
+    "path": "/Users/nampham/Documents/Blended/SmolVLA/results/mujoco_panda_prompt_demo/figures/panda_prompt_demo_hero_frame_hq.png",
+    "resolution": [
+      1280,
+      720
+    ]
+  },
+  "source_hashes": {
+    "canonical_predictions_sha256": "ab4984aeea52a8ca60c94a5cb19a15d69fd27707f5c5734ddd8bec680f376dc4",
+    "episode_parquet_sha256": "d9359f9d470a771ca39bf91e4602ccd33a7b73e06d3e6e692d86ec53bcf215c6",
+    "reference_gif_sha256": "6cddfbff0c92c8cdf453996e2ee0524518dc58ca48705d49e88827051febbec9",
+    "scene_xml_sha256": "2e16c2582ac6bb5ba6b96d02e4693a4efd8f2eff236334ebd097675e1034fe90",
+    "transform_config_sha256": "5dff3cbb24e6987cfa4a4c94e9498fd33cf668c86c6c0e0ea3ed23612699e413"
+  },
+  "disclaimer": "Illustrative rendering of stored action differences; not closed-loop SmolVLA\u2013LIBERO execution.",
+  "stored_actions_integrated_as_rollout": false,
+  "smol_vla_model_loaded": false,
+  "libero_simulator_loaded": false,
+  "checks": {
+    "canonical_predictions_800_rows": true,
+    "canonical_predictions_no_duplicates": true,
+    "exact_four_conditions_at_hero": true,
+    "hero_regimes_expected": true,
+    "selected_checkpoint_count_7": true,
+    "same_fixed_transform_all_frames": true,
+    "all_258_ik_targets_finite": true,
+    "all_nominal_ik_residuals_below_12mm": true,
+    "all_branch_ik_residuals_below_12mm": true,
+    "mp4_frame_count_expected": true,
+    "mp4_duration_expected": true,
+    "mp4_resolution_expected": true,
+    "gif_nonempty": true,
+    "storyboard_resolution_expected": true,
+    "hero_resolution_expected": true,
+    "required_disclaimer_rendered": true,
+    "smol_vla_model_not_loaded": true,
+    "not_closed_loop_rollout": true
+  }
+}

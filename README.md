@@ -29,6 +29,27 @@ The GIF below shows the complete stored episode 0 trajectory from the agent and 
 
 ![Episode 0 arm demonstration](results/demo_assets/episode_00_arm_demo.gif)
 
+### Bottom-up task interpretation
+
+The final professor-feedback extension makes the existing result easier to
+interpret by progressing from stored XYZ translation proposals, to the stored
+continuous gripper decision, to one short four-branch one-object MuJoCo
+illustration, and finally back to the existing full packing visualization.
+
+![Bottom-up stored-action demo](results/bottom_up_demo/videos/bottom_up_teaser.gif)
+
+Regenerate the stored-data figures and then compose the validated animation:
+
+```bash
+MPLCONFIGDIR="$PWD/.cache/matplotlib" .venv/bin/python experiments/bottom_up_analysis.py
+.venv/bin/python sim/mujoco_bottom_up_demo.py --mode render
+```
+
+The one-object physics hard gate can be regenerated separately with
+`--mode microtask`. See `results/bottom_up_demo/FINDINGS.md` for the numerical
+results and limitations. This is a short-horizon illustrative consequence of
+stored actions, not task-success evaluation or closed-loop execution.
+
 ### Official Menagerie Panda hard gate
 
 The official Google DeepMind MuJoCo Menagerie `franka_emika_panda` asset is
@@ -48,8 +69,59 @@ Regenerate this asset-only validation with:
 
 Exact joint/actuator names, source hashes, motion ranges, and output metadata
 are recorded in `results/mujoco_panda_hard_gate/validation.json`. This is not a
-packing rollout and does not load SmolVLA or LIBERO. The custom Panda packing
-scene and trajectory-tracking IK begin only after review of this gate.
+packing rollout and does not load SmolVLA or LIBERO. At that validation stage,
+the custom packing scene and trajectory-tracking IK were intentionally deferred;
+the completed presentation extension is documented in the next section.
+
+### Panda prompt hero demo
+
+The presentation-focused hero demo now combines the official articulated Panda
+with a LIBERO-like table, basket, and product proxies. A single fixed transform
+maps all 258 stored episode-0 expert end-effector XYZ states into the Panda
+workspace. Position-only Jacobian IK provides the shared nominal motion. At the
+hero checkpoint, four colored arrows and four reset local branch snippets show
+the exact stored Correct, Paraphrase, Contradictory, and Unrelated next-action
+proposals. The real Panda jaws visualize the operational OPEN/CLOSE regime.
+
+> Illustrative rendering of stored action differences; not closed-loop SmolVLA–LIBERO execution.
+
+For a concise presentation opener modeled on the visual pacing of the local
+`teaser.mp4` and `hang-towel.mp4` references, use the 10-second version below.
+It combines a typed canonical prompt, stable accelerated Panda motion, and one
+compact four-action comparison:
+
+![Panda prompt teaser](results/mujoco_panda_prompt_demo/videos/panda_prompt_demo_teaser.gif)
+
+Regenerate it with:
+
+```bash
+.venv/bin/python sim/mujoco_panda_prompt_demo.py --mode render-teaser
+```
+
+The full 25-second explanation follows:
+
+![Panda prompt hero demo](results/mujoco_panda_prompt_demo/videos/panda_prompt_demo_main_hq.gif)
+
+Render the 25-second MP4, GIF, storyboard, hero still, and validation report:
+
+```bash
+.venv/bin/python sim/mujoco_panda_prompt_demo.py --mode render
+```
+
+For the recommended higher-quality presentation version—with a closer
+full-arm camera and 1280 x 720, 15-fps, 256-color GIF—run:
+
+```bash
+.venv/bin/python sim/mujoco_panda_prompt_demo.py --mode render-hq
+```
+
+The standard 960 x 540 GIF remains available when a smaller file is preferable.
+
+The script reads only stored dataset/prediction artifacts and does not load
+SmolVLA. See `results/mujoco_panda_prompt_demo/notes.md` for the exact transform,
+IK method, selected checkpoints, action/gripper mapping, and limitations.
+The complete original/simplified/Panda animation gallery is listed in
+`results/GIF_INDEX.md`.
 
 ### Illustrative MuJoCo prompt comparison
 
@@ -202,6 +274,9 @@ reliability/
 sim/
   assets/mujoco_menagerie/              attributed official model snapshot
   mujoco_panda_hard_gate.py             official Panda asset/actuator validation
+  packing_panda_scene.xml               Panda packing-scene composition
+  panda_prompt_demo_config.json         fixed trajectory/action visualization transform
+  mujoco_panda_prompt_demo.py           final Panda stored-action hero renderer
   packing_prompt_scene.xml             simplified tabletop/basket/arm MJCF
   mujoco_prompt_animation.py           stored-action 2x2 animation renderer
   mujoco_smoke_test.py                  native MuJoCo render hard gate
@@ -226,6 +301,7 @@ results/
   final_viewer_audit.json               five-example viewer/source-frame record
   FINAL_AUDIT.md                        final forensic verdict and limitations
   mujoco_panda_hard_gate/               official Panda PNG/MP4/GIF and validation
+  mujoco_panda_prompt_demo/              final Panda MP4/GIF/storyboard and validation
   mujoco_prompt_animation/              MP4/GIF/storyboard and validation
 ```
 

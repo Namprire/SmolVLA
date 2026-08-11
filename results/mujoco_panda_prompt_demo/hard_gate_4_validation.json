@@ -1,0 +1,53 @@
+{
+  "status": "PASS",
+  "hard_gate": 4,
+  "episode_id": 0,
+  "frame_index": 81,
+  "frame_count": 72,
+  "duration_seconds": 3.0,
+  "resolution": [
+    1280,
+    720
+  ],
+  "branch_ik_residuals_m": {
+    "correct": 0.0006032218456274512,
+    "paraphrase": 0.0005638893091106151,
+    "contradictory": 0.0006486694855838587,
+    "unrelated": 0.0014297854075321146
+  },
+  "branch_targets_mujoco": {
+    "correct": [
+      0.4864812371134758,
+      -0.0008845087140798499,
+      0.6711300851404667
+    ],
+    "paraphrase": [
+      0.488600073158741,
+      -1.8338397145255605e-05,
+      0.6662456898763776
+    ],
+    "contradictory": [
+      0.4853293332457542,
+      0.005056607320904745,
+      0.6753799143433571
+    ],
+    "unrelated": [
+      0.41663813322782517,
+      0.014382296293973928,
+      0.6224544905126095
+    ]
+  },
+  "gripper_visual_mapping": "stored prediction < 0 => Panda finger target 0.040 m OPEN; >= 0 => 0.004 m CLOSE",
+  "continuous_gripper_values_retained": {
+    "correct": 1.0167014598846436,
+    "paraphrase": 1.0212349891662598,
+    "contradictory": 1.01021409034729,
+    "unrelated": -0.9807476997375488
+  },
+  "video": "/Users/nampham/Documents/Blended/SmolVLA/results/mujoco_panda_prompt_demo/videos/hard_gate_4_branch_preview.mp4",
+  "gif": "/Users/nampham/Documents/Blended/SmolVLA/results/mujoco_panda_prompt_demo/videos/hard_gate_4_branch_preview.gif",
+  "contact_sheet": "/Users/nampham/Documents/Blended/SmolVLA/results/mujoco_panda_prompt_demo/figures/hard_gate_4_branch_contact_sheet.png",
+  "disclaimer": "Illustrative rendering of stored action differences; not closed-loop SmolVLA\u2013LIBERO execution.",
+  "stored_actions_integrated_as_rollout": false,
+  "smol_vla_model_loaded": false
+}

@@ -1,0 +1,82 @@
+{
+  "status": "PASS",
+  "style_references": {
+    "teaser.mp4": "prompt-first reveal and sparse action graphics",
+    "hang-towel.mp4": "stable wide camera and uninterrupted accelerated arm motion"
+  },
+  "camera": "hero_hq",
+  "duration_seconds": 10.0,
+  "fps": 24,
+  "frame_count": 240,
+  "resolution": [
+    1280,
+    720
+  ],
+  "canonical_instruction": "put both the cream cheese box and the butter in the basket",
+  "hero_frame": 81,
+  "hero_distances_from_correct": {
+    "correct": 0.0,
+    "paraphrase": 0.05634947949189747,
+    "contradictory": 0.06602045063233855,
+    "unrelated": 2.2840237033218687
+  },
+  "hero_gripper_regimes": {
+    "correct": "CLOSE",
+    "paraphrase": "CLOSE",
+    "contradictory": "CLOSE",
+    "unrelated": "OPEN"
+  },
+  "nominal_motion_source": "fixed transform of stored episode-0 expert end-effector XYZ targets",
+  "timeline_seconds": {
+    "typed_prompt": [
+      0.0,
+      1.2
+    ],
+    "accelerated_nominal_motion": [
+      1.2,
+      5.4
+    ],
+    "stored_four_prompt_action_overlay": [
+      5.4,
+      8.8
+    ],
+    "takeaway": [
+      8.8,
+      10.0
+    ]
+  },
+  "mp4": "/Users/nampham/Documents/Blended/SmolVLA/results/mujoco_panda_prompt_demo/videos/panda_prompt_demo_teaser.mp4",
+  "gif": {
+    "path": "/Users/nampham/Documents/Blended/SmolVLA/results/mujoco_panda_prompt_demo/videos/panda_prompt_demo_teaser.gif",
+    "frame_count": 150,
+    "resolution": [
+      1280,
+      720
+    ],
+    "size_bytes": 6030719
+  },
+  "storyboard": "/Users/nampham/Documents/Blended/SmolVLA/results/mujoco_panda_prompt_demo/figures/panda_prompt_demo_teaser_storyboard.png",
+  "source_hashes": {
+    "canonical_predictions_sha256": "ab4984aeea52a8ca60c94a5cb19a15d69fd27707f5c5734ddd8bec680f376dc4",
+    "scene_xml_sha256": "2e16c2582ac6bb5ba6b96d02e4693a4efd8f2eff236334ebd097675e1034fe90",
+    "transform_config_sha256": "5dff3cbb24e6987cfa4a4c94e9498fd33cf668c86c6c0e0ea3ed23612699e413"
+  },
+  "disclaimer": "Illustrative rendering of stored action differences; not closed-loop SmolVLA\u2013LIBERO execution.",
+  "stored_actions_integrated_as_rollout": false,
+  "smol_vla_model_loaded": false,
+  "checks": {
+    "canonical_predictions_800_rows": true,
+    "canonical_predictions_no_duplicates": true,
+    "exact_four_conditions_at_hero": true,
+    "canonical_instruction_exact": true,
+    "all_nominal_ik_residuals_below_12mm": true,
+    "mp4_frame_count_expected": true,
+    "mp4_duration_expected": true,
+    "mp4_resolution_expected": true,
+    "gif_animated": true,
+    "gif_resolution_expected": true,
+    "required_disclaimer_rendered": true,
+    "smol_vla_model_not_loaded": true,
+    "not_closed_loop_rollout": true
+  }
+}

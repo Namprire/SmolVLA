@@ -1,0 +1,32 @@
+{
+  "status": "PASS",
+  "hard_gate": 2,
+  "episode_id": 0,
+  "source_frame_range": [
+    28,
+    142
+  ],
+  "fixed_transform_config": "/Users/nampham/Documents/Blended/SmolVLA/sim/panda_prompt_demo_config.json",
+  "trajectory_rows": 258,
+  "ik_method": "position-only damped least-squares body Jacobian with nullspace home-posture regularization",
+  "ik_residual_mean_m": 0.00016156637870494255,
+  "ik_residual_median_m": 0.00011094337071436589,
+  "ik_residual_max_m": 0.0014887683953772714,
+  "ik_residual_p95_m": 0.0006814911721341808,
+  "ik_all_targets_below_12mm": true,
+  "video_frame_count": 96,
+  "video_duration_seconds": 4.0,
+  "resolution": [
+    1280,
+    720
+  ],
+  "video": "/Users/nampham/Documents/Blended/SmolVLA/results/mujoco_panda_prompt_demo/videos/hard_gate_2_nominal_preview.mp4",
+  "gif": "/Users/nampham/Documents/Blended/SmolVLA/results/mujoco_panda_prompt_demo/videos/hard_gate_2_nominal_preview.gif",
+  "contact_sheet": "/Users/nampham/Documents/Blended/SmolVLA/results/mujoco_panda_prompt_demo/figures/hard_gate_2_nominal_contact_sheet.png",
+  "trajectory_csv": "/Users/nampham/Documents/Blended/SmolVLA/results/mujoco_panda_prompt_demo/nominal_ik_trajectory.csv",
+  "episode_sha256": "d9359f9d470a771ca39bf91e4602ccd33a7b73e06d3e6e692d86ec53bcf215c6",
+  "config_sha256": "5dff3cbb24e6987cfa4a4c94e9498fd33cf668c86c6c0e0ea3ed23612699e413",
+  "disclaimer": "Illustrative rendering of stored action differences; not closed-loop SmolVLA\u2013LIBERO execution.",
+  "smol_vla_model_loaded": false,
+  "libero_simulator_loaded": false
+}

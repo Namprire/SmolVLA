@@ -1,0 +1,95 @@
+<mujoco model="Panda prompt demo packing scene">
+  <!-- Official Menagerie model is included unchanged. Repository-specific
+       scene geometry remains in this separate composition file. -->
+  <include file="assets/mujoco_menagerie/franka_emika_panda/panda.xml"/>
+  <compiler meshdir="assets/mujoco_menagerie/franka_emika_panda/assets"/>
+
+  <statistic center="0.45 0 0.50" extent="1.20"/>
+
+  <visual>
+    <headlight diffuse="0.65 0.65 0.65" ambient="0.28 0.28 0.28" specular="0.15 0.15 0.15"/>
+    <rgba haze="0.08 0.11 0.15 1"/>
+    <global offwidth="1280" offheight="720"/>
+  </visual>
+
+  <asset>
+    <texture type="skybox" builtin="gradient" rgb1="0.22 0.30 0.39" rgb2="0.035 0.045 0.06"
+      width="512" height="3072"/>
+    <texture name="wood_texture" type="2d" builtin="checker" rgb1="0.33 0.16 0.075"
+      rgb2="0.47 0.25 0.11" mark="edge" markrgb="0.24 0.10 0.04" width="512" height="512"/>
+    <material name="wood" texture="wood_texture" texrepeat="5 4" texuniform="true"
+      reflectance="0.08" shininess="0.18"/>
+    <material name="floor_mat" rgba="0.09 0.11 0.14 1" reflectance="0.04"/>
+    <material name="basket_mat" rgba="0.73 0.67 0.55 1" shininess="0.15"/>
+    <material name="basket_dark" rgba="0.38 0.32 0.25 1"/>
+    <material name="cream_box" rgba="0.91 0.24 0.16 1"/>
+    <material name="cream_label" rgba="0.98 0.90 0.73 1"/>
+    <material name="butter_box" rgba="0.98 0.76 0.10 1"/>
+    <material name="butter_label" rgba="0.15 0.38 0.72 1"/>
+    <material name="milk_box" rgba="0.93 0.96 0.98 1"/>
+    <material name="milk_label" rgba="0.16 0.48 0.78 1"/>
+  </asset>
+
+  <worldbody>
+    <light name="key" pos="0.55 -0.45 1.65" dir="-0.1 0.15 -1" directional="true"
+      diffuse="0.92 0.88 0.82" specular="0.32 0.32 0.30"/>
+    <light name="fill" pos="0.25 0.85 1.05" dir="0 -0.6 -0.8" directional="true"
+      diffuse="0.42 0.50 0.62" specular="0.08 0.08 0.10"/>
+    <light name="rim" pos="1.10 0.15 1.25" dir="-0.7 -0.05 -0.7" directional="true"
+      diffuse="0.34 0.38 0.45"/>
+
+    <geom name="floor" type="plane" size="2.5 2.5 0.04" pos="0 0 -0.025" material="floor_mat"/>
+
+    <body name="table">
+      <geom name="tabletop" type="box" pos="0.52 0 0.305" size="0.43 0.46 0.035"
+        material="wood" contype="1" conaffinity="1"/>
+      <geom type="box" pos="0.22 -0.36 0.14" size="0.035 0.035 0.14" material="wood"/>
+      <geom type="box" pos="0.82 -0.36 0.14" size="0.035 0.035 0.14" material="wood"/>
+      <geom type="box" pos="0.22 0.36 0.14" size="0.035 0.035 0.14" material="wood"/>
+      <geom type="box" pos="0.82 0.36 0.14" size="0.035 0.035 0.14" material="wood"/>
+    </body>
+
+    <body name="basket" pos="0.632 -0.102 0.352">
+      <geom name="basket_base" type="box" pos="0 0 0.012" size="0.125 0.165 0.012"
+        material="basket_mat"/>
+      <geom name="basket_front" type="box" pos="-0.125 0 0.075" size="0.010 0.165 0.075"
+        material="basket_dark"/>
+      <geom name="basket_back" type="box" pos="0.125 0 0.075" size="0.010 0.165 0.075"
+        material="basket_dark"/>
+      <geom name="basket_left" type="box" pos="0 -0.165 0.075" size="0.125 0.010 0.075"
+        material="basket_dark"/>
+      <geom name="basket_right" type="box" pos="0 0.165 0.075" size="0.125 0.010 0.075"
+        material="basket_dark"/>
+      <geom type="box" pos="0 0 0.025" size="0.105 0.145 0.004" material="basket_mat"/>
+    </body>
+
+    <body name="cream_cheese" mocap="true" pos="0.398 -0.012 0.368">
+      <geom name="cream_cheese_geom" type="box" size="0.050 0.034 0.023" material="cream_box"/>
+      <geom type="box" pos="0 -0.035 0" size="0.037 0.002 0.015" material="cream_label"/>
+    </body>
+
+    <body name="butter" mocap="true" pos="0.510 -0.038 0.363">
+      <geom name="butter_geom" type="box" size="0.055 0.027 0.017" material="butter_box"/>
+      <geom type="box" pos="0 -0.028 0" size="0.035 0.002 0.010" material="butter_label"/>
+    </body>
+
+    <body name="milk_proxy" pos="0.34 0.28 0.405">
+      <geom type="box" size="0.035 0.035 0.065" material="milk_box"/>
+      <geom type="box" pos="0 -0.036 0.005" size="0.025 0.002 0.025" material="milk_label"/>
+    </body>
+
+    <body name="sauce_proxy" pos="0.76 0.27 0.395">
+      <geom type="cylinder" size="0.025 0.050" rgba="0.60 0.12 0.06 1"/>
+      <geom type="cylinder" pos="0 0 0.060" size="0.014 0.010" rgba="0.20 0.06 0.03 1"/>
+    </body>
+
+    <camera name="hero" pos="1.28 1.20 1.25"
+      xyaxes="-0.7071 0.7071 0 -0.360 -0.360 0.861" fovy="45"/>
+    <camera name="hero_hq" pos="1.28 1.20 1.25"
+      xyaxes="-0.7071 0.7071 0 -0.360 -0.360 0.861" fovy="39"/>
+    <camera name="alternate" pos="1.36 -1.30 1.10"
+      xyaxes="0.7071 0.7071 0 -0.300 0.300 0.905" fovy="42"/>
+    <camera name="branch" pos="1.00 0.75 0.90"
+      xyaxes="-0.7071 0.7071 0 -0.280 -0.280 0.918" fovy="39"/>
+  </worldbody>
+</mujoco>

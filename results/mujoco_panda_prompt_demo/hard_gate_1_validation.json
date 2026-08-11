@@ -1,0 +1,19 @@
+{
+  "status": "PASS",
+  "hard_gate": 1,
+  "scene": "/Users/nampham/Documents/Blended/SmolVLA/sim/packing_panda_scene.xml",
+  "robot_asset": "official Menagerie franka_emika_panda",
+  "nq": 9,
+  "nv": 9,
+  "nu": 8,
+  "camera": "hero",
+  "resolution": [
+    1280,
+    720
+  ],
+  "output": "/Users/nampham/Documents/Blended/SmolVLA/results/mujoco_panda_prompt_demo/figures/hard_gate_1_static_scene.png",
+  "gif": "/Users/nampham/Documents/Blended/SmolVLA/results/mujoco_panda_prompt_demo/videos/hard_gate_1_static_scene.gif",
+  "disclaimer": "Illustrative rendering of stored action differences; not closed-loop SmolVLA\u2013LIBERO execution.",
+  "smol_vla_model_loaded": false,
+  "libero_simulator_loaded": false
+}

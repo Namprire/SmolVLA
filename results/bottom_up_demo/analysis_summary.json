@@ -1,0 +1,134 @@
+{
+  "status": "PASS",
+  "selection_rules": {
+    "translation": "same gripper regime across all 31 prompts; class mean distance ordering P<C<U; exclude observations above the Phase-B 75th percentile of Unrelated translation mean; choose largest Correct-to-Unrelated class-mean angle",
+    "gripper": "Correct CLOSING; all ten Paraphrases CLOSING; at least one altered OPENING; choose maximum combined Contradictory+Unrelated opening rate"
+  },
+  "translation_example": {
+    "episode_id": 3,
+    "frame_index": 38,
+    "normalized_progress": 0.1324041811846689,
+    "all_31_same_gripper_regime": true,
+    "gripper_regime": "OPENING",
+    "class_results": {
+      "Correct": {
+        "mean_vector": [
+          0.1047391891479492,
+          -0.2656738758087158,
+          -0.5404688715934753
+        ],
+        "mean_distance_from_correct": 0.0,
+        "mean_angle_deg_from_correct": 0.0
+      },
+      "Paraphrase": {
+        "mean_vector": [
+          -0.03593886829912661,
+          -0.16704508811235425,
+          -0.5489364713430405
+        ],
+        "mean_distance_from_correct": 0.2034024736292137,
+        "mean_angle_deg_from_correct": 16.304652022941507
+      },
+      "Contradictory": {
+        "mean_vector": [
+          -0.10609240904450412,
+          -0.15594736188650127,
+          -0.5629423916339874
+        ],
+        "mean_distance_from_correct": 0.24481647053100541,
+        "mean_angle_deg_from_correct": 22.794277621594592
+      },
+      "Unrelated": {
+        "mean_vector": [
+          -0.3364524632692337,
+          -0.16227326914668078,
+          -0.5152173697948456
+        ],
+        "mean_distance_from_correct": 0.4611661846476389,
+        "mean_angle_deg_from_correct": 42.60323749793243
+      }
+    }
+  },
+  "gripper_example": {
+    "episode_id": 5,
+    "frame_index": 230,
+    "normalized_progress": 0.8273381294964028,
+    "class_rates": {
+      "Correct": {
+        "n": 1,
+        "open_count": 0,
+        "open_percentage": 0.0
+      },
+      "Paraphrase": {
+        "n": 10,
+        "open_count": 0,
+        "open_percentage": 0.0
+      },
+      "Contradictory": {
+        "n": 10,
+        "open_count": 3,
+        "open_percentage": 30.0
+      },
+      "Unrelated": {
+        "n": 10,
+        "open_count": 7,
+        "open_percentage": 70.0
+      }
+    },
+    "microtask_prompt_ids": {
+      "Correct": "CORRECT",
+      "Paraphrase": "P07",
+      "Contradictory": "C01",
+      "Unrelated": "U09"
+    },
+    "microtask_rows": [
+      {
+        "prompt_id": "U09",
+        "prompt_class": "Unrelated",
+        "instruction": "put the blue cup on the upper shelf",
+        "pred_action_x": -0.4919672012329101,
+        "pred_action_y": -0.1972679793834686,
+        "pred_action_z": -0.4572765231132507,
+        "pred_action_gripper": -0.99644273519516,
+        "gripper_regime": "OPENING"
+      },
+      {
+        "prompt_id": "C01",
+        "prompt_class": "Contradictory",
+        "instruction": "put the cream cheese box in the basket but leave the butter outside the basket",
+        "pred_action_x": -0.2318121194839477,
+        "pred_action_y": -0.1527764201164245,
+        "pred_action_z": -0.0586036182940006,
+        "pred_action_gripper": -0.9782106280326844,
+        "gripper_regime": "OPENING"
+      },
+      {
+        "prompt_id": "P07",
+        "prompt_class": "Paraphrase",
+        "instruction": "take the cream cheese box and the butter and place them in the basket",
+        "pred_action_x": -0.1598407328128814,
+        "pred_action_y": 0.2576243877410888,
+        "pred_action_z": 0.5622575283050537,
+        "pred_action_gripper": 0.99335378408432,
+        "gripper_regime": "CLOSING"
+      },
+      {
+        "prompt_id": "CORRECT",
+        "prompt_class": "Correct",
+        "instruction": "put both the cream cheese box and the butter in the basket",
+        "pred_action_x": -0.1769819855690002,
+        "pred_action_y": 0.1427551507949829,
+        "pred_action_z": 0.7414053678512573,
+        "pred_action_gripper": 1.0023051500320437,
+        "gripper_regime": "CLOSING"
+      }
+    ]
+  },
+  "source_hashes": {
+    "canonical_predictions_sha256": "ab4984aeea52a8ca60c94a5cb19a15d69fd27707f5c5734ddd8bec680f376dc4",
+    "phase_b_predictions_sha256": "2848da0bd577f2db55fc2b1ec003550fdedc7e798a803066a42cbd135bb5b173",
+    "prompt_bank_sha256": "374851a74870c452b55021ae2b31b6747fb3ecb89366d7ea5314775a718d03d8"
+  },
+  "phase_b_experiment_seed": 20260810,
+  "model_inference_performed": false
+}

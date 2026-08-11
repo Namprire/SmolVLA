@@ -1,0 +1,188 @@
+{
+  "status": "PASS",
+  "translation_example": {
+    "episode_id": 3,
+    "frame_index": 38
+  },
+  "gripper_and_microtask_example": {
+    "episode_id": 5,
+    "frame_index": 230
+  },
+  "microtask_prompt_ids": {
+    "Correct": "CORRECT",
+    "Paraphrase": "P07",
+    "Contradictory": "C01",
+    "Unrelated": "U09"
+  },
+  "microtask_metrics": [
+    {
+      "prompt_class": "Correct",
+      "prompt_id": "CORRECT",
+      "instruction": "put both the cream cheese box and the butter in the basket",
+      "action_x": -0.1769819855690002,
+      "action_y": 0.1427551507949829,
+      "action_z": 0.7414053678512573,
+      "gripper_value": 1.0023051500320437,
+      "gripper_regime": "CLOSING",
+      "start_distance_to_basket_m": 0.141161180353993,
+      "end_distance_to_basket_m": 0.1924499867965892,
+      "change_in_distance_m": 0.0512888064425962,
+      "object_still_held_after_short_branch": true,
+      "end_object_x": 0.548715487988274,
+      "end_object_y": -0.0703206312410442,
+      "end_object_z": 0.560578735697068,
+      "ik_residual_m": 0.0013713550783977
+    },
+    {
+      "prompt_class": "Paraphrase",
+      "prompt_id": "P07",
+      "instruction": "take the cream cheese box and the butter and place them in the basket",
+      "action_x": -0.1598407328128814,
+      "action_y": 0.2576243877410888,
+      "action_z": 0.5622575283050537,
+      "gripper_value": 0.99335378408432,
+      "gripper_regime": "CLOSING",
+      "start_distance_to_basket_m": 0.141161180353993,
+      "end_distance_to_basket_m": 0.1724378288238318,
+      "change_in_distance_m": 0.0312766484698388,
+      "object_still_held_after_short_branch": true,
+      "end_object_x": 0.5572772602070583,
+      "end_object_y": -0.0682149057671975,
+      "end_object_z": 0.5416900931998992,
+      "ik_residual_m": 0.0008435695016321
+    },
+    {
+      "prompt_class": "Contradictory",
+      "prompt_id": "C01",
+      "instruction": "put the cream cheese box in the basket but leave the butter outside the basket",
+      "action_x": -0.2318121194839477,
+      "action_y": -0.1527764201164245,
+      "action_z": -0.0586036182940006,
+      "gripper_value": -0.9782106280326844,
+      "gripper_regime": "OPENING",
+      "start_distance_to_basket_m": 0.141161180353993,
+      "end_distance_to_basket_m": 0.0781456923127179,
+      "change_in_distance_m": -0.063015488041275,
+      "object_still_held_after_short_branch": false,
+      "end_object_x": 0.5703858862253727,
+      "end_object_y": -0.0697392866490952,
+      "end_object_z": 0.4256328020915001,
+      "ik_residual_m": 0.0008093952646813
+    },
+    {
+      "prompt_class": "Unrelated",
+      "prompt_id": "U09",
+      "instruction": "put the blue cup on the upper shelf",
+      "action_x": -0.4919672012329101,
+      "action_y": -0.1972679793834686,
+      "action_z": -0.4572765231132507,
+      "gripper_value": -0.99644273519516,
+      "gripper_regime": "OPENING",
+      "start_distance_to_basket_m": 0.141161180353993,
+      "end_distance_to_basket_m": 0.0823617464607491,
+      "change_in_distance_m": -0.0587994338932438,
+      "object_still_held_after_short_branch": false,
+      "end_object_x": 0.5630185024635195,
+      "end_object_y": -0.059535098021877,
+      "end_object_z": 0.4048910166770998,
+      "ik_residual_m": 8.641708639141793e-05
+    }
+  ],
+  "visualization_transform": {
+    "matrix": [
+      [
+        0.0,
+        0.5,
+        0.0
+      ],
+      [
+        0.9,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.75
+      ]
+    ],
+    "translation": [
+      0.5,
+      -0.10024764910340309,
+      0.14407656669616697
+    ],
+    "formula": "xyz_mujoco = matrix @ xyz_dataset + translation",
+    "axis_note": "dataset y maps to Panda-forward x; dataset x maps to Panda-lateral y; dataset z maps to world z",
+    "selection_note": "One transform derived from the complete episode-0 XYZ range and Panda workspace; it is reused for every frame and prompt."
+  },
+  "local_branch_scale": 0.14,
+  "object_attachment_mechanism": "box pose follows the illustrative hand target while held; on an OPENING branch it becomes a free MuJoCo body and falls under gravity",
+  "timeline_seconds": {
+    "bottom_up_title": [
+      0,
+      2
+    ],
+    "translation": [
+      2,
+      5
+    ],
+    "gripper": [
+      5,
+      8
+    ],
+    "one_object_microtask": [
+      8,
+      12
+    ],
+    "existing_full_task": [
+      12,
+      14.5
+    ],
+    "takeaway": [
+      14.5,
+      16
+    ]
+  },
+  "outputs": {
+    "mp4": "/Users/nampham/Documents/Blended/SmolVLA/results/bottom_up_demo/videos/bottom_up_teaser.mp4",
+    "gif": "/Users/nampham/Documents/Blended/SmolVLA/results/bottom_up_demo/videos/bottom_up_teaser.gif",
+    "storyboard": "/Users/nampham/Documents/Blended/SmolVLA/results/bottom_up_demo/figures/bottom_up_teaser_storyboard.png",
+    "microtask_storyboard": "/Users/nampham/Documents/Blended/SmolVLA/results/bottom_up_demo/figures/simple_task_storyboard.png"
+  },
+  "media": {
+    "duration_seconds": 16.0,
+    "mp4_frame_count": 384,
+    "gif_frame_count": 240,
+    "resolution": [
+      1280,
+      720
+    ]
+  },
+  "source_hashes": {
+    "canonical_predictions_sha256": "ab4984aeea52a8ca60c94a5cb19a15d69fd27707f5c5734ddd8bec680f376dc4",
+    "phase_b_predictions_sha256": "2848da0bd577f2db55fc2b1ec003550fdedc7e798a803066a42cbd135bb5b173",
+    "analysis_summary_sha256": "783960652247a8f35c524354a8e3c1ecdc249e26943659405623c53defd86a1e",
+    "scene_xml_sha256": "3b3d997f0c2cfe58dc978519fb27bc773b1792602b193e01a1c4a84e5d3bacd2"
+  },
+  "scientific_scope": "short-horizon illustrative consequence of stored SmolVLA actions",
+  "task_success_evaluation": false,
+  "disclaimer": "Stored-action visualization; not closed-loop SmolVLA\u2013LIBERO execution.",
+  "checks": {
+    "canonical_predictions_hash_unchanged": true,
+    "phase_b_predictions_hash_unchanged": true,
+    "exact_four_traceable_microtask_rows": true,
+    "displayed_actions_match_phase_b_rows": true,
+    "stored_analysis_pass": true,
+    "same_phase_b_noise_hash_for_microtask_rows": true,
+    "operational_gripper_rule_applied": true,
+    "all_microtask_metrics_finite": true,
+    "all_ik_residuals_below_12mm": true,
+    "mp4_frame_count_expected": true,
+    "mp4_duration_expected": true,
+    "gif_animated": true,
+    "gif_resolution_expected": true,
+    "required_disclaimer_rendered": true,
+    "smol_vla_inference_not_performed": true,
+    "not_closed_loop_rollout": true
+  }
+}
