@@ -1,198 +1,145 @@
 # Controlled Language Sensitivity in SmolVLA
 
-This project evaluates how changing only a natural-language instruction alters the action predicted by a pretrained Vision-Language-Action model. It combines a controlled paired experiment, trajectory-stage analysis, agreement measurements against recorded demonstrations, and an empirical audit of binary gripper-control semantics.
+This repository studies a simple reliability question for vision-language-action models:
 
-The project evaluates `HuggingFaceVLA/smolvla_libero` on demonstrations from `HuggingFaceVLA/smol-libero`. It does **not** train or fine-tune SmolVLA, and it does not claim closed-loop task success or safety.
+> How much does SmolVLA's predicted robot action change when only the natural-language instruction changes?
 
-## Motivation
+We evaluate the pretrained [`HuggingFaceVLA/smolvla_libero`](https://huggingface.co/HuggingFaceVLA/smolvla_libero) checkpoint on demonstrations from [`HuggingFaceVLA/smol-libero`](https://huggingface.co/datasets/HuggingFaceVLA/smol-libero). The camera images, robot state, preprocessing, model checkpoint, and explicit flow-matching noise are held fixed within every comparison. Only the instruction changes.
 
-A VLA policy receives language, images, and robot state together. If its action changes under semantically equivalent, contradictory, or unrelated instructions, that behavior matters for reliability. The central question is:
+![SmolVLA Panda prompt teaser](results/mujoco_panda_prompt_demo/videos/panda_prompt_demo_teaser.gif)
 
-> How much does changing only the natural-language instruction alter SmolVLA's predicted action when vision, robot state, preprocessing, model, and flow-matching noise are fixed?
+**Main result:** semantically equivalent paraphrases generally produce smaller action changes than contradictory instructions, while unrelated instructions produce the largest average changes. This is an offline next-action study, not a closed-loop task-success or safety evaluation.
 
-## Experimental design
+## Project highlights
 
-- Pretrained model: `HuggingFaceVLA/smolvla_libero`
-- Dataset: `HuggingFaceVLA/smol-libero`
-- Hardware used for stored inference: Apple M2 Max, `mps:0`
-- 10 locally available episodes
-- 20 stratified observations per episode; 200 observations total
-- Four language conditions: Correct, Paraphrase, Contradictory, Unrelated
-- 800 stored predictions
-- Same two images, robot state, preprocessing, checkpoint, and explicit flow-noise tensor within every four-condition comparison
+- Real pretrained SmolVLA inference; no training or fine-tuning
+- 10 robot-demonstration episodes and 200 stratified observations
+- 4 controlled language conditions and 800 stored predictions
+- Identical explicit flow noise within every four-condition comparison
+- Episode-cluster bootstrap confidence intervals
+- Independent forensic validation of the stored results
+- A 31-prompt robustness extension over 20 selected observations
+- An offline result viewer and presentation-ready figures, GIFs, MP4s, and MuJoCo illustrations
 
-The explicit flow noise has checkpoint-specific shape `(1, 50, 32)`, dtype `float32`, and is reused exactly across all four language conditions for an observation. `results/main_experiment_selection.json` records the deterministic sample selection, noise seeds, and noise hashes. `results/vla_predictions.csv` is the immutable source of truth for final analysis.
+## Method
 
-## Visual demo
+For each selected observation, the experiment evaluates four instructions:
 
-The GIF below shows the complete stored episode 0 trajectory from the agent and eye-in-hand cameras. It uses existing dataset frames only; no new model inference or simulation was run.
+| Condition | Instruction type |
+|---|---|
+| **Correct** | Original demonstrated task |
+| **Paraphrase** | Same task expressed with different wording |
+| **Contradictory** | Partially conflicts with the demonstrated task |
+| **Unrelated** | Requests a different manipulation task |
 
-![Episode 0 arm demonstration](results/demo_assets/episode_00_arm_demo.gif)
+The controlled comparison is:
 
-### Bottom-up task interpretation
-
-The final professor-feedback extension makes the existing result easier to
-interpret by progressing from stored XYZ translation proposals, to the stored
-continuous gripper decision, to one short four-branch one-object MuJoCo
-illustration, and finally back to the existing full packing visualization.
-
-![Bottom-up stored-action demo](results/bottom_up_demo/videos/bottom_up_teaser.gif)
-
-Regenerate the stored-data figures and then compose the validated animation:
-
-```bash
-MPLCONFIGDIR="$PWD/.cache/matplotlib" .venv/bin/python experiments/bottom_up_analysis.py
-.venv/bin/python sim/mujoco_bottom_up_demo.py --mode render
+```text
+same two images + same robot state + same checkpoint + same flow noise
+                                  |
+                    change only the instruction
+                                  |
+              compare the predicted 7-D next action
 ```
 
-The one-object physics hard gate can be regenerated separately with
-`--mode microtask`. See `results/bottom_up_demo/FINDINGS.md` for the numerical
-results and limitations. This is a short-horizon illustrative consequence of
-stored actions, not task-success evaluation or closed-loop execution.
+The seven action dimensions contain XYZ translation, three axis-angle orientation components, and one continuous gripper command.
 
-### Official Menagerie Panda hard gate
+## Results
 
-The official Google DeepMind MuJoCo Menagerie `franka_emika_panda` asset is
-vendored unchanged at `sim/assets/mujoco_menagerie/franka_emika_panda/` from
-revision `da76818e269b82289eba39808e2fb91d679d6994` under its included Apache-2.0
-license. MuJoCo 3.11.0 compiles the model with `nq=9`, `nv=9`, and `nu=8`.
-The hard gate moves all seven articulated arm joints and closes and reopens the
-actual Panda gripper through the upstream actuators.
+### Language-induced action change
 
-![Official Menagerie Panda hard gate](results/mujoco_panda_hard_gate/panda_joint_gripper_hard_gate.gif)
+Mean full 7-D distance from the Correct-language prediction:
 
-Regenerate this asset-only validation with:
+| Altered condition | Mean distance | Episode-cluster bootstrap 95% CI | Arm-only 6-D mean |
+|---|---:|---:|---:|
+| Paraphrase | **0.2028** | [0.1725, 0.2314] | 0.1496 |
+| Contradictory | **0.3543** | [0.2974, 0.4145] | 0.2103 |
+| Unrelated | **0.8064** | [0.7619, 0.8560] | 0.4670 |
 
-```bash
-.venv/bin/python sim/mujoco_panda_hard_gate.py
-```
+The aggregate ordering survives removal of the gripper channel. It is not universal: the strict Paraphrase < Contradictory < Unrelated ordering holds in 125 of 200 observations and fails in 75.
 
-Exact joint/actuator names, source hashes, motion ranges, and output metadata
-are recorded in `results/mujoco_panda_hard_gate/validation.json`. This is not a
-packing rollout and does not load SmolVLA or LIBERO. At that validation stage,
-the custom packing scene and trajectory-tracking IK were intentionally deferred;
-the completed presentation extension is documented in the next section.
+### Agreement with the recorded expert action
 
-### Panda prompt hero demo
-
-The presentation-focused hero demo now combines the official articulated Panda
-with a LIBERO-like table, basket, and product proxies. A single fixed transform
-maps all 258 stored episode-0 expert end-effector XYZ states into the Panda
-workspace. Position-only Jacobian IK provides the shared nominal motion. At the
-hero checkpoint, four colored arrows and four reset local branch snippets show
-the exact stored Correct, Paraphrase, Contradictory, and Unrelated next-action
-proposals. The real Panda jaws visualize the operational OPEN/CLOSE regime.
-
-> Illustrative rendering of stored action differences; not closed-loop SmolVLA–LIBERO execution.
-
-For a concise presentation opener modeled on the visual pacing of the local
-`teaser.mp4` and `hang-towel.mp4` references, use the 10-second version below.
-It combines a typed canonical prompt, stable accelerated Panda motion, and one
-compact four-action comparison:
-
-![Panda prompt teaser](results/mujoco_panda_prompt_demo/videos/panda_prompt_demo_teaser.gif)
-
-Regenerate it with:
-
-```bash
-.venv/bin/python sim/mujoco_panda_prompt_demo.py --mode render-teaser
-```
-
-The full 25-second explanation follows:
-
-![Panda prompt hero demo](results/mujoco_panda_prompt_demo/videos/panda_prompt_demo_main_hq.gif)
-
-Render the 25-second MP4, GIF, storyboard, hero still, and validation report:
-
-```bash
-.venv/bin/python sim/mujoco_panda_prompt_demo.py --mode render
-```
-
-For the recommended higher-quality presentation version—with a closer
-full-arm camera and 1280 x 720, 15-fps, 256-color GIF—run:
-
-```bash
-.venv/bin/python sim/mujoco_panda_prompt_demo.py --mode render-hq
-```
-
-The standard 960 x 540 GIF remains available when a smaller file is preferable.
-
-The script reads only stored dataset/prediction artifacts and does not load
-SmolVLA. See `results/mujoco_panda_prompt_demo/notes.md` for the exact transform,
-IK method, selected checkpoints, action/gripper mapping, and limitations.
-The complete original/simplified/Panda animation gallery is listed in
-`results/GIF_INDEX.md`.
-
-### Illustrative MuJoCo prompt comparison
-
-The synchronized 2×2 animation uses the complete stored episode-0 expert
-end-effector XYZ trajectory as one shared nominal backbone. At eight
-deterministic checkpoints it overlays the four stored next-action proposals
-from `results/vla_predictions.csv`. Prompt-conditioned predictions are shown as
-scaled translation arrows/ghost targets, full 7-D distances from Correct, and
-opening/closing gripper regimes; they are never integrated into the nominal
-motion.
-
-> Illustrative rendering of stored action differences; not closed-loop SmolVLA–LIBERO execution.
-
-![Illustrative four-prompt MuJoCo comparison](results/mujoco_prompt_animation/videos/prompt_comparison_main.gif)
-
-Run the already-validated preview, full render, or storyboard generation:
-
-```bash
-.venv/bin/python sim/mujoco_prompt_animation.py --mode preview
-.venv/bin/python sim/mujoco_prompt_animation.py --mode render
-.venv/bin/python sim/mujoco_prompt_animation.py --mode storyboard
-```
-
-These modes read stored predictions and the already-local episode parquet. They
-do not load SmolVLA or run inference. See
-`results/mujoco_prompt_animation/animation_notes.md` and `validation.json` for
-the action mapping, checkpoint policy, source hashes, and limitations.
-
-| Language-induced action difference | Agreement with recorded expert action |
-|:---:|:---:|
-| ![Language-induced action difference](results/figures/final/01_language_induced_action_difference.png) | ![Agreement with recorded expert action](results/figures/final/02_agreement_with_recorded_expert_action.png) |
-| Language sensitivity across task progress | Gripper-command semantics |
-| ![Language sensitivity across task progress](results/figures/final/03_language_sensitivity_across_task_progress.png) | ![Gripper-command semantics](results/figures/final/04_gripper_semantics_temporal_validation.png) |
-
-## Main results
-
-Mean full 7-D action distance from the Correct-language prediction:
-
-| Condition | Mean distance | Episode-cluster bootstrap 95% CI |
-|---|---:|---:|
-| Paraphrase | 0.202755 | [0.172452, 0.231373] |
-| Contradictory | 0.354315 | [0.297352, 0.414462] |
-| Unrelated | 0.806369 | [0.761888, 0.855950] |
-
-Mean translation / axis-angle orientation / gripper errors against the recorded expert action:
+Mean translation / axis-angle orientation / gripper errors:
 
 | Condition | Translation | Orientation | Gripper |
 |---|---:|---:|---:|
-| Correct | 0.340237 | 0.070786 | 0.208461 |
-| Paraphrase | 0.363251 | 0.071559 | 0.228939 |
-| Contradictory | 0.414641 | 0.072025 | 0.276336 |
-| Unrelated | 0.615211 | 0.092736 | 0.656285 |
+| Correct | **0.3402** | **0.0708** | **0.2085** |
+| Paraphrase | 0.3633 | 0.0716 | 0.2289 |
+| Contradictory | 0.4146 | 0.0720 | 0.2763 |
+| Unrelated | 0.6152 | 0.0927 | 0.6563 |
 
-Under these controlled observations, paraphrases generally produced smaller changes than contradictory or unrelated instructions. Unrelated instructions produced the largest average changes. The ordering is an aggregate result, not a rule for every individual frame. Language sensitivity also varied non-monotonically across task progress.
+These are agreement measurements against a recorded demonstration, not objective accuracy or proof that the demonstrated action is optimal.
 
-The final forensic robustness check excludes the gripper channel and recomputes a 6-D arm-only norm over translation plus the three axis-angle components. Its means remain ordered: Paraphrase 0.149570, Contradictory 0.210309, Unrelated 0.467043. The strict full 7-D ordering holds in 125/200 observations and fails in 75/200, so the conclusion is descriptive and aggregate rather than universal.
+## Evidence gallery
 
-The expert gripper channel is an exactly binary persistent command: `+1` closes and `-1` opens. A `+1 -> -1` transition marks opening-command onset, but does not by itself prove successful physical release.
+### Real demonstration frames
 
-See `results/final_findings.md`, `results/final_validation.json`, and `results/presentation_cheatsheet.md` for the concise final record.
+The following GIF contains the complete stored episode-0 trajectory from the agent and eye-in-hand cameras. It uses dataset frames rather than simulation.
 
-## Quick start: inspect completed results
+![Episode 0 two-camera demonstration](results/demo_assets/episode_00_arm_demo.gif)
 
-No model checkpoint or dataset download is needed to read the tracked tables, documents, figures, or curated demo assets.
+### Main analysis figures
 
-Create the verified Python 3.11 environment if needed:
+| Language-induced action difference | Agreement with the recorded expert action |
+|:---:|:---:|
+| ![Language-induced action difference](results/figures/final/01_language_induced_action_difference.png) | ![Agreement with the recorded expert action](results/figures/final/02_agreement_with_recorded_expert_action.png) |
+| **Sensitivity across task progress** | **Gripper-command semantics** |
+| ![Language sensitivity across task progress](results/figures/final/03_language_sensitivity_across_task_progress.png) | ![Gripper semantics](results/figures/final/04_gripper_semantics_temporal_validation.png) |
+
+High-resolution PDF versions are available in [`results/figures/final/`](results/figures/final/).
+
+### Bottom-up interpretation
+
+This extension moves from stored translation proposals, to the gripper decision, to a short one-object MuJoCo illustration, and finally to the full packing visualization.
+
+![Bottom-up evidence pipeline](results/bottom_up_demo/figures/bottom_up_pipeline.png)
+
+![Bottom-up stored-action demo](results/bottom_up_demo/videos/bottom_up_teaser.gif)
+
+### Videos
+
+| Deliverable | Preview or video | What it shows |
+|---|---|---|
+| 10-second Panda teaser | [MP4](results/mujoco_panda_prompt_demo/videos/panda_prompt_demo_teaser.mp4) · [GIF](results/mujoco_panda_prompt_demo/videos/panda_prompt_demo_teaser.gif) | Prompt-first presentation summary |
+| 25-second Panda hero demo | [HQ MP4](results/mujoco_panda_prompt_demo/videos/panda_prompt_demo_main_hq.mp4) · [HQ GIF](results/mujoco_panda_prompt_demo/videos/panda_prompt_demo_main_hq.gif) | Stored action proposals on an articulated Panda |
+| Four-prompt comparison | [MP4](results/mujoco_prompt_animation/videos/prompt_comparison_main.mp4) · [GIF](results/mujoco_prompt_animation/videos/prompt_comparison_main.gif) | Synchronized Correct, Paraphrase, Contradictory, and Unrelated conditions |
+| Bottom-up explanation | [MP4](results/bottom_up_demo/videos/bottom_up_teaser.mp4) · [GIF](results/bottom_up_demo/videos/bottom_up_teaser.gif) | Translation, gripper, one-object consequence, and packing context |
+| One-object branches | [MP4](results/bottom_up_demo/videos/simple_one_object_branches.mp4) · [GIF](results/bottom_up_demo/videos/simple_one_object_branches.gif) | Four short branches from one shared simulated state |
+| Official Panda actuator test | [MP4](results/mujoco_panda_hard_gate/panda_joint_gripper_hard_gate.mp4) · [GIF](results/mujoco_panda_hard_gate/panda_joint_gripper_hard_gate.gif) | Seven arm joints and the real Panda gripper actuators |
+
+The MuJoCo media illustrates stored next-action differences. Predictions are not integrated into a closed-loop rollout, and simulator states are not fed back through SmolVLA.
+
+## Requirements
+
+The completed results, figures, and videos can be inspected without downloading the model or dataset.
+
+For reproducible local analysis:
+
+- Python 3.11
+- [`uv`](https://docs.astral.sh/uv/) for environment creation
+- Dependencies pinned in [`requirements.txt`](requirements.txt)
+
+The stored model inference was produced on an Apple M2 Max using `mps:0`. Model-free analysis works on CPU. MuJoCo video rendering requires a working local graphics context and FFmpeg support through `imageio-ffmpeg`.
+
+## Installation
+
+Clone the repository and create the environment:
 
 ```bash
-UV_CACHE_DIR=/private/tmp/smolvla-uv-cache uv venv --python 3.11 .venv
-UV_CACHE_DIR=/private/tmp/smolvla-uv-cache uv pip install --python .venv/bin/python -r requirements.txt
+git clone https://github.com/Namprire/SmolVLA.git
+cd SmolVLA
+
+UV_CACHE_DIR=/private/tmp/smolvla-uv-cache \
+  uv venv --python 3.11 .venv
+
+UV_CACHE_DIR=/private/tmp/smolvla-uv-cache \
+  uv pip install --python .venv/bin/python -r requirements.txt
 ```
+
+## Quick start
+
+### Inspect the completed experiment
 
 Launch the offline viewer:
 
@@ -200,40 +147,35 @@ Launch the offline viewer:
 .venv/bin/python demo/demo.py
 ```
 
-Use the buttons or keys `1`–`4` to switch language conditions for the same observation. Use the example buttons or arrow keys to move through curated observations. List them without opening a window with:
+Use keys `1`-`4` to switch language conditions while keeping the observation fixed. Use the arrow keys to move between five curated examples, including a counterexample to the aggregate ordering.
+
+List the examples without opening a window:
 
 ```bash
 .venv/bin/python demo/demo.py --list-examples
 ```
 
-## Cheap and safe to rerun
-
-These commands use stored predictions and perform **zero new SmolVLA inference**.
-
-Regenerate Phase 8–9 metrics from `results/vla_predictions.csv`:
-
-```bash
-MPLCONFIGDIR="$PWD/.cache/matplotlib" \
-  .venv/bin/python experiments/analyze_language_results.py
-```
-
-Validate the final sources, regenerate the four final figures, refresh curated examples and camera assets, and rewrite the final findings/cheat sheet:
-
-```bash
-MPLCONFIGDIR="$PWD/.cache/matplotlib" \
-  .venv/bin/python experiments/finalize_results.py
-```
-
-The finalizer needs the already-local episode parquet files only when refreshing camera assets and the representative gripper figure. It never loads the checkpoint. Existing tracked outputs remain directly inspectable without those local caches.
-
-Run the headless demo smoke test:
+Run its headless smoke test:
 
 ```bash
 MPLBACKEND=Agg MPLCONFIGDIR="$PWD/.cache/matplotlib" \
   .venv/bin/python demo/demo.py --smoke-test
 ```
 
-Run the independent model-free forensic checks:
+## Reproduce the analysis
+
+These commands use the tracked predictions and perform **zero new SmolVLA inference**.
+
+### 1. Recompute the primary metrics
+
+```bash
+MPLCONFIGDIR="$PWD/.cache/matplotlib" \
+  .venv/bin/python experiments/analyze_language_results.py
+```
+
+This regenerates the paired language effects, recorded-expert agreement metrics, episode-cluster bootstrap summary, task-stage analysis, and Phase 8-9 figures from [`results/vla_predictions.csv`](results/vla_predictions.csv).
+
+### 2. Run the independent forensic validation
 
 ```bash
 .venv/bin/python experiments/final_independent_validation.py
@@ -242,9 +184,86 @@ MPLBACKEND=Agg MPLCONFIGDIR="$PWD/.cache/matplotlib" \
   .venv/bin/python experiments/final_viewer_audit.py
 ```
 
-## Expensive inference: already completed
+The independent validator deliberately avoids importing the project metric helpers. The current forensic verdict is documented in [`results/FINAL_AUDIT.md`](results/FINAL_AUDIT.md).
 
-The two-stage command below produced the 800 predictions. **Do not run it merely to inspect, analyze, plot, or demonstrate the completed project.** The driver is resumable and validates every existing row, but running it requires the local checkpoint/dataset and MPS access.
+### 3. Regenerate final figures and documentation
+
+```bash
+MPLCONFIGDIR="$PWD/.cache/matplotlib" \
+  .venv/bin/python experiments/finalize_results.py
+```
+
+The finalizer never loads SmolVLA. The local episode parquet files are only required when refreshing camera assets and the representative gripper figure.
+
+### 4. Reproduce the multi-prompt robustness analysis
+
+The tracked 620 predictions can be reanalyzed without model inference:
+
+```bash
+MPLCONFIGDIR="$PWD/.cache/matplotlib" \
+  .venv/bin/python experiments/prompt_robustness.py --stage analyze --device cpu
+```
+
+Results and prompt definitions are in [`results/prompt_robustness/`](results/prompt_robustness/).
+
+## Reproduce the visual evidence
+
+The renderers below read stored predictions and local dataset frames. They do not load SmolVLA.
+
+Generate the bottom-up figures and animation:
+
+```bash
+MPLCONFIGDIR="$PWD/.cache/matplotlib" \
+  .venv/bin/python experiments/bottom_up_analysis.py
+
+.venv/bin/python sim/mujoco_bottom_up_demo.py --mode render
+```
+
+Generate the presentation-quality Panda teaser or full hero demo:
+
+```bash
+.venv/bin/python sim/mujoco_panda_prompt_demo.py --mode render-teaser
+.venv/bin/python sim/mujoco_panda_prompt_demo.py --mode render-hq
+```
+
+Generate the synchronized four-prompt animation:
+
+```bash
+.venv/bin/python sim/mujoco_prompt_animation.py --mode render
+```
+
+Validate the official Menagerie Panda joints and gripper actuators:
+
+```bash
+.venv/bin/python sim/mujoco_panda_hard_gate.py
+```
+
+All generated media and validation reports are indexed in [`results/GIF_INDEX.md`](results/GIF_INDEX.md).
+
+## Reproduce the full model inference
+
+Fresh inference is expensive and is **not required** to verify the tracked results. The main driver is resumable, so the tracked 800-row CSV causes a normal run to validate and skip all completed predictions.
+
+### Download the checkpoint and ten source episodes
+
+```bash
+HF_HOME="$PWD/.cache/huggingface" \
+  .venv/bin/hf download HuggingFaceVLA/smolvla_libero \
+  --local-dir "$PWD/.cache/huggingface/models/HuggingFaceVLA/smolvla_libero"
+
+HF_HOME="$PWD/.cache/huggingface" \
+  .venv/bin/hf download HuggingFaceVLA/smol-libero \
+  --repo-type dataset \
+  --revision v2.1 \
+  --include "meta/*" "data/chunk-000/episode_00000?.parquet" \
+  --local-dir "$PWD/.cache/huggingface/lerobot_v21/HuggingFaceVLA/smol-libero"
+```
+
+The dataset helper creates a separate local v3.0 view expected by LeRobot 0.4.4. It does not modify the downloaded v2.1 source.
+
+### Run the staged experiment
+
+To truly recompute the predictions, use a disposable clone and first preserve or remove its tracked `results/vla_predictions.csv`. Then run:
 
 ```bash
 PYTORCH_ENABLE_MPS_FALLBACK=0 HF_HOME="$PWD/.cache/huggingface" \
@@ -254,67 +273,49 @@ PYTORCH_ENABLE_MPS_FALLBACK=0 HF_HOME="$PWD/.cache/huggingface" \
   .venv/bin/python experiments/main_language_experiment.py --stage b --device mps
 ```
 
-The validated inference source hash is recorded in `results/final_validation.json`. The finalization workflow checks that derived language effects, expert-agreement metrics, and summaries remain consistent with the stored predictions.
+Stage A covers two episodes as a hard gate. Stage B completes all ten episodes. Rows are validated and flushed incrementally so an interrupted run can resume safely.
 
 ## Repository structure
 
 ```text
 demo/
-  demo.py                              offline stored-prediction viewer
+  demo.py                         offline stored-prediction viewer
 experiments/
-  sanity_check.py                      one-action model hard gate
-  language_control.py                  controlled-language pilot
-  main_language_experiment.py          completed 800-prediction driver
-  analyze_language_results.py          model-free Phase 8–9 metrics
-  finalize_results.py                  final validation, figures, examples, docs
-  final_independent_validation.py      independent pandas/numpy forensic audit
-  final_viewer_audit.py                exact source-frame and rendered-viewer audit
+  main_language_experiment.py     controlled 800-prediction driver
+  analyze_language_results.py     primary model-free metrics and figures
+  final_independent_validation.py independent pandas/numpy audit
+  prompt_robustness.py            31-prompt robustness experiment
+  bottom_up_analysis.py           translation and gripper interpretation
 reliability/
-  inspect_gripper.py                   model-free Phase 10 semantics audit
+  inspect_gripper.py              expert gripper-semantics audit
 sim/
-  assets/mujoco_menagerie/              attributed official model snapshot
-  mujoco_panda_hard_gate.py             official Panda asset/actuator validation
-  packing_panda_scene.xml               Panda packing-scene composition
-  panda_prompt_demo_config.json         fixed trajectory/action visualization transform
-  mujoco_panda_prompt_demo.py           final Panda stored-action hero renderer
-  packing_prompt_scene.xml             simplified tabletop/basket/arm MJCF
-  mujoco_prompt_animation.py           stored-action 2x2 animation renderer
-  mujoco_smoke_test.py                  native MuJoCo render hard gate
+  mujoco_panda_prompt_demo.py      articulated Panda hero renderer
+  mujoco_prompt_animation.py      synchronized four-prompt renderer
+  mujoco_bottom_up_demo.py         one-object and bottom-up renderer
+  assets/mujoco_menagerie/         attributed official Panda asset snapshot
 src/
-  dataset.py                           local dataset preparation/loading
-  prediction.py                        controlled prediction API
-  metrics.py                           validation and paired metrics
+  dataset.py                      dataset conversion and loading
+  prediction.py                   controlled-noise SmolVLA API
+  metrics.py                      validation and paired metrics
 results/
-  vla_predictions.csv                  validated inference source of truth
-  language_effects.csv                 600 paired comparisons against Correct
-  expert_agreement.csv                 800 agreement records
-  bootstrap_summary.csv                episode-cluster uncertainty
-  stage_sensitivity*.csv               aggregate and per-episode stage results
-  figures/final/                       four final PNG/PDF figures
-  demo_assets/                         camera frames used by the offline demo
-  demo_examples.json                   deterministic curated selection
-  final_validation.json                final integrity report
-  final_findings.md                    concise scientific summary
-  presentation_cheatsheet.md           one-page defense notes
-  final_smoke_test.txt                  final command/status record
-  final_independent_validation.*        independent recomputation record
-  final_viewer_audit.json               five-example viewer/source-frame record
-  FINAL_AUDIT.md                        final forensic verdict and limitations
-  mujoco_panda_hard_gate/               official Panda PNG/MP4/GIF and validation
-  mujoco_panda_prompt_demo/              final Panda MP4/GIF/storyboard and validation
-  mujoco_prompt_animation/              MP4/GIF/storyboard and validation
+  vla_predictions.csv             immutable primary prediction table
+  figures/final/                  final PNG and PDF figures
+  prompt_robustness/              31-prompt extension evidence
+  bottom_up_demo/                 bottom-up figures, metrics, and videos
+  mujoco_panda_prompt_demo/        Panda media and validation reports
+  FINAL_AUDIT.md                  final forensic verdict and limitations
 ```
 
-## Scope and limitations
+## Scientific scope and limitations
 
-- Only 10 locally available episodes and one manipulation task/domain were evaluated.
-- Observations within episodes are temporally related; uncertainty resamples episodes as clusters.
-- The recorded expert action is a demonstration reference, not a ground-truth optimal action.
-- Translation, axis-angle orientation, and gripper dimensions have different physical meanings and scales.
-- The full 7-D norm is useful for paired comparison but is not a calibrated physical cost.
-- This is offline frame-level analysis, not closed-loop task-success evaluation.
-- Only one pretrained checkpoint was studied.
-- Language conditions were manually designed.
-- Physical release cannot be inferred from gripper command sign alone.
+- This is offline frame-level next-action analysis, not closed-loop execution.
+- Only one checkpoint, one manipulation task/domain, and ten locally available episodes were studied.
+- Observations within an episode are temporally related; they are not 200 independent robot trials.
+- Translation, axis-angle orientation, and gripper dimensions have different units and scales.
+- The full 7-D Euclidean norm is a paired comparison measure, not a calibrated physical cost.
+- The recorded expert action is a demonstration reference, not guaranteed optimal ground truth.
+- Language conditions and prompt variants were manually designed.
+- Gripper command sign does not by itself prove successful physical release.
+- The MuJoCo demonstrations illustrate stored actions and do not measure SmolVLA task success.
 
-Phases 11–14, release-event extraction, a release envelope or guard, stochasticity experiments, ROS, and simulator integration remain outside the validated studies described above. Native MuJoCo now supports both the falling-cube rendering hard gate and an illustrative stored-action prompt animation. Neither is a release-guard result, an exact physical trajectory replay, or closed-loop SmolVLA–LIBERO execution.
+For the concise scientific record, see [`results/final_findings.md`](results/final_findings.md). For exact integrity checks, hashes, counterexamples, and caveats, see [`results/FINAL_AUDIT.md`](results/FINAL_AUDIT.md).
