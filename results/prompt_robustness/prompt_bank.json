@@ -1,0 +1,212 @@
+{
+  "schema_version": 1,
+  "experiment": "Phase B systematic multi-prompt robustness",
+  "experiment_seed": 20260810,
+  "canonical_correct_instruction": "put both the cream cheese box and the butter in the basket",
+  "authoring_method": "Manually and systematically authored fixed prompt bank; not sampled from a population distribution.",
+  "prompts": [
+    {
+      "prompt_id": "CORRECT",
+      "prompt_class": "Correct",
+      "instruction": "put both the cream cheese box and the butter in the basket",
+      "semantic_notes": "Exact canonical dataset task; the single baseline for every observation."
+    },
+    {
+      "prompt_id": "P01",
+      "prompt_class": "Paraphrase",
+      "instruction": "place both the cream cheese box and the butter in the basket",
+      "semantic_notes": "Lexical substitution; preserves both objects and destination."
+    },
+    {
+      "prompt_id": "P02",
+      "prompt_class": "Paraphrase",
+      "instruction": "put the butter and the cream cheese box together inside the basket",
+      "semantic_notes": "Reverses object order and uses inside/together; same goal."
+    },
+    {
+      "prompt_id": "P03",
+      "prompt_class": "Paraphrase",
+      "instruction": "move the cream cheese box and the butter into the basket",
+      "semantic_notes": "Uses move/into while retaining both objects and destination."
+    },
+    {
+      "prompt_id": "P04",
+      "prompt_class": "Paraphrase",
+      "instruction": "transfer both items, the cream cheese box and the butter, to the basket",
+      "semantic_notes": "Appositive syntax; explicitly names both items and the basket."
+    },
+    {
+      "prompt_id": "P05",
+      "prompt_class": "Paraphrase",
+      "instruction": "set the cream cheese box as well as the butter inside the basket",
+      "semantic_notes": "As-well-as coordination; same two-object placement goal."
+    },
+    {
+      "prompt_id": "P06",
+      "prompt_class": "Paraphrase",
+      "instruction": "pack the basket with both the cream cheese box and the butter",
+      "semantic_notes": "Destination-fronted packing wording; preserves complete goal."
+    },
+    {
+      "prompt_id": "P07",
+      "prompt_class": "Paraphrase",
+      "instruction": "take the cream cheese box and the butter and place them in the basket",
+      "semantic_notes": "Two-verb construction with an explicit plural reference to both objects."
+    },
+    {
+      "prompt_id": "P08",
+      "prompt_class": "Paraphrase",
+      "instruction": "ensure that both the butter and the cream cheese box are inside the basket",
+      "semantic_notes": "State-goal phrasing; both named objects must end inside the basket."
+    },
+    {
+      "prompt_id": "P09",
+      "prompt_class": "Paraphrase",
+      "instruction": "the cream cheese box and the butter should both be put into the basket",
+      "semantic_notes": "Passive syntax; same object set and destination."
+    },
+    {
+      "prompt_id": "P10",
+      "prompt_class": "Paraphrase",
+      "instruction": "into the basket, place both the cream cheese box and the butter",
+      "semantic_notes": "Fronted destination; retains both objects and the original goal."
+    },
+    {
+      "prompt_id": "C01",
+      "prompt_class": "Contradictory",
+      "instruction": "put the cream cheese box in the basket but leave the butter outside the basket",
+      "semantic_notes": "Original contradiction: excludes the butter from the destination."
+    },
+    {
+      "prompt_id": "C02",
+      "prompt_class": "Contradictory",
+      "instruction": "put the butter in the basket but leave the cream cheese box on the table",
+      "semantic_notes": "Reverses which target object is excluded."
+    },
+    {
+      "prompt_id": "C03",
+      "prompt_class": "Contradictory",
+      "instruction": "place only the cream cheese box in the basket and move the butter beside the basket",
+      "semantic_notes": "Changes inclusion and gives the butter an adjacent destination."
+    },
+    {
+      "prompt_id": "C04",
+      "prompt_class": "Contradictory",
+      "instruction": "put only the butter in the basket and keep the cream cheese box where it is",
+      "semantic_notes": "Selects only the butter and preserves the cream-cheese position."
+    },
+    {
+      "prompt_id": "C05",
+      "prompt_class": "Contradictory",
+      "instruction": "place the cream cheese box on the table and put only the butter in the basket",
+      "semantic_notes": "Assigns different destinations and excludes one object from the basket."
+    },
+    {
+      "prompt_id": "C06",
+      "prompt_class": "Contradictory",
+      "instruction": "place both the cream cheese box and the butter next to the basket instead of inside it",
+      "semantic_notes": "Preserves both objects but changes the destination for both."
+    },
+    {
+      "prompt_id": "C07",
+      "prompt_class": "Contradictory",
+      "instruction": "put the cream cheese box in the basket and move the butter to the far side of the table",
+      "semantic_notes": "Keeps one original placement and gives the butter a distant destination."
+    },
+    {
+      "prompt_id": "C08",
+      "prompt_class": "Contradictory",
+      "instruction": "stack the butter on top of the cream cheese box outside the basket",
+      "semantic_notes": "Changes the goal from packing to stacking both objects outside."
+    },
+    {
+      "prompt_id": "C09",
+      "prompt_class": "Contradictory",
+      "instruction": "put the cream cheese box beside the basket and leave the butter on the table",
+      "semantic_notes": "Keeps both target objects outside at two stated locations."
+    },
+    {
+      "prompt_id": "C10",
+      "prompt_class": "Contradictory",
+      "instruction": "move the cream cheese box into the basket, then take the butter out of the basket",
+      "semantic_notes": "Sequential inclusion/exclusion contradiction with distinct object roles."
+    },
+    {
+      "prompt_id": "U01",
+      "prompt_class": "Unrelated",
+      "instruction": "open the top drawer of the cabinet",
+      "semantic_notes": "Original Unrelated prompt retained as one variant for direct diagnosis."
+    },
+    {
+      "prompt_id": "U02",
+      "prompt_class": "Unrelated",
+      "instruction": "close the microwave door",
+      "semantic_notes": "Plausible appliance manipulation unrelated to the packing goal."
+    },
+    {
+      "prompt_id": "U03",
+      "prompt_class": "Unrelated",
+      "instruction": "pick up the red mug and place it on the saucer",
+      "semantic_notes": "Different object-transfer task with an unrelated destination."
+    },
+    {
+      "prompt_id": "U04",
+      "prompt_class": "Unrelated",
+      "instruction": "move the black bowl onto the serving plate",
+      "semantic_notes": "Different tabletop placement task using unrelated objects."
+    },
+    {
+      "prompt_id": "U05",
+      "prompt_class": "Unrelated",
+      "instruction": "turn the stove knob clockwise",
+      "semantic_notes": "Plausible rotational manipulation unrelated to packing."
+    },
+    {
+      "prompt_id": "U06",
+      "prompt_class": "Unrelated",
+      "instruction": "place the cereal box inside the kitchen cabinet",
+      "semantic_notes": "Different object and destination; not a modification of the basket task."
+    },
+    {
+      "prompt_id": "U07",
+      "prompt_class": "Unrelated",
+      "instruction": "lift the saucepan and set it on the front burner",
+      "semantic_notes": "Different two-step kitchen manipulation task."
+    },
+    {
+      "prompt_id": "U08",
+      "prompt_class": "Unrelated",
+      "instruction": "slide the cutting board toward the sink",
+      "semantic_notes": "Different planar manipulation with unrelated object and target."
+    },
+    {
+      "prompt_id": "U09",
+      "prompt_class": "Unrelated",
+      "instruction": "put the blue cup on the upper shelf",
+      "semantic_notes": "Different object-placement task in another part of the workspace."
+    },
+    {
+      "prompt_id": "U10",
+      "prompt_class": "Unrelated",
+      "instruction": "take the spoon from the counter and place it in the utensil holder",
+      "semantic_notes": "Different pick-and-place task with unrelated objects and destination."
+    }
+  ],
+  "audit": {
+    "validation_result": "PASS",
+    "prompt_count": 31,
+    "altered_prompt_count": 30,
+    "class_counts": {
+      "Paraphrase": 10,
+      "Contradictory": 10,
+      "Unrelated": 10,
+      "Correct": 1
+    },
+    "unique_ids": true,
+    "unique_nonempty_instructions": true,
+    "paraphrases_preserve_both_objects_and_destination": true,
+    "contradictions_name_both_objects_and_task_destination": true,
+    "unrelated_prompts_exclude_original_objects_and_destination": true,
+    "manual_semantic_audit": "Completed before inference; semantic_notes record each decision."
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "validation_result": "PASS",
+  "stage": "pilot",
+  "target_observations": 2,
+  "target_predictions": 62,
+  "predictions_computed_this_run": 62,
+  "predictions_skipped_as_valid": 0,
+  "same_noise_for_31_prompts_per_observation": true,
+  "non_language_preprocessing_audits_this_run": 2,
+  "source_frame_mutation_checks_this_run": 2,
+  "max_abs_correct_baseline_difference_from_canonical": 0.0,
+  "prediction_csv_sha256_before": "d2200bf467f0999e3aad7802839224f4173341b70f114cacd5ee044a0931583e",
+  "prediction_csv_sha256_after": "9a31d053adde4bbab3b917286fac0f6f47804436b2010d628331cb69ffa80a02",
+  "csv_unchanged_when_no_rows_missing": true,
+  "elapsed_runtime_seconds": 55.33054504194297,
+  "started_at": "2026-08-10T16:43:36.222890-04:00",
+  "completed_at": "2026-08-10T16:44:31.554861-04:00",
+  "row_count": 62,
+  "observation_count": 2,
+  "duplicate_observation_prompt_count": 0,
+  "finite_7d_expert_and_predicted_actions": true,
+  "same_noise_hash_within_observation": true,
+  "prompt_strings_exactly_match_bank": true,
+  "execution_positions_match_deterministic_shuffle": true,
+  "correct_execution_positions": [
+    2,
+    16
+  ]
+}

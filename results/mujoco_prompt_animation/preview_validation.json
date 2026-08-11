@@ -1,0 +1,35 @@
+{
+  "mode": "preview",
+  "hard_gate": true,
+  "episode_id": 0,
+  "source_frames": [
+    42,
+    100
+  ],
+  "checkpoint_frame": 81,
+  "condition": "Correct",
+  "stored_instruction": "put both the cream cheese box and the butter in the basket",
+  "stored_action": [
+    -0.0861598178744316,
+    0.756074845790863,
+    0.1706543266773224,
+    -0.003439494408667,
+    -0.0816232711076736,
+    0.0028178906068205,
+    1.0167014598846436
+  ],
+  "gripper_rule": "predicted gripper < 0 => opening; >= 0 => closing",
+  "arrow_scale": 0.18,
+  "arrow_scale_note": "Arrow/path scale is illustrative and derived from stored relative actions.",
+  "fps": 20,
+  "frame_count": 59,
+  "resolution": [
+    640,
+    360
+  ],
+  "video_path": "/Users/nampham/Documents/Blended/SmolVLA/results/mujoco_prompt_animation/videos/preview_correct_snippet.mp4",
+  "still_path": "/Users/nampham/Documents/Blended/SmolVLA/results/mujoco_prompt_animation/figures/preview_correct_snippet.png",
+  "disclaimer": "Illustrative rendering of stored action differences; not closed-loop SmolVLA\u2013LIBERO execution.",
+  "model_loaded": false,
+  "closed_loop_rollout": false
+}

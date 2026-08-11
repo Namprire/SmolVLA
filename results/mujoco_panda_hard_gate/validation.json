@@ -1,0 +1,114 @@
+{
+  "status": "PASS",
+  "python_version": "3.11.15",
+  "mujoco_version": "3.11.0",
+  "upstream_repository": "https://github.com/google-deepmind/mujoco_menagerie",
+  "upstream_revision": "da76818e269b82289eba39808e2fb91d679d6994",
+  "vendored_model_directory": "/Users/nampham/Documents/Blended/SmolVLA/sim/assets/mujoco_menagerie/franka_emika_panda",
+  "scene_path": "/Users/nampham/Documents/Blended/SmolVLA/sim/assets/mujoco_menagerie/franka_emika_panda/scene.xml",
+  "scene_sha256": "4b08c2e5108f0ed67fa689e096e58850210130c3e6ef889b1e22822d369fd8c3",
+  "panda_xml_sha256": "96ad67da03710f17f798c9478fd9e9efdf24a3bf8359f05e456dd9fb158ea273",
+  "license_sha256": "a6cba85bc92e0cff7a450b1d873c0eaa2e9fc96bf472df0247a26bec77bf3ff9",
+  "nq": 9,
+  "nv": 9,
+  "nu": 8,
+  "joint_names": [
+    "joint1",
+    "joint2",
+    "joint3",
+    "joint4",
+    "joint5",
+    "joint6",
+    "joint7",
+    "finger_joint1",
+    "finger_joint2"
+  ],
+  "actuator_names": [
+    "actuator1",
+    "actuator2",
+    "actuator3",
+    "actuator4",
+    "actuator5",
+    "actuator6",
+    "actuator7",
+    "actuator8"
+  ],
+  "gripper_joint_names": [
+    "finger_joint1",
+    "finger_joint2"
+  ],
+  "end_effector_body_names": [
+    "hand",
+    "left_finger",
+    "right_finger"
+  ],
+  "site_names": [],
+  "camera_names": [],
+  "keyframe_names": [
+    "home"
+  ],
+  "arm_joint_motion_range": [
+    0.7986363888233496,
+    0.602966824832154,
+    0.5497959279605358,
+    0.79867443616641,
+    0.44874568891587097,
+    0.5984592977165231,
+    0.6484319305861577
+  ],
+  "moved_arm_joint_count": 7,
+  "finger_position_min": 9.693225809229306e-05,
+  "finger_position_max": 0.04000062998783848,
+  "hand_position_min": [
+    0.3180715121129449,
+    -0.338045813728057,
+    0.585342102484855
+  ],
+  "hand_position_max": [
+    0.5560801044822864,
+    0.3466573443264606,
+    0.6245024294875893
+  ],
+  "fps": 30,
+  "frame_count": 90,
+  "duration_seconds": 3.0,
+  "resolution": [
+    960,
+    720
+  ],
+  "source_offscreen_resolution": [
+    640,
+    480
+  ],
+  "runtime_offscreen_resolution": [
+    960,
+    720
+  ],
+  "codec": "h264",
+  "gif_frame_count": 45,
+  "gif_resolution": [
+    720,
+    540
+  ],
+  "outputs": {
+    "default_png": "/Users/nampham/Documents/Blended/SmolVLA/results/mujoco_panda_hard_gate/panda_default_scene.png",
+    "mp4": "/Users/nampham/Documents/Blended/SmolVLA/results/mujoco_panda_hard_gate/panda_joint_gripper_hard_gate.mp4",
+    "gif": "/Users/nampham/Documents/Blended/SmolVLA/results/mujoco_panda_hard_gate/panda_joint_gripper_hard_gate.gif",
+    "contact_sheet": "/Users/nampham/Documents/Blended/SmolVLA/results/mujoco_panda_hard_gate/panda_motion_contact_sheet.png"
+  },
+  "smol_vla_model_loaded": false,
+  "libero_simulator_loaded": false,
+  "checks": {
+    "official_scene_compiles": true,
+    "model_dimensions_expected": true,
+    "all_seven_arm_joints_moved": true,
+    "gripper_reached_closed_visual_state": true,
+    "gripper_reached_open_visual_state": true,
+    "no_mujoco_warnings": true,
+    "mp4_frame_count_expected": true,
+    "mp4_duration_expected": true,
+    "mp4_resolution_expected": true,
+    "gif_nonempty": true,
+    "png_nonempty": true
+  }
+}

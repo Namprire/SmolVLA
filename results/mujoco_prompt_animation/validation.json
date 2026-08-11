@@ -1,0 +1,90 @@
+{
+  "status": "PASS",
+  "episode_id": 0,
+  "visual_format": "2x2 synchronized panels",
+  "conditions": [
+    "correct",
+    "paraphrase",
+    "contradictory",
+    "unrelated"
+  ],
+  "checkpoint_frames": [
+    13,
+    53,
+    81,
+    128,
+    156,
+    191,
+    221,
+    241
+  ],
+  "expert_command_transition_frames": [
+    50,
+    129,
+    183,
+    240
+  ],
+  "fps": 20,
+  "rendered_frame_count": 370,
+  "expected_frame_count": 370,
+  "mp4_duration_seconds": 18.5,
+  "mp4_resolution": [
+    1280,
+    720
+  ],
+  "mp4_codec": "h264",
+  "gif_frame_count": 185,
+  "gif_resolution": [
+    960,
+    540
+  ],
+  "storyboard_resolution": [
+    2880,
+    1080
+  ],
+  "legend_resolution": [
+    1600,
+    900
+  ],
+  "arrow_scale": 0.18,
+  "arrow_scale_note": "Arrow/path scale is illustrative and derived from stored relative actions.",
+  "gripper_rule": "predicted gripper < 0 => opening; >= 0 => closing",
+  "disclaimer": "Illustrative rendering of stored action differences; not closed-loop SmolVLA\u2013LIBERO execution.",
+  "smol_vla_model_loaded": false,
+  "closed_loop_rollout": false,
+  "inputs": {
+    "predictions": "/Users/nampham/Documents/Blended/SmolVLA/results/vla_predictions.csv",
+    "predictions_sha256": "ab4984aeea52a8ca60c94a5cb19a15d69fd27707f5c5734ddd8bec680f376dc4",
+    "episode_parquet": "/Users/nampham/Documents/Blended/SmolVLA/.cache/huggingface/lerobot_v21/HuggingFaceVLA/smol-libero/data/chunk-000/episode_000000.parquet",
+    "episode_parquet_sha256": "d9359f9d470a771ca39bf91e4602ccd33a7b73e06d3e6e692d86ec53bcf215c6",
+    "scene_xml": "/Users/nampham/Documents/Blended/SmolVLA/sim/packing_prompt_scene.xml",
+    "scene_xml_sha256": "d21d2626308848c345ba7656dd5c3212e31822020ab2444c1e9eb6c501e6781c"
+  },
+  "outputs": {
+    "mp4": "/Users/nampham/Documents/Blended/SmolVLA/results/mujoco_prompt_animation/videos/prompt_comparison_main.mp4",
+    "mp4_sha256": "429e1fcbad372118f9de972ccccd7ffd386e284f5f17e62a8c8a42fdaf241813",
+    "gif": "/Users/nampham/Documents/Blended/SmolVLA/results/mujoco_prompt_animation/videos/prompt_comparison_main.gif",
+    "gif_sha256": "473cede24fdcfe311f1a2cf21da675ff1dfd750104396815f67114e076cd2590",
+    "storyboard": "/Users/nampham/Documents/Blended/SmolVLA/results/mujoco_prompt_animation/figures/prompt_comparison_storyboard.png",
+    "storyboard_sha256": "5fb9902bf606851bd87c563d31c1c29fe05199c24ee914c1cd58c9bc0da9d931",
+    "legend": "/Users/nampham/Documents/Blended/SmolVLA/results/mujoco_prompt_animation/figures/legend.png",
+    "legend_sha256": "614055117346c0621392deb5cc85d5156e1f343b4ae283b3311723d445447d43"
+  },
+  "checks": {
+    "checkpoint_count_exact": true,
+    "checkpoint_values_finite": true,
+    "four_prompt_conditions_exact": true,
+    "rendered_frame_count_exact": true,
+    "encoded_mp4_frame_count_exact": true,
+    "mp4_resolution_expected": true,
+    "mp4_fps_expected": true,
+    "storyboard_resolution_expected": true,
+    "legend_resolution_expected": true,
+    "outputs_nonempty": true,
+    "same_nominal_state_all_panels_by_construction": true,
+    "stored_actions_not_integrated": true,
+    "smol_vla_model_not_loaded": true,
+    "not_closed_loop_rollout": true,
+    "required_disclaimer_rendered": true
+  }
+}

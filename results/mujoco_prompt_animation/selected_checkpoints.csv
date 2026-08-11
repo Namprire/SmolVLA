@@ -1,0 +1,9 @@
+episode_id,frame_index,global_index,normalized_progress,why_selected,correct_vs_paraphrase_distance,correct_vs_contradictory_distance,correct_vs_unrelated_distance,gripper_flip_present,gripper_flip_conditions
+0,13,13,0.0505836575875486,Early ordinary control: low-progress comparison without an event transition.,0.113683513928835,0.07980921272659809,0.3991546894396112,False,
+0,53,53,0.2062256809338521,Nearest stored evaluation after first expert close-command onset at frame 50.,0.18822555607951658,2.0506533760490497,0.1907589563023491,True,Contradictory
+0,81,81,0.3151750972762646,Strongest episode-0 Unrelated distance in the 20–40% progress region.,0.05634947949189747,0.06602045063233855,2.2840237033218687,True,Unrelated
+0,128,128,0.4980544747081712,Nearest stored evaluation to first expert open-command onset at frame 129.,0.08565579230392484,0.10063895242695266,0.10937503187912906,False,
+0,156,156,0.6070038910505836,Ordinary mid-trajectory control between the two manipulation cycles.,0.3249028558778281,0.57606117183673,0.8127431494246805,False,
+0,191,191,0.7431906614785992,Nearest stored evaluation after second expert close-command onset at frame 183.,0.23189839777604623,0.39175090332883894,0.49038273485539285,False,
+0,221,221,0.8599221789883269,Late second holding interval with a strong Unrelated gripper-regime flip.,0.07702384081041506,0.41080750992511894,2.124248829269526,True,Unrelated
+0,241,241,0.9377431906614786,Nearest stored evaluation to second expert open-command onset at frame 240.,2.0854066367299096,0.21233668091657218,0.1448957664511499,True,Paraphrase

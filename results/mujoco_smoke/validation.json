@@ -1,0 +1,30 @@
+{
+  "python_version": "3.11.15",
+  "python_implementation": "CPython",
+  "platform": "macOS-15.7.1-arm64-arm-64bit",
+  "mujoco_version": "3.11.0",
+  "render_backend_env": "unset (MuJoCo default)",
+  "model_timestep": 0.002,
+  "nbody": 2,
+  "njnt": 1,
+  "nq": 7,
+  "ndof": 6,
+  "step_count": 625,
+  "simulated_seconds": 1.2500000000000009,
+  "initial_cube_position": [
+    0.0,
+    0.0,
+    0.72
+  ],
+  "final_cube_position": [
+    3.825875885888156e-18,
+    -3.01590247842048e-18,
+    0.06492049380692216
+  ],
+  "renderer_width": 640,
+  "renderer_height": 480,
+  "initial_png": "/Users/nampham/Documents/Blended/SmolVLA/results/mujoco_smoke/falling_cube_initial.png",
+  "final_png": "/Users/nampham/Documents/Blended/SmolVLA/results/mujoco_smoke/falling_cube_final.png",
+  "contact_sheet_png": "/Users/nampham/Documents/Blended/SmolVLA/results/mujoco_smoke/falling_cube_contact_sheet.png",
+  "pipeline_validated": true
+}

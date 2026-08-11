@@ -29,6 +29,55 @@ The GIF below shows the complete stored episode 0 trajectory from the agent and 
 
 ![Episode 0 arm demonstration](results/demo_assets/episode_00_arm_demo.gif)
 
+### Official Menagerie Panda hard gate
+
+The official Google DeepMind MuJoCo Menagerie `franka_emika_panda` asset is
+vendored unchanged at `sim/assets/mujoco_menagerie/franka_emika_panda/` from
+revision `da76818e269b82289eba39808e2fb91d679d6994` under its included Apache-2.0
+license. MuJoCo 3.11.0 compiles the model with `nq=9`, `nv=9`, and `nu=8`.
+The hard gate moves all seven articulated arm joints and closes and reopens the
+actual Panda gripper through the upstream actuators.
+
+![Official Menagerie Panda hard gate](results/mujoco_panda_hard_gate/panda_joint_gripper_hard_gate.gif)
+
+Regenerate this asset-only validation with:
+
+```bash
+.venv/bin/python sim/mujoco_panda_hard_gate.py
+```
+
+Exact joint/actuator names, source hashes, motion ranges, and output metadata
+are recorded in `results/mujoco_panda_hard_gate/validation.json`. This is not a
+packing rollout and does not load SmolVLA or LIBERO. The custom Panda packing
+scene and trajectory-tracking IK begin only after review of this gate.
+
+### Illustrative MuJoCo prompt comparison
+
+The synchronized 2×2 animation uses the complete stored episode-0 expert
+end-effector XYZ trajectory as one shared nominal backbone. At eight
+deterministic checkpoints it overlays the four stored next-action proposals
+from `results/vla_predictions.csv`. Prompt-conditioned predictions are shown as
+scaled translation arrows/ghost targets, full 7-D distances from Correct, and
+opening/closing gripper regimes; they are never integrated into the nominal
+motion.
+
+> Illustrative rendering of stored action differences; not closed-loop SmolVLA–LIBERO execution.
+
+![Illustrative four-prompt MuJoCo comparison](results/mujoco_prompt_animation/videos/prompt_comparison_main.gif)
+
+Run the already-validated preview, full render, or storyboard generation:
+
+```bash
+.venv/bin/python sim/mujoco_prompt_animation.py --mode preview
+.venv/bin/python sim/mujoco_prompt_animation.py --mode render
+.venv/bin/python sim/mujoco_prompt_animation.py --mode storyboard
+```
+
+These modes read stored predictions and the already-local episode parquet. They
+do not load SmolVLA or run inference. See
+`results/mujoco_prompt_animation/animation_notes.md` and `validation.json` for
+the action mapping, checkpoint policy, source hashes, and limitations.
+
 | Language-induced action difference | Agreement with recorded expert action |
 |:---:|:---:|
 | ![Language-induced action difference](results/figures/final/01_language_induced_action_difference.png) | ![Agreement with recorded expert action](results/figures/final/02_agreement_with_recorded_expert_action.png) |
@@ -150,6 +199,12 @@ experiments/
   final_viewer_audit.py                exact source-frame and rendered-viewer audit
 reliability/
   inspect_gripper.py                   model-free Phase 10 semantics audit
+sim/
+  assets/mujoco_menagerie/              attributed official model snapshot
+  mujoco_panda_hard_gate.py             official Panda asset/actuator validation
+  packing_prompt_scene.xml             simplified tabletop/basket/arm MJCF
+  mujoco_prompt_animation.py           stored-action 2x2 animation renderer
+  mujoco_smoke_test.py                  native MuJoCo render hard gate
 src/
   dataset.py                           local dataset preparation/loading
   prediction.py                        controlled prediction API
@@ -170,6 +225,8 @@ results/
   final_independent_validation.*        independent recomputation record
   final_viewer_audit.json               five-example viewer/source-frame record
   FINAL_AUDIT.md                        final forensic verdict and limitations
+  mujoco_panda_hard_gate/               official Panda PNG/MP4/GIF and validation
+  mujoco_prompt_animation/              MP4/GIF/storyboard and validation
 ```
 
 ## Scope and limitations
@@ -184,4 +241,4 @@ results/
 - Language conditions were manually designed.
 - Physical release cannot be inferred from gripper command sign alone.
 
-Phases 11–14, release-event extraction, a release envelope or guard, stochasticity experiments, MuJoCo, ROS, and simulator integration are intentionally outside the final project scope.
+Phases 11–14, release-event extraction, a release envelope or guard, stochasticity experiments, ROS, and simulator integration remain outside the validated studies described above. Native MuJoCo now supports both the falling-cube rendering hard gate and an illustrative stored-action prompt animation. Neither is a release-guard result, an exact physical trajectory replay, or closed-loop SmolVLA–LIBERO execution.
