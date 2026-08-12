@@ -1,0 +1,278 @@
+{
+  "status": "PASS",
+  "deliverable": "four separate prompt-labeled full pick-and-place GIFs",
+  "episode_id": 0,
+  "frame_index": 81,
+  "duration_seconds_each": 8.0,
+  "scripted_motion_stages": [
+    "approach",
+    "grasp",
+    "lift",
+    "stored frame-81 proposal waypoint",
+    "basket transport",
+    "lower",
+    "release and drop",
+    "retreat"
+  ],
+  "stored_action_role": "stored XYZ shapes one local waypoint per condition; stored predictions are not chained into a rollout",
+  "scripted_motion_role": "the complete grasp, basket transport, release, object drop, and retreat are deterministic presentation choreography",
+  "object_attachment_mechanism": "cream-cheese mocap proxy follows the Panda hand while held and follows a deterministic vertical drop into the basket after scripted opening",
+  "nominal_trajectory_ik_max_residual_m": 0.0014887683953772714,
+  "full_pick_place_waypoint_ik_max_residual_m": 0.0014756168884676759,
+  "object_start_mujoco": [
+    0.3983999267220497,
+    -0.011604872345924375,
+    0.3696612261533737
+  ],
+  "object_final_mujoco": [
+    0.632,
+    -0.102,
+    0.405
+  ],
+  "basket_fit_checks": {
+    "x_inside": true,
+    "y_inside": true,
+    "z_below_rim": true
+  },
+  "conditions": {
+    "correct": {
+      "condition_label": "Correct",
+      "display_prompt": "put both the cream cheese box and the butter in the basket",
+      "stored_source_prompt": "put both the cream cheese box and the butter in the basket",
+      "source_episode": 0,
+      "source_frame": 81,
+      "stored_action": [
+        -0.0861598178744316,
+        0.756074845790863,
+        0.1706543266773224,
+        -0.003439494408667,
+        -0.0816232711076736,
+        0.0028178906068205,
+        1.0167014598846436
+      ],
+      "stored_distance_from_correct_7d": 0.0,
+      "stored_gripper_value": 1.0167014598846436,
+      "stored_gripper_regime": "CLOSE",
+      "stored_gripper_drives_scripted_release": false,
+      "stored_proposal_waypoint_mujoco": [
+        0.4513251659274101,
+        -0.022461009398102756,
+        0.7075799304544925
+      ],
+      "waypoint_ik_residuals_m": {
+        "approach": 0.0005458813632331526,
+        "grasp": 0.0013977685325507728,
+        "lift": 5.148163481998411e-05,
+        "stored_proposal": 0.0005223209590875834,
+        "basket_high": 0.0014189357174671574,
+        "drop": 0.00035143733900435466,
+        "retreat": 0.0005451378570237061
+      },
+      "mp4": {
+        "path": "/Users/nampham/Documents/Blended/SmolVLA/results/mujoco_panda_prompt_demo/videos/full_pick_place_correct.mp4",
+        "frame_count": 192,
+        "duration_seconds": 8.0,
+        "resolution": [
+          1280,
+          720
+        ]
+      },
+      "gif": {
+        "path": "/Users/nampham/Documents/Blended/SmolVLA/results/mujoco_panda_prompt_demo/videos/full_pick_place_correct.gif",
+        "frame_count": 96,
+        "resolution": [
+          960,
+          540
+        ],
+        "size_bytes": 2564757,
+        "sha256": "46abb8d5e689b6b3ac374115628eb2801446c5edbbbce926e7d0416c7eacc790"
+      },
+      "contact_sheet": "/Users/nampham/Documents/Blended/SmolVLA/results/mujoco_panda_prompt_demo/figures/full_pick_place_correct_contact_sheet.png"
+    },
+    "paraphrase": {
+      "condition_label": "Paraphrase",
+      "display_prompt": "place the cream cheese box and the butter together inside the basket",
+      "stored_source_prompt": "place the cream cheese box and the butter together inside the basket",
+      "source_episode": 0,
+      "source_frame": 81,
+      "stored_action": [
+        -0.0792854502797126,
+        0.7863439321517944,
+        0.1241362765431404,
+        -0.0051385252736508,
+        -0.0864366367459297,
+        0.0016988511197268,
+        1.0212349891662598
+      ],
+      "stored_distance_from_correct_7d": 0.05634947949189747,
+      "stored_gripper_value": 1.0212349891662598,
+      "stored_gripper_regime": "CLOSE",
+      "stored_gripper_drives_scripted_release": false,
+      "stored_proposal_waypoint_mujoco": [
+        0.4534440019726753,
+        -0.02159483908116816,
+        0.7026955351904034
+      ],
+      "waypoint_ik_residuals_m": {
+        "approach": 0.0005458813632331526,
+        "grasp": 0.0013977685325507728,
+        "lift": 5.148163481998411e-05,
+        "stored_proposal": 0.0005088362943713931,
+        "basket_high": 0.0013567508447525386,
+        "drop": 0.00035513181677976027,
+        "retreat": 0.0005453202956809472
+      },
+      "mp4": {
+        "path": "/Users/nampham/Documents/Blended/SmolVLA/results/mujoco_panda_prompt_demo/videos/full_pick_place_paraphrase.mp4",
+        "frame_count": 192,
+        "duration_seconds": 8.0,
+        "resolution": [
+          1280,
+          720
+        ]
+      },
+      "gif": {
+        "path": "/Users/nampham/Documents/Blended/SmolVLA/results/mujoco_panda_prompt_demo/videos/full_pick_place_paraphrase.gif",
+        "frame_count": 96,
+        "resolution": [
+          960,
+          540
+        ],
+        "size_bytes": 2590648,
+        "sha256": "07c2bbcf890ec695ffbddc7ed81a1e0ecc6d34a0fbd7428a6baa6ffb8b8fa240"
+      },
+      "contact_sheet": "/Users/nampham/Documents/Blended/SmolVLA/results/mujoco_panda_prompt_demo/figures/full_pick_place_paraphrase_contact_sheet.png"
+    },
+    "contradictory": {
+      "condition_label": "Contradictory",
+      "display_prompt": "put the cream cheese box in the basket but leave the butter outside the basket",
+      "stored_source_prompt": "put the cream cheese box in the basket but leave the butter outside the basket",
+      "source_episode": 0,
+      "source_frame": 81,
+      "stored_action": [
+        -0.0390081033110618,
+        0.7396190762519836,
+        0.2111288905143737,
+        -0.0028845188207924,
+        -0.0835028290748596,
+        -0.0106173744425177,
+        1.01021409034729
+      ],
+      "stored_distance_from_correct_7d": 0.06602045063233855,
+      "stored_gripper_value": 1.01021409034729,
+      "stored_gripper_regime": "CLOSE",
+      "stored_gripper_drives_scripted_release": false,
+      "stored_proposal_waypoint_mujoco": [
+        0.45017326205968855,
+        -0.01651989336311816,
+        0.7118297596573829
+      ],
+      "waypoint_ik_residuals_m": {
+        "approach": 0.0005458813632331526,
+        "grasp": 0.0013977685325507728,
+        "lift": 5.148163481998411e-05,
+        "stored_proposal": 0.0005742727573679864,
+        "basket_high": 0.0014756168884676759,
+        "drop": 0.00034813630067749714,
+        "retreat": 0.0005449493820759526
+      },
+      "mp4": {
+        "path": "/Users/nampham/Documents/Blended/SmolVLA/results/mujoco_panda_prompt_demo/videos/full_pick_place_contradictory.mp4",
+        "frame_count": 192,
+        "duration_seconds": 8.0,
+        "resolution": [
+          1280,
+          720
+        ]
+      },
+      "gif": {
+        "path": "/Users/nampham/Documents/Blended/SmolVLA/results/mujoco_panda_prompt_demo/videos/full_pick_place_contradictory.gif",
+        "frame_count": 96,
+        "resolution": [
+          960,
+          540
+        ],
+        "size_bytes": 2666705,
+        "sha256": "8c014c528c31476a353dc956d017a0a373ae4f4020ca4c3f1408591de4958d5f"
+      },
+      "contact_sheet": "/Users/nampham/Documents/Blended/SmolVLA/results/mujoco_panda_prompt_demo/figures/full_pick_place_contradictory_contact_sheet.png"
+    },
+    "unrelated": {
+      "condition_label": "Unrelated",
+      "display_prompt": "put both the cream cheese box and the butter in the basket, and open the drawer of the cabinet",
+      "stored_source_prompt": "open the top drawer of the cabinet",
+      "source_episode": 0,
+      "source_frame": 81,
+      "stored_action": [
+        0.0350053012371063,
+        -0.2416837811470031,
+        -0.2929227650165558,
+        -0.0080422991886734,
+        -0.0901215523481369,
+        0.0447790846228599,
+        -0.9807476997375488
+      ],
+      "stored_distance_from_correct_7d": 2.2840237033218687,
+      "stored_gripper_value": -0.9807476997375488,
+      "stored_gripper_regime": "OPEN",
+      "stored_gripper_drives_scripted_release": false,
+      "stored_proposal_waypoint_mujoco": [
+        0.3814820620417595,
+        -0.007194204390048979,
+        0.6589043358266353
+      ],
+      "waypoint_ik_residuals_m": {
+        "approach": 0.0005458813632331526,
+        "grasp": 0.0013977685325507728,
+        "lift": 5.148163481998411e-05,
+        "stored_proposal": 0.00014481253658342222,
+        "basket_high": 0.0003672135529749133,
+        "drop": 0.00041500671259866003,
+        "retreat": 0.000547839098075275
+      },
+      "mp4": {
+        "path": "/Users/nampham/Documents/Blended/SmolVLA/results/mujoco_panda_prompt_demo/videos/full_pick_place_unrelated.mp4",
+        "frame_count": 192,
+        "duration_seconds": 8.0,
+        "resolution": [
+          1280,
+          720
+        ]
+      },
+      "gif": {
+        "path": "/Users/nampham/Documents/Blended/SmolVLA/results/mujoco_panda_prompt_demo/videos/full_pick_place_unrelated.gif",
+        "frame_count": 96,
+        "resolution": [
+          960,
+          540
+        ],
+        "size_bytes": 2550343,
+        "sha256": "cd3974125f1803e53a0f38bd770c86f1298c26999cee94f789f7e7448013157f"
+      },
+      "contact_sheet": "/Users/nampham/Documents/Blended/SmolVLA/results/mujoco_panda_prompt_demo/figures/full_pick_place_unrelated_contact_sheet.png"
+    }
+  },
+  "source_hashes": {
+    "canonical_predictions_sha256": "ab4984aeea52a8ca60c94a5cb19a15d69fd27707f5c5734ddd8bec680f376dc4",
+    "episode_parquet_sha256": "d9359f9d470a771ca39bf91e4602ccd33a7b73e06d3e6e692d86ec53bcf215c6",
+    "scene_xml_sha256": "2e16c2582ac6bb5ba6b96d02e4693a4efd8f2eff236334ebd097675e1034fe90",
+    "transform_config_sha256": "5dff3cbb24e6987cfa4a4c94e9498fd33cf668c86c6c0e0ea3ed23612699e413"
+  },
+  "disclaimer": "Illustrative rendering of stored action differences; not closed-loop SmolVLA\u2013LIBERO execution.",
+  "stored_actions_integrated_as_rollout": false,
+  "smol_vla_model_loaded": false,
+  "libero_simulator_loaded": false,
+  "checks": {
+    "exact_four_conditions": true,
+    "all_display_prompts_rendered_as_configured": true,
+    "all_stored_source_prompts_preserved": true,
+    "all_waypoint_ik_residuals_below_12mm": true,
+    "all_gifs_animated": true,
+    "all_gifs_960x540": true,
+    "all_mp4_frame_counts_expected": true,
+    "final_object_center_inside_basket": true,
+    "required_disclaimer_rendered": true,
+    "scripted_completion_not_claimed_as_model_rollout": true,
+    "smol_vla_model_not_loaded": true
+  }
+}

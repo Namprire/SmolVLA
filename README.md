@@ -103,6 +103,7 @@ This extension moves from stored translation proposals, to the gripper decision,
 |---|---|---|
 | 10-second Panda teaser | [MP4](results/mujoco_panda_prompt_demo/videos/panda_prompt_demo_teaser.mp4) · [GIF](results/mujoco_panda_prompt_demo/videos/panda_prompt_demo_teaser.gif) | Prompt-first presentation summary |
 | 25-second Panda hero demo | [HQ MP4](results/mujoco_panda_prompt_demo/videos/panda_prompt_demo_main_hq.mp4) · [HQ GIF](results/mujoco_panda_prompt_demo/videos/panda_prompt_demo_main_hq.gif) | Stored action proposals on an articulated Panda |
+| Separate full pick-and-place prompts | [Correct GIF](results/mujoco_panda_prompt_demo/videos/full_pick_place_correct.gif) · [Paraphrase GIF](results/mujoco_panda_prompt_demo/videos/full_pick_place_paraphrase.gif) · [Contradictory GIF](results/mujoco_panda_prompt_demo/videos/full_pick_place_contradictory.gif) · [Unrelated GIF](results/mujoco_panda_prompt_demo/videos/full_pick_place_unrelated.gif) | Four prompt-labeled 8-second illustrations from grasp through basket drop and retreat |
 | Four-prompt comparison | [MP4](results/mujoco_prompt_animation/videos/prompt_comparison_main.mp4) · [GIF](results/mujoco_prompt_animation/videos/prompt_comparison_main.gif) | Synchronized Correct, Paraphrase, Contradictory, and Unrelated conditions |
 | Bottom-up explanation | [MP4](results/bottom_up_demo/videos/bottom_up_teaser.mp4) · [GIF](results/bottom_up_demo/videos/bottom_up_teaser.gif) | Translation, gripper, one-object consequence, and packing context |
 | One-object branches | [MP4](results/bottom_up_demo/videos/simple_one_object_branches.mp4) · [GIF](results/bottom_up_demo/videos/simple_one_object_branches.gif) | Four short branches from one shared simulated state |
@@ -224,6 +225,7 @@ Generate the presentation-quality Panda teaser or full hero demo:
 ```bash
 .venv/bin/python sim/mujoco_panda_prompt_demo.py --mode render-teaser
 .venv/bin/python sim/mujoco_panda_prompt_demo.py --mode render-hq
+.venv/bin/python sim/mujoco_panda_prompt_demo.py --mode full-pick-place
 ```
 
 Generate the synchronized four-prompt animation:

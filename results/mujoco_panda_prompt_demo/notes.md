@@ -121,6 +121,30 @@ The continuous stored gripper values remain in `validation.json`. The visual
 finger target is not presented as a direct model output or proof of physical
 release.
 
+## Separate full pick-and-place prompt GIFs
+
+Four 8-second GIFs extend the hard-gate-4 visual language into separate,
+single-condition animations. Each starts above the cream-cheese box and shows
+approach, grasp, lift, one condition-specific stored-action waypoint, scripted
+transport to the basket, lowering, opening, a visible object drop, and retreat.
+
+The exact episode-0/frame-81 prompts rendered in the GIFs are:
+
+- Correct: `put both the cream cheese box and the butter in the basket`
+- Paraphrase: `place the cream cheese box and the butter together inside the basket`
+- Contradictory: `put the cream cheese box in the basket but leave the butter outside the basket`
+- Unrelated display text: `put both the cream cheese box and the butter in the basket, and open the drawer of the cabinet`
+
+Only the condition-specific waypoint comes from the stored prediction XYZ.
+The complete grasp-to-basket motion is deterministic presentation choreography,
+and the release is scripted independently of the stored frame-81 gripper value.
+This distinction matters because Correct, Paraphrase, and Contradictory are
+CLOSE at the selected frame, while Unrelated is OPEN. The Unrelated prompt also
+uses requested combined display text, while its stored frame-81 proposal remains
+traceable to the original inferred source prompt, `open the top drawer of the
+cabinet`. Its animation intentionally remains an action-difference illustration
+rather than a semantic execution claim.
+
 ## Video structure
 
 - 0–3 s: stored LIBERO agent/eye-in-hand reference
@@ -144,6 +168,12 @@ release.
 - `videos/hard_gate_2_nominal_preview.gif` — articulated nominal Panda movement
 - `videos/hard_gate_3_four_action_overlay.gif` — pulsing four-action hero comparison
 - `videos/hard_gate_4_branch_preview.gif` — synchronized four-branch Panda comparison
+- `videos/full_pick_place_correct.gif` — Correct prompt, complete scripted pick-and-place
+- `videos/full_pick_place_paraphrase.gif` — Paraphrase prompt, complete scripted pick-and-place
+- `videos/full_pick_place_contradictory.gif` — Contradictory prompt, complete scripted pick-and-place
+- `videos/full_pick_place_unrelated.gif` — Unrelated prompt, complete scripted pick-and-place
+- `full_pick_place_validation.json` — exact prompts/actions, waypoint IK,
+  object/basket checks, media metadata, hashes, and passing checks
 - `videos/panda_prompt_demo_main.mp4` — 25.0 s, 600 frames, 24 fps,
   1280 x 720 H.264
 - `videos/panda_prompt_demo_main.gif` — 300 frames, 960 x 540

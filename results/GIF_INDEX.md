@@ -71,6 +71,49 @@ The smaller `mujoco_panda_prompt_demo/videos/panda_prompt_demo_main.gif`
 
 ![Four local Panda action branches](mujoco_panda_prompt_demo/videos/hard_gate_4_branch_preview.gif)
 
+## Separate prompt-labeled full pick-and-place GIFs
+
+Each animation shows approach, grasp, lift, one real stored frame-81 XYZ
+waypoint, scripted basket transport, visible release/drop, and retreat. The
+complete motion is presentation choreography, not a closed-loop SmolVLA
+rollout; the exact prompt used is rendered inside each GIF.
+
+### Correct
+
+Prompt: `put both the cream cheese box and the butter in the basket`
+
+`mujoco_panda_prompt_demo/videos/full_pick_place_correct.gif`
+
+![Correct full pick-and-place](mujoco_panda_prompt_demo/videos/full_pick_place_correct.gif)
+
+### Paraphrase
+
+Prompt: `place the cream cheese box and the butter together inside the basket`
+
+`mujoco_panda_prompt_demo/videos/full_pick_place_paraphrase.gif`
+
+![Paraphrase full pick-and-place](mujoco_panda_prompt_demo/videos/full_pick_place_paraphrase.gif)
+
+### Contradictory
+
+Prompt: `put the cream cheese box in the basket but leave the butter outside the basket`
+
+`mujoco_panda_prompt_demo/videos/full_pick_place_contradictory.gif`
+
+![Contradictory full pick-and-place](mujoco_panda_prompt_demo/videos/full_pick_place_contradictory.gif)
+
+### Unrelated
+
+Displayed prompt: `put both the cream cheese box and the butter in the basket, and open the drawer of the cabinet`
+
+The stored frame-81 proposal remains from the original inferred source prompt,
+`open the top drawer of the cabinet`; no new model inference was performed for
+this display-text edit.
+
+`mujoco_panda_prompt_demo/videos/full_pick_place_unrelated.gif`
+
+![Unrelated full pick-and-place](mujoco_panda_prompt_demo/videos/full_pick_place_unrelated.gif)
+
 ## Supporting GIFs
 
 ### Original stored LIBERO two-camera reference

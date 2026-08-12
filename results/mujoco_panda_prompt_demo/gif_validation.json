@@ -1,6 +1,6 @@
 {
   "status": "PASS",
-  "gif_count": 10,
+  "gif_count": 14,
   "all_files_nonempty": true,
   "all_gifs_animated": true,
   "primary_gif": "/Users/nampham/Documents/Blended/SmolVLA/results/mujoco_panda_prompt_demo/videos/panda_prompt_demo_main_hq.gif",
@@ -74,6 +74,46 @@
       ],
       "size_bytes": 875909,
       "sha256": "c30b40a2dc17807e44802070e06f9d5c6acd8e6f2e4f72dc8983d6634b0afdd9"
+    },
+    "panda_full_pick_place_correct": {
+      "path": "/Users/nampham/Documents/Blended/SmolVLA/results/mujoco_panda_prompt_demo/videos/full_pick_place_correct.gif",
+      "frame_count": 96,
+      "resolution": [
+        960,
+        540
+      ],
+      "size_bytes": 2564757,
+      "sha256": "46abb8d5e689b6b3ac374115628eb2801446c5edbbbce926e7d0416c7eacc790"
+    },
+    "panda_full_pick_place_paraphrase": {
+      "path": "/Users/nampham/Documents/Blended/SmolVLA/results/mujoco_panda_prompt_demo/videos/full_pick_place_paraphrase.gif",
+      "frame_count": 96,
+      "resolution": [
+        960,
+        540
+      ],
+      "size_bytes": 2590648,
+      "sha256": "07c2bbcf890ec695ffbddc7ed81a1e0ecc6d34a0fbd7428a6baa6ffb8b8fa240"
+    },
+    "panda_full_pick_place_contradictory": {
+      "path": "/Users/nampham/Documents/Blended/SmolVLA/results/mujoco_panda_prompt_demo/videos/full_pick_place_contradictory.gif",
+      "frame_count": 96,
+      "resolution": [
+        960,
+        540
+      ],
+      "size_bytes": 2666705,
+      "sha256": "8c014c528c31476a353dc956d017a0a373ae4f4020ca4c3f1408591de4958d5f"
+    },
+    "panda_full_pick_place_unrelated": {
+      "path": "/Users/nampham/Documents/Blended/SmolVLA/results/mujoco_panda_prompt_demo/videos/full_pick_place_unrelated.gif",
+      "frame_count": 96,
+      "resolution": [
+        960,
+        540
+      ],
+      "size_bytes": 2550343,
+      "sha256": "cd3974125f1803e53a0f38bd770c86f1298c26999cee94f789f7e7448013157f"
     },
     "panda_complete_hero": {
       "path": "/Users/nampham/Documents/Blended/SmolVLA/results/mujoco_panda_prompt_demo/videos/panda_prompt_demo_main.gif",

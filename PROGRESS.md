@@ -53,7 +53,9 @@
   - Added animated GIF counterparts for every Panda visual gate (scene, nominal motion, four-action arrows, and local branches)
   - Added a higher-quality primary variant using a closer full-arm camera: 1280x720 at 15 fps with a 256-color Sierra-2-4A-dithered GIF, plus matching MP4, storyboard, hero still, and validation report
   - Added a 10-second prompt-first teaser cut inspired by the visual pacing of the local `teaser.mp4` and `hang-towel.mp4` references: fixed HQ camera, typed canonical instruction, uninterrupted accelerated nominal Panda movement, and the stored frame-81 four-action overlay
-  - Consolidated ten presentation GIFs in one index with a machine-readable audit; retained the smaller 960x540 primary render as a lightweight fallback
+  - Added four separate 8-second prompt-labeled pick-and-place GIFs for Correct, Paraphrase, Contradictory, and Unrelated, each showing approach, grasp, lift, its real frame-81 stored-action waypoint, scripted basket transport, visible drop, and retreat
+  - Rendered the exact source prompt in every new animation and explicitly separated the stored one-step proposal/gripper value from the hand-authored completion choreography
+  - Consolidated fourteen presentation GIFs in one index with a machine-readable audit; retained the smaller 960x540 primary render as a lightweight fallback
   - Rendered the controlled-comparison message and required non-closed-loop disclaimer prominently; predictions are local reset comparisons and are not chained into a rollout
   - Saved scene/config/source hashes, selected checkpoints, nominal IK trajectory, all hard-gate reports, final validation, and notes under `results/mujoco_panda_prompt_demo/`
 - Bottom-up professor-feedback extension — complete
